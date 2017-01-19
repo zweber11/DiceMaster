@@ -1,0 +1,85 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Skills.NewSkillFrag"
+    android:background="@color/colorPrimary"
+    android:paddingTop="60dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lChar"
+        android:background="@drawable/background"
+        android:layout_margin="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Skill Details"
+            android:id="@+id/txtAddEditSkill"
+            android:textColor="@color/color5"
+            android:padding="2dp" />
+
+        <!--Skill Name-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Skill Name:"
+                android:id="@+id/textSkillName"
+                android:textColor="@color/color5"
+                android:layout_weight="0"
+                android:layout_marginRight="5dp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtSkillName"
+                android:layout_weight="1"
+                android:textColor="@color/color5"
+                android:background="@drawable/background"
+                android:layout_marginRight="5dp"
+                android:paddingLeft="5dp"
+                android:selectAllOnFocus="true"
+                android:enabled="false"
+                android:editable="true" />
+        </LinearLayout>
+
+        <!--<CheckBox-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Favorite?"-->
+            <!--android:id="@+id/chkFav"-->
+            <!--android:textColor="@color/color5"-->
+            <!--android:checked="false"-->
+            <!--android:buttonTint="@color/color5" />-->
+    </LinearLayout>
+
+    <!--Cancel/Save buttons-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/btnCancelSkill"
+            android:background="@drawable/background"
+            android:textColor="@color/color5"
+            android:textAllCaps="false"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</FrameLayout>

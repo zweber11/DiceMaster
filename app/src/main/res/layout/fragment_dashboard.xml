@@ -1,0 +1,213 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.DashboardFragment"
+    android:background="@color/colorPrimary">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
+
+        <!--1st row-->
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!--1st column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxSessions">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Adventures"
+                    android:textColor="@color/color5"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/ivDash1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_adventures"
+                    android:backgroundTint="@color/color5"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+
+            <!--2nd column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxChars">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Characters"
+                    android:textColor="@color/color5"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/ivDash2"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_chars"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/black"/>
+
+            </LinearLayout>
+
+        </TableRow>
+
+        <!--2nd row-->
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!--1st column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxSkills">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Skills"
+                    android:textColor="@color/color5"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/ivDash3"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_skills"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/black"/>
+
+            </LinearLayout>
+
+            <!--2nd column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxDiceSets">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dice Sets"
+                    android:textColor="@color/color5"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/ivDash4"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_dice_sets"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/black"/>
+            </LinearLayout>
+        </TableRow>
+
+        <!--3rd row-->
+        <TableRow android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <!--1st column-->
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/background"-->
+                <!--android:layout_margin="2dp"-->
+                <!--android:id="@+id/boxSettings">-->
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Settings"-->
+                    <!--android:textColor="@color/color5"-->
+                    <!--android:gravity="center" />-->
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="fill_parent"-->
+                    <!--android:id="@+id/ivDash5"-->
+                    <!--android:gravity="center_vertical|center_horizontal"-->
+                    <!--android:src="@drawable/ic_settings"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:backgroundTint="@color/black"/>-->
+
+            <!--</LinearLayout>-->
+
+            <!--2nd column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxAbout">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="About"
+                    android:textColor="@color/color5"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/ivDash6"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_about"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/black"/>
+            </LinearLayout>
+            <!--3rd column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxHelp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Help"
+                    android:textColor="@color/color5"
+                    android:gravity="center" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/ivDash7"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_help"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/black"/>
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

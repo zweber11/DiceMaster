@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_sessions"
+            android:icon="@drawable/ic_adventures"
+            android:title="Adventures" />
+        <item
+            android:id="@+id/nav_characters"
+            android:icon="@drawable/ic_chars"
+            android:title="Characters" />
+        <item
+            android:id="@+id/nav_skills"
+            android:icon="@drawable/ic_skills"
+            android:title="Skills" />
+        <item
+            android:id="@+id/nav_dice_sets"
+            android:icon="@drawable/ic_dice_sets"
+            android:title="Dice Sets" />
+        <!--<item-->
+            <!--android:id="@+id/nav_settings"-->
+            <!--android:icon="@drawable/ic_settings"-->
+            <!--android:title="Settings" />-->
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="About" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_help"
+            android:title="Help" />
+        <item
+            android:id="@+id/nav_facebook"
+            android:icon="@mipmap/fb_icon"
+            android:title="Our Facebook Page" />
+        <item
+            android:id="@+id/nav_twitter"
+            android:icon="@mipmap/twitter_icon"
+            android:title="Our Twitter Page" />
+        <item
+            android:id="@+id/nav_other_apps"
+            android:icon="@mipmap/playstore_icon"
+            android:title="Other HellWeb Studios Apps!" />
+    </group>
+
+    <!--<item android:title="More">-->
+        <!--<menu>-->
+            <!-- -->
+
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

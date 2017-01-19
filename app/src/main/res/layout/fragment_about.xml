@@ -1,0 +1,61 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hellwebstudios.zweber.dd.Fragments.AboutFragment"
+    android:background="@color/colorPrimary"
+    android:paddingTop="60dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="About Menu"
+            android:textColor="@color/color5"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@drawable/background"
+            android:layout_margin="5dp"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dice Master 1.0"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp"
+            android:padding="5dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HellWeb Studios \nProgramming: Zack Weber"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp"
+            android:padding="5dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Special Thanks To: \nAaron Weber \nGentlemen's Sword"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:id="@+id/txtThanks" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Support &amp; Suggestions: HellWebStudios@gmail.com"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp"
+            android:padding="5dp" />
+    </LinearLayout>
+</FrameLayout>

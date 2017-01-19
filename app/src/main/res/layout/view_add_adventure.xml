@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:theme="@style/Platform.AppCompat.Light">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:layout_margin="10dp">
+
+        <!--Adv Name-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adventure Name"
+            android:id="@+id/textView"
+            android:textColor="@color/color5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAdvName"
+            android:layout_gravity="center"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+
+        <!--Description-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adventure Description"
+            android:id="@+id/textView3"
+            android:textColor="@color/color5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtAdvDesc"
+            android:layout_gravity="center"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+
+        <!--Character-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Character"
+            android:id="@+id/textView23"
+            android:textColor="@color/color5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinChar"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+
+
+    </LinearLayout>
+</FrameLayout>

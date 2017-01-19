@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background">
+
+        <!--1st row-->
+        <TableRow
+            android:layout_margin="2dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/char_name"
+                    android:text="Guy"
+                    android:textSize="18sp"
+                    android:textColor="@color/color6"/>
+            </LinearLayout>
+        </TableRow>
+
+        <!--2nd row-->
+        <TableRow
+            android:layout_margin="2dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/char_class_l"
+                    android:text="Class:"
+                    android:textSize="18sp"
+                    android:textColor="@color/color5"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/char_class"
+                    android:text="Ogre"
+                    android:textSize="18sp"
+                    android:textColor="@color/color5"
+                    android:layout_marginStart="5dp" />
+            </LinearLayout>
+        </TableRow>
+
+        <!--3rd row-->
+        <TableRow
+            android:layout_margin="2dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/char_race_l"
+                    android:text="Race:"
+                    android:textSize="16sp"
+                    android:textColor="@color/color4"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/char_race"
+                    android:text="Half-Ogre"
+                    android:textSize="16sp"
+                    android:textColor="@color/color4"
+                    android:layout_marginStart="5dp" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

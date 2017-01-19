@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary" >
+
+    <!--Menu bar-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Race Menu"
+            android:id="@+id/textU16"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:textColor="@color/color5" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Race"
+            android:id="@+id/txtAddRace"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_marginEnd="10dp" />
+    </LinearLayout>
+
+    <!--ListView-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:layout_margin="5dp">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lvRaces"
+            android:layout_margin="10dp"
+            android:dividerHeight="10dp"
+            android:divider="@color/colorPrimary"
+            android:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:paddingTop="60dp">
+
+    <!--ChapterTitle-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chapter Name Here"
+            android:textColor="@color/color5"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/txtChapTitle"/>
+
+    </LinearLayout>
+
+    <!--Attack/Skill roll buttons-->
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!-- -->
+        <!-- -->
+    <!--</LinearLayout>-->
+
+    <!-- lvRollSkills-->
+
+    <!--<LinearLayout-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/background"-->
+        <!--android:layout_margin="5dp">-->
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/lvRollAttack"-->
+            <!--android:dividerHeight="10dp"-->
+            <!--android:divider="@color/colorPrimary"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_margin="10dp" />-->
+        <TabHost
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabHost"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tabStripEnabled="true"
+                    android:theme="@style/AppThemeTabs"
+                    android:background="@drawable/background"
+                    android:layout_margin="5dp"></TabWidget>
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--Attack Rolls-->
+                    <LinearLayout
+                        android:id="@+id/tab1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/background"
+                            android:layout_margin="5dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Attack Roll"
+                                android:textColor="@color/color5"
+                                android:background="@drawable/background"
+                                android:padding="5dp"
+                                android:layout_margin="10dp"
+                                android:id="@+id/txtAttackRoll"
+                                android:layout_gravity="center_vertical|end"
+                                android:gravity="center_vertical|center_horizontal" />
+                            <ListView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/lvRollAttackSets"
+                                android:dividerHeight="10dp"
+                                android:divider="@color/colorPrimary"
+                                android:layout_weight="1"
+                                android:layout_margin="10dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!--Skill Rolls-->
+                    <LinearLayout
+                        android:id="@+id/tab2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/background"
+                            android:layout_margin="5dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Skill Roll"
+                                android:textColor="@color/color5"
+                                android:background="@drawable/background"
+                                android:padding="5dp"
+                                android:layout_margin="10dp"
+                                android:id="@+id/txtSkillRoll"
+                                android:layout_gravity="center_vertical|end"
+                                android:gravity="center_vertical|center_horizontal" />
+                            <ListView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/lvRollSkill"
+                                android:dividerHeight="10dp"
+                                android:divider="@color/colorPrimary"
+                                android:layout_weight="1"
+                                android:layout_margin="10dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+
+        <!--<ListView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/lvRollSkill"-->
+            <!--android:dividerHeight="10dp"-->
+            <!--android:divider="@color/colorPrimary"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_margin="10dp" />-->
+    <!--</LinearLayout>-->
+
+</LinearLayout>
