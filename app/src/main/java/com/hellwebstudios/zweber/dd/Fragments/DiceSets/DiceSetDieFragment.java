@@ -143,8 +143,6 @@ public class DiceSetDieFragment extends Fragment {
 
                 dsd = db.getDSD(dID);
 
-//                Toast.makeText(getActivity(), "Selected DiceID:" + dID, Toast.LENGTH_SHORT).show();
-
                 //alertDialog popup.
                 AlertDialog.Builder abAddDie = new AlertDialog.Builder(getActivity());
                 abAddDie.setTitle("Please select a Die.");
@@ -154,11 +152,7 @@ public class DiceSetDieFragment extends Fragment {
                 spinDice = (Spinner) view2.findViewById(R.id.spinDie);
                 sDie = new ArrayList<>();
 
-                //Based on the dsd.DiceID, grab the appropriate Dice for the upgrade...
-
-
                 db = new DataHelper(getActivity());
-//                Cursor res = db.getUpDie(dsd.DiceID);
                 Cursor res = db.getAllDie();
 
                 if (res.getCount() == 0)
@@ -188,16 +182,13 @@ public class DiceSetDieFragment extends Fragment {
                         int dieID = (int) spinDice.getSelectedItemId() + 1;
 
                         //Check DiceID's here.
-                        if (dieID > dsd.DiceID - 1)
-                        {
+                        if (dieID > dsd.DiceID - 1) {
                             dsdUp.DiceID = dieID;
                             db.updateDSD(dsdUp);
                             setDSD(dsID);
                         }
                         else
-                        {
                             Toast.makeText(getActivity(), "Please select a Die greater than your current selection.", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
 

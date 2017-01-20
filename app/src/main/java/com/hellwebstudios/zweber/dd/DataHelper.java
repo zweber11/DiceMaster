@@ -732,15 +732,6 @@ public class DataHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    //getUpDie(DiceID)
-    public Cursor getUpDie(int DiceID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + T_DICE + " WHERE DiceID > " + DiceID, null);
-        return res;
-    }
-
-
     //getDiceName(ID)
     public String getDiceName(int ID)
     {
@@ -752,19 +743,6 @@ public class DataHelper extends SQLiteOpenHelper {
             dn = res.getString(0);
 
         return dn;
-    }
-
-    //getDiceID(int DSDID)iD
-    public int getDiceID(int DSDID)
-    {
-        int diceID = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT DiceID FROM " + T_DSD + " WHERE ID = " + DSDID, null);
-
-        while (res.moveToNext())
-            diceID = res.getInt(0);
-
-        return diceID;
     }
 
     //getDSD(int DSDID)
@@ -871,47 +849,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
     }
 
-//    public void updateRS(RollSkill rs)
-//    {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//
-//        cv.put(RS_1, rs.SkillID);
-//        cv.put(RS_2, rs.ChapID);
-//        cv.put(RS_3, rs.Roll);
-//
-//        String f = "ID=" + rs.ID;
-//
-//        db.update(T_RS, cv, f, null);
-//    }
-
-    //endregion
-
-    //region **RollLog table calls.
-
-    //addRollLog
-//    public boolean addRollLog(RollLog rl)
-//    {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues cv = new ContentValues();
-//
-//        cv.put(RL_1, rl.ChapID);
-//        cv.put(RL_2, rl.AttackSkill);
-//
-//        long result = db.insert(T_RL, null, cv);
-//        if (result == -1)
-//            return false;
-//        else
-//            return true;
-//    }
-//
-//    //getRLByType(int typeID)
-//    public Cursor getRLByType(int typeID)
-//    {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor res = db.rawQuery("SELECT * FROM " + T_RL + " WHERE AttackSkill = " + typeID, null);
-//        return res;
-//    }
 
     //endregion
 
