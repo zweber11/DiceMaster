@@ -673,7 +673,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
 
     //addChap
-    public boolean addChap(Chapter c)
+    public void addChap(Chapter c)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -681,11 +681,7 @@ public class DataHelper extends SQLiteOpenHelper {
         cv.put(CH_1, c.AdvID);
         cv.put(CH_2, c.Name);
 
-        long result = db.insert(T_CHAP, null, cv);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        db.insert(T_CHAP, null, cv);
     }
 
     //getChapTitle(int chapID)
@@ -707,6 +703,36 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE AdvID = " + a, null);
         return res;
+    }
+
+    //getChap(int chapID)
+    public Chapter getChap(int chapID)
+    {
+        Chapter c = new Chapter();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE ChapID = " + chapID, null);
+
+        while (res.moveToNext()) {
+            c.ChapID = res.getInt(0);
+            c.AdvID = res.getInt(1);
+            c.Name = res.getString(2);
+        }
+
+        return c;
+    }
+
+    //updateChap(chap)
+    public void updateChap(Chapter c)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(CH_1, c.AdvID);
+        cv.put(CH_2, c.Name);
+
+        String strFilter = "ChapID=" + c.ChapID;
+
+        db.update(T_CHAP, cv, strFilter, null);
     }
 
 

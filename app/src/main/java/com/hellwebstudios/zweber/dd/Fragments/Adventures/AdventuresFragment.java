@@ -190,7 +190,7 @@ public class AdventuresFragment extends Fragment {
 
                 abAddAdv.setView(view2);
 
-                abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                abAddAdv.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

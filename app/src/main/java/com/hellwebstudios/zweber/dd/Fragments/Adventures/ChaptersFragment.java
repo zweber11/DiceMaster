@@ -56,6 +56,10 @@ public class ChaptersFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //Give the user some instruction.
+        Toast.makeText(getActivity(), "Select a Chapter to Roll, or press and hold to edit the Chapter Name.", Toast.LENGTH_LONG).show();
+
         db = new DataHelper(getActivity());
         lvChaps = (ListView) getView().findViewById(R.id.lvChaps);
 
@@ -131,6 +135,49 @@ public class ChaptersFragment extends Fragment {
             }
         });
 
+        //lvChaps.setOnItemLongClickListener
+        lvChaps.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //Grab the selectedIndex.
+                final Integer sChapID = (Integer) view.getTag();
+
+                Chapter c = db.getChap(sChapID);
+
+                AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
+                abAddChap.setTitle("Please enter a Chapter Name.");
+
+                View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
+
+                tvChapName = (TextView) view2.findViewById(R.id.txtChapName);
+                tvChapName.setText(c.getName());
+
+                abAddChap.setView(view2);
+
+                //Save action button.
+                abAddChap.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        Chapter c = new Chapter();
+                        c.ChapID = sChapID;
+                        c.AdvID = advID;
+                        c.Name = tvChapName.getText().toString();
+
+                        valFields(c);
+                    }
+                });
+
+                AlertDialog a = abAddChap.create();
+                a.show();
+
+                return true;
+            }
+        });
+
         //endregion
 
     }
@@ -176,12 +223,16 @@ public class ChaptersFragment extends Fragment {
                     .create();
             myAlert.show();
         } else {
-            if (db.addChap(c)) {
-                Toast.makeText(getActivity(), "Chapter added successfully.", Toast.LENGTH_SHORT).show();
-                setChaps(advID);
+            if (c.ChapID == 0) { //New Chapter
+                db.addChap(c);
+                Toast.makeText(getActivity(), c.Name + " added.", Toast.LENGTH_SHORT).show();
             }
-            else
-                Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+            else { //Existing Chapter
+                db.updateChap(c);
+                Toast.makeText(getActivity(), c.Name + " updated.", Toast.LENGTH_SHORT).show();
+            }
+
+            setChaps(advID);
         }
     }
 
