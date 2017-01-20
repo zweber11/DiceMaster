@@ -65,6 +65,9 @@ public class AdventuresFragment extends Fragment {
         //Call setAdv()
         setAdv();
 
+        //Give the user some instructions.
+        Toast.makeText(getActivity(), "Select an Adventure to view Chapters, or press and hold to update Adventure info.", Toast.LENGTH_LONG).show();
+
         tvAdd = (TextView) getView().findViewById(R.id.txtNewAdventure);
         tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +148,75 @@ public class AdventuresFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        lvAdv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                db = new DataHelper(getActivity());
+
+                //Bring up the AlertDialog & populate with selected Adventure information. Grab the selectedIndex.
+                final Integer sAdvID = (Integer) view.getTag();
+
+                Adventure adv = db.getAdv(sAdvID);
+
+                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
+                abAddAdv.setTitle("Please enter the info below.");
+
+                View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
+
+                tvAdvName = (TextView) view2.findViewById(R.id.txtAdvName);
+                tvAddDesc = (TextView) view2.findViewById(R.id.txtAdvDesc);
+                tvAdvName.setText(adv.getName());
+                tvAddDesc.setText(adv.getDesc());
+
+                //Spinner Chars
+                spinChars = (Spinner) view2.findViewById(R.id.spinChar);
+                sChars = new ArrayList<>();
+                Cursor res = db.getAllCharacters();
+
+                if (res.getCount() == 0)
+                    Toast.makeText(getActivity(), "An error occurred. Please try again", Toast.LENGTH_SHORT).show();
+                else
+                    //Loop and fill the List.
+                    while (res.moveToNext())
+                        sChars.add(res.getString(1));
+
+                //Init adapter
+                ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
+                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinChars.setAdapter(ad2);
+                spinChars.setSelection(adv.CharID - 1);
+
+                abAddAdv.setView(view2);
+
+                abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        Adventure a = new Adventure();
+                        a.AdvID = sAdvID;
+                        a.Name = tvAdvName.getText().toString();
+                        a.Desc = tvAddDesc.getText().toString();
+
+                        int CharID = (int) spinChars.getSelectedItemId() + 1;
+                        a.CharID = CharID;
+
+                        a.NumChapters = 0;
+
+                        valFields(a);
+                    }
+                });
+
+                AlertDialog a = abAddAdv.create();
+                a.show();
+
+                return true;
+            }
+        });
+
     }
 
     //setAdv(), populates the ListView with Adventures.
@@ -188,15 +260,19 @@ public class AdventuresFragment extends Fragment {
                     .create();
             myAlert.show();
         } else {
-            if (db.addAdv(a)) {
-                Toast.makeText(getActivity(), "Adventure added successfully.", Toast.LENGTH_SHORT).show();
-                setAdv();
+            if (a.AdvID == 0) //New Adventure
+            {
+                //Add Adventure and refresh the list.
+                db.addAdv(a);
+                Toast.makeText(getActivity(), a.Name + " added.", Toast.LENGTH_SHORT).show();
             }
-            else
-                Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+            else //Existing Adventure
+            {
+                db.updateAdv(a);
+                Toast.makeText(getActivity(), a.Name + " updated.", Toast.LENGTH_SHORT).show();
+            }
+
+            setAdv();
         }
-
     }
-
-
 }

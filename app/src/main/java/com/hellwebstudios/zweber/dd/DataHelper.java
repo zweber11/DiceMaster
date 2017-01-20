@@ -606,7 +606,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //addAdv
-    public boolean addAdv(Adventure adv)
+    public void addAdv(Adventure adv)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -616,17 +616,11 @@ public class DataHelper extends SQLiteOpenHelper {
         cv.put(ADV_3, adv.CharID);
         cv.put(ADV_4, adv.NumChapters);
 
-        long result = db.insert(T_ADV, null, cv);
-        if (result == -1)
-        {
-            return false;
-        }
-        else
-            return true;
+        db.insert(T_ADV, null, cv);
     }
 
     //updateAdv(Adv)
-    public boolean updateAdv(Adventure adv)
+    public void updateAdv(Adventure adv)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -638,11 +632,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
         String strFilter = "AdvID=" + adv.AdvID;
 
-        long result = db.update(T_ADV, cv, strFilter, null);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        db.update(T_ADV, cv, strFilter, null);
     }
 
     //getAdv(advID)
