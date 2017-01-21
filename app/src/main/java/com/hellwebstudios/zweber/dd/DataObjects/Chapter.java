@@ -5,19 +5,22 @@ package com.hellwebstudios.zweber.dd.DataObjects;
  */
 public class Chapter {
 
+    //Props
     public int ChapID;
     public int AdvID;
     public String Name;
+    public int RollToHit;
 
     //Empty
     public Chapter() {
     }
 
     //Loaded
-    public Chapter(int chapID, int advID, String name) {
+    public Chapter(int chapID, int advID, String name, int rollToHit) {
         ChapID = chapID;
         AdvID = advID;
         Name = name;
+        RollToHit = rollToHit;
     }
 
     //Getter/setters
@@ -43,5 +46,13 @@ public class Chapter {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public int getRollToHit() {
+        return RollToHit;
+    }
+
+    public void setRollToHit(int rollToHit) {
+        RollToHit = rollToHit;
     }
 }

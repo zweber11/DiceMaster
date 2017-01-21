@@ -80,6 +80,7 @@ public class DataHelper extends SQLiteOpenHelper {
     //Chapters table.
     public static final String CH_1 = "AdvID";
     public static final String CH_2 = "Name";
+    public static final String CH_3 = "RollToHit";
 
     //RollAttack table.
     public static final String RA_1 = "RASID";
@@ -156,13 +157,14 @@ public class DataHelper extends SQLiteOpenHelper {
         //Chapters table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_CHAP + " (ChapID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "AdvID INTEGER REFERENCES Adventures (AdvID), " +
-                "Name TEXT)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (1, 1, 'Chapter 1: Humble Beginnings')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (2, 1, 'Chapter 2: The Great Bridge')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (3, 1, 'Chapter 3: Team Cohesion')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (4, 2, 'Chapter 1: Formation')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (5, 2, 'Chapter 2: Training')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (6, 2, 'Chapter 3: Night Raid')");
+                "Name TEXT, " +
+                "RollToHit INTEGER)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (1, 1, 'Chapter 1: Humble Beginnings', 1)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (2, 1, 'Chapter 2: The Great Bridge', 2)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (3, 1, 'Chapter 3: Team Cohesion', 3)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (4, 2, 'Chapter 1: Formation', 4)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (5, 2, 'Chapter 2: Training', 5)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (6, 2, 'Chapter 3: Night Raid', 6)");
 
 
         //endregion
@@ -680,6 +682,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
         cv.put(CH_1, c.AdvID);
         cv.put(CH_2, c.Name);
+        cv.put(CH_3, c.RollToHit);
 
         db.insert(T_CHAP, null, cv);
     }
@@ -716,6 +719,7 @@ public class DataHelper extends SQLiteOpenHelper {
             c.ChapID = res.getInt(0);
             c.AdvID = res.getInt(1);
             c.Name = res.getString(2);
+            c.RollToHit = res.getInt(3);
         }
 
         return c;
@@ -729,12 +733,12 @@ public class DataHelper extends SQLiteOpenHelper {
 
         cv.put(CH_1, c.AdvID);
         cv.put(CH_2, c.Name);
+        cv.put(CH_3, c.RollToHit);
 
         String strFilter = "ChapID=" + c.ChapID;
 
         db.update(T_CHAP, cv, strFilter, null);
     }
-
 
     //endregion
 

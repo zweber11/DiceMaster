@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,6 +42,12 @@ public class ChaptersFragment extends Fragment {
     TextView tvChapName;
     TextView tvAddChap;
 
+    Spinner spinRTH;
+    Spinner spinRTH2;
+    List<Integer> sRTH;
+    int number;
+    int maxNumb;
+
     public ChaptersFragment() {
         // Required empty public constructor
     }
@@ -58,7 +65,7 @@ public class ChaptersFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //Give the user some instruction.
-        Toast.makeText(getActivity(), "Select a Chapter to Roll, or press and hold to edit the Chapter Name.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), "Select a Chapter to Roll, or press and hold to edit the Chapter details.", Toast.LENGTH_LONG).show();
 
         db = new DataHelper(getActivity());
         lvChaps = (ListView) getView().findViewById(R.id.lvChaps);
@@ -85,11 +92,29 @@ public class ChaptersFragment extends Fragment {
             public void onClick(View v) {
 
                 AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
-                abAddChap.setTitle("Please enter a Chapter Name.");
+                abAddChap.setTitle("Please enter Chapter Details.");
 
                 View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
 
                 tvChapName = (TextView) view.findViewById(R.id.txtChapName);
+                spinRTH = (Spinner) view.findViewById(R.id.spinRTH);
+
+                sRTH = new ArrayList<>();
+                number = 1;
+                maxNumb = 21;
+
+                //Loop through and generate a list of possible rolls.
+                while (number < maxNumb) {
+                    sRTH.add(number);
+                    number++;
+                }
+
+                //Adapter
+                ArrayAdapter<Integer> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sRTH);
+                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinRTH.setAdapter(ad);
+                spinRTH.setSelection(0);
+
                 abAddChap.setView(view);
 
                 //Save action button.
@@ -103,6 +128,7 @@ public class ChaptersFragment extends Fragment {
                         c.ChapID = 0;
                         c.AdvID = advID;
                         c.Name = tvChapName.getText().toString();
+                        c.RollToHit = (int) spinRTH.getSelectedItemId() + 1;
 
                         valFields(c);
                     }
@@ -146,12 +172,30 @@ public class ChaptersFragment extends Fragment {
                 Chapter c = db.getChap(sChapID);
 
                 AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
-                abAddChap.setTitle("Please enter a Chapter Name.");
+                abAddChap.setTitle("Please enter Chapter details.");
 
                 View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
 
                 tvChapName = (TextView) view2.findViewById(R.id.txtChapName);
                 tvChapName.setText(c.getName());
+
+                spinRTH2 = (Spinner) view2.findViewById(R.id.spinRTH);
+
+                sRTH = new ArrayList<>();
+                number = 1;
+                maxNumb = 21;
+
+                //Loop through and generate a list of possible rolls.
+                while (number < maxNumb) {
+                    sRTH.add(number);
+                    number++;
+                }
+
+                //Adapter
+                ArrayAdapter<Integer> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sRTH);
+                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinRTH2.setAdapter(ad2);
+                spinRTH2.setSelection(c.RollToHit - 1);
 
                 abAddChap.setView(view2);
 
@@ -166,6 +210,7 @@ public class ChaptersFragment extends Fragment {
                         c.ChapID = sChapID;
                         c.AdvID = advID;
                         c.Name = tvChapName.getText().toString();
+                        c.RollToHit = (int) spinRTH2.getSelectedItemId() + 1;
 
                         valFields(c);
                     }
@@ -188,9 +233,9 @@ public class ChaptersFragment extends Fragment {
         mChapList = new ArrayList<>();
         Cursor res = db.getChapsByAdv(a);
 
-        //Loop to populate the Adventure list.
+        //Loop to populate the Chapter list.
         while (res.moveToNext())
-            mChapList.add(new Chapter(res.getInt(0), res.getInt(1), res.getString(2)));
+            mChapList.add(new Chapter(res.getInt(0), res.getInt(1), res.getString(2), res.getInt(3)));
 
         //init adapter
         adapter = new ChapsListAdapter(getActivity(), mChapList);

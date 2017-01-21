@@ -22,31 +22,7 @@
 
     </LinearLayout>
 
-    <!--Attack/Skill roll buttons-->
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!-- -->
-        <!-- -->
-    <!--</LinearLayout>-->
-
-    <!-- lvRollSkills-->
-
-    <!--<LinearLayout-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:background="@drawable/background"-->
-        <!--android:layout_margin="5dp">-->
-        <!--<ListView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/lvRollAttack"-->
-            <!--android:dividerHeight="10dp"-->
-            <!--android:divider="@color/colorPrimary"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_margin="10dp" />-->
+        <!--Attack/Skill roll buttons-->
         <TabHost
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,6 +72,38 @@
                                 android:id="@+id/txtAttackRoll"
                                 android:layout_gravity="center_vertical|end"
                                 android:gravity="center_vertical|center_horizontal" />
+
+
+                            <!--<ExpandableListView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:id="@+id/expandableListView" />-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Roll To Hit:"
+                                    android:id="@+id/textView2"
+                                    android:textColor="@color/color5"
+                                    android:layout_margin="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="right" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5"
+                                    android:id="@+id/txtRTH"
+                                    android:textColor="@color/color5"
+                                    android:layout_margin="10dp"
+                                    android:layout_weight="1"
+                                    android:gravity="left" />
+                            </LinearLayout>
+
+
                             <ListView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -144,15 +152,5 @@
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
-
-        <!--<ListView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/lvRollSkill"-->
-            <!--android:dividerHeight="10dp"-->
-            <!--android:divider="@color/colorPrimary"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_margin="10dp" />-->
-    <!--</LinearLayout>-->
 
 </LinearLayout>

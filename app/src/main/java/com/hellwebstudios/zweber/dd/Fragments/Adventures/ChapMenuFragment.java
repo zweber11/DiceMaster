@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
 import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
+import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.DataObjects.RollAttackSet;
 import com.hellwebstudios.zweber.dd.DataObjects.RollSkill;
 import com.hellwebstudios.zweber.dd.DataObjects.Skill;
@@ -68,6 +69,14 @@ public class ChapMenuFragment extends Fragment {
     Integer RSID;
     int RASID;
 
+    //RollToHit spinner
+//    Spinner RTH;
+//    int rNumber;
+//    int maxNumb;
+//    List<Integer> D20Hit;
+    Chapter c;
+    TextView txtRTH;
+
     public ChapMenuFragment() {
         // Required empty public constructor
     }
@@ -87,11 +96,60 @@ public class ChapMenuFragment extends Fragment {
         lvRSkills = (ListView) getView().findViewById(R.id.lvRollSkill);
         lvRASets = (ListView) getView().findViewById(R.id.lvRollAttackSets);
 
+        txtRTH = (TextView) getView().findViewById(R.id.txtRTH);
+
+//        RTH = (Spinner) getView().findViewById(R.id.spinRollToHit);
+
         //Bundle it.
         Bundle bundle = getArguments();
         if (bundle != null) {
             chapID = bundle.getInt("ChapID", 0);
         }
+
+        //Grab the Chapter, and display the
+        c = db.getChap(chapID);
+        String rth = c.RollToHit + "";
+        txtRTH.setText(rth);
+
+        //Initialize TextViews
+        txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);
+        txtChapTitle.setText(c.Name);
+
+        //Identify what Dice we're looking at, and generate a loop accordingly.
+//        rNumber = 1;
+//        maxNumb = 21;
+//        D20Hit = new ArrayList<>();
+//
+//        //Loop through and generate a list of possible rolls.
+//        while (rNumber < maxNumb) {
+//            D20Hit.add(rNumber);
+//            rNumber++;
+//        }
+
+        //Adapter
+//        ArrayAdapter<Integer> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, D20Hit);
+//        ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        RTH.setAdapter(ad2);
+//        RTH.setSelection(c.RollToHit + 1);
+//
+//        //Update Chapter on RTH,indexChanged
+//        RTH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//                int rth = (int) RTH.getSelectedItemId() + 1;
+//                c.RollToHit = rth;
+//
+//                db.updateChap(c);
+//
+//                Toast.makeText(getActivity(), "Roll To Hit updated.", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         //Tabs!
         TabHost th = (TabHost) getView().findViewById(R.id.tabHost);
@@ -108,11 +166,6 @@ public class ChapMenuFragment extends Fragment {
         specs.setContent(R.id.tab2);
         specs.setIndicator("Skill Rolls");
         th.addTab(specs);
-
-        //Initialize TextViews
-        txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);
-        txtChapTitle.setText(db.getChapTitle(chapID));
-
 
         //region *** Roll Attack calls
         //Attack roll button - separate .xml from the Skill roll. Dropdown to select a DS.
@@ -180,6 +233,7 @@ public class ChapMenuFragment extends Fragment {
                 a.show();
             }
         });
+
         //endregion
 
         //region **Roll Skill calls
