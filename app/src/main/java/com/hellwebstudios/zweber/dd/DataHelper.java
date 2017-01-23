@@ -98,6 +98,8 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //endregion
 
+    //Testing the global db call to reduce calls.
+    SQLiteDatabase db = this.getWritableDatabase();
 
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
@@ -803,24 +805,18 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getAllDS
     public Cursor getAllDS() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DS, null);
         return res;
     }
 
     //getCharDS(int charID)
-    public Cursor getCharDS(int charID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Cursor getCharDS(int charID) {
         Cursor res = db.rawQuery("SELECT * FROM DiceSets WHERE CharID = " + charID, null);
-
         return res;
     }
 
     //addDS
-    public boolean addDS(DiceSet newDS)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public boolean addDS(DiceSet newDS) {
         ContentValues cv = new ContentValues();
 
         cv.put(DS_1, newDS.Name);
@@ -834,12 +830,10 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getDSNameByID
-    public String getDSNameByID(int id)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public String getDSNameByID(int id) {
+        String dsn = "";
         Cursor res = db.rawQuery("SELECT Name FROM " + T_DS + " WHERE ID = " + id, null);
 
-        String dsn = "";
         while (res.moveToNext())
             dsn = res.getString(0);
 
@@ -847,11 +841,8 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getDSIDByName(string name)
-    public int getDSIDByName(String name)
-    {
+    public int getDSIDByName(String name) {
         int id = 0;
-
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DS + " WHERE Name = '" + name + "'", null);
 
         while (res.moveToNext())
@@ -860,6 +851,16 @@ public class DataHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    //valDS(string DSN)
+    public int valDS(String DSN) {
+        int c = 0;
+        Cursor res = db.rawQuery("SELECT Count(ID) FROM " + T_DS + " WHERE Name = '" + DSN + "'", null);
+
+        while (res.moveToNext())
+            c = res.getInt(0);
+
+        return c;
+    }
 
     //endregion
 
@@ -893,7 +894,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateDSD(DSD dsdUp)
     public void updateDSD(DiceSetDie dsdUp)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(DSD_1, dsdUp.DiceSetID);
@@ -902,7 +902,6 @@ public class DataHelper extends SQLiteOpenHelper {
         String f = "ID=" + dsdUp.ID;
 
         db.update(T_DSD, cv, f, null);
-
     }
 
 

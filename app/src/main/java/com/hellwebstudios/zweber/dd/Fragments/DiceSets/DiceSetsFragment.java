@@ -86,8 +86,7 @@ public class DiceSetsFragment extends Fragment {
 
                 if (res.getCount() == 0)
                     return;
-                else
-                    //Loop and fill the List.
+                else //Loop and fill the List.
                     while (res.moveToNext())
                         sChars.add(res.getString(1));
 
@@ -139,11 +138,8 @@ public class DiceSetsFragment extends Fragment {
                 android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetDieFragment");
                 fragmentTransaction.commit();
-
             }
         });
-
-
     }
 
     //setDS
@@ -166,7 +162,7 @@ public class DiceSetsFragment extends Fragment {
     {
         AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
 
-        if (tvDSN.length() == 0) {
+        if (tvDSN.length() == 0) { //Blank DSN Check
             myAlert.setMessage("Please enter a Name.")
                     .setPositiveButton("Close", new DialogInterface.OnClickListener() {
                         @Override
@@ -176,7 +172,7 @@ public class DiceSetsFragment extends Fragment {
                     })
                     .create();
             myAlert.show();
-        } else if (tvDSN.length() > 30) {
+        } else if (tvDSN.length() > 30) { //Limits the DSN to 30 chars.
             myAlert.setMessage("Please enter a Name under 30 characters.")
                     .setPositiveButton("Close", new DialogInterface.OnClickListener() {
                         @Override
@@ -186,6 +182,8 @@ public class DiceSetsFragment extends Fragment {
                     })
                     .create();
             myAlert.show();
+        } else if (db.valDS(ds.Name) != 0) {
+            Toast.makeText(getActivity(), "A Dice Set named " + ds.Name + " already exists.", Toast.LENGTH_SHORT).show();
         } else {
             if (db.addDS(ds)) {
                 Toast.makeText(getActivity(), "Dice Set added successfully.", Toast.LENGTH_SHORT).show();
