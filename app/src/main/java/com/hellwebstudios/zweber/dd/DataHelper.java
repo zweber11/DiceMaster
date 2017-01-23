@@ -146,7 +146,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
         //region **Adventures/Chapters**
 
-
         //Adventures table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_ADV + " (AdvID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "Name TEXT, " +
@@ -168,11 +167,9 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (5, 2, 'Chapter 2: Training', 5)");
         db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (6, 2, 'Chapter 3: Night Raid', 6)");
 
-
         //endregion
 
         //region **RollSkills/RollAttackSets/RollAttacks**
-
 
         //RollSkills table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_RS + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -202,11 +199,9 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (1, 1, 1, 2)");
         db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (2, 1, 3, 7)");
 
-
         //endregion
 
         //region **Skills**
-
 
         //Skills table.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_SKI + " (SkillID INTEGER PRIMARY KEY AUTOINCREMENT, SkillName TEXT, LastUsed TEXT, Favorite INTEGER)");
@@ -240,7 +235,6 @@ public class DataHelper extends SQLiteOpenHelper {
         //Intelligence
         //Strength
         //Wisdom
-
 
         //endregion
 
@@ -286,7 +280,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getAllCharacters
     public Cursor getAllCharacters() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAR, null);
         return res;
     }
@@ -294,7 +287,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //addCharacter
     public void addCharacter(DDCharacter newChar)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(C_1, newChar.CharacterName);
@@ -307,7 +299,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateCharacter(CHAR)
     public void updateCharacter(DDCharacter charToUpdate)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(C_1, charToUpdate.CharacterName);
@@ -323,7 +314,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public DDCharacter getChar(int charID)
     {
         DDCharacter charFromDB = new DDCharacter();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAR + " WHERE CharacterID = " + charID, null);
 
         while (res.moveToNext()) {
@@ -339,7 +329,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //getCharName(charID)
     public String getCharName(int charID)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT CharacterName FROM " + T_CHAR + " WHERE CharacterID = " + charID, null);
 
         String cn = "";
@@ -356,7 +345,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getAllClasses
     public Cursor getAllClasses() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CLASS, null);
         return res;
     }
@@ -364,7 +352,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //addClass
     public boolean addClass(CharClass newClass)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(CC_1, newClass.ClassName);
@@ -379,9 +366,7 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateClass
     public boolean updateClass(CharClass cToUpdate)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(CC_1, cToUpdate.ClassName);
 
         String strFilter = "ClassID=" + cToUpdate.ClassID;
@@ -397,7 +382,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public CharClass getClass(int classID)
     {
         CharClass cFromDB = new CharClass();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CLASS + " WHERE ClassID = " + classID, null);
 
         while (res.moveToNext()) {
@@ -411,7 +395,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //getCN
     public String getCN(int classID)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT ClassName FROM " + T_CLASS + " WHERE ClassID = " + classID, null);
 
         String cn = "";
@@ -427,24 +410,18 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getAllRaces
     public Cursor getAllRaces() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_RACE, null);
         return res;
     }
 
     //addRace
-    public boolean addRace(CharRace newRace)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public boolean addRace(CharRace newRace) {
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(CR_1, newRace.RaceName);
 
         long result = db.insert(T_RACE, null, contentValues);
         if (result == -1)
-        {
             return false;
-        }
         else
             return true;
     }
@@ -452,9 +429,7 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateRace
     public boolean updateRace(CharRace crToUpdate)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
         cv.put(CR_1, crToUpdate.RaceName);
 
         String strFilter = "RaceID=" + crToUpdate.RaceID;
@@ -470,11 +445,9 @@ public class DataHelper extends SQLiteOpenHelper {
     public CharRace getRace(int raceID)
     {
         CharRace crFromDB = new CharRace();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_RACE + " WHERE RaceID = " + raceID, null);
 
-        while (res.moveToNext())
-        {
+        while (res.moveToNext()) {
             crFromDB.RaceID = res.getInt(0);
             crFromDB.RaceName = res.getString(1);
         }
@@ -485,7 +458,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //getRN
     public String getRN(int raceID)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT RaceName FROM " + T_RACE + " WHERE RaceID = " + raceID, null);
 
         String rn = "";
@@ -501,7 +473,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getAllSkills
     public Cursor getAllSkills() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_SKI, null);
         return res;
     }
@@ -509,7 +480,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateSkill
 //    public boolean updateSkillFavFlag(int skillID, int value)
 //    {
-//        SQLiteDatabase db = this.getWritableDatabase();
 //        ContentValues cv = new ContentValues();
 //
 //        cv.put("SkillID", skillID);
@@ -528,12 +498,9 @@ public class DataHelper extends SQLiteOpenHelper {
     public Skill getSkill(int skillID)
     {
         Skill sFromDB = new Skill();
-
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_SKI + " WHERE SkillID = " + skillID, null);
 
-        while (res.moveToNext())
-        {
+        while (res.moveToNext()) {
             sFromDB.SkillID = res.getInt(0);
             sFromDB.SkillName = res.getString(1);
             sFromDB.LastUsed = res.getString(2);
@@ -546,7 +513,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //getSkillName(id)
     public String getSkillName(int ID)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT SkillName FROM " + T_SKI + " WHERE SkillID = " + ID, null);
 
         String sn = "";
@@ -558,14 +524,12 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getSkillsByFav --v2 call...
 //    public Cursor getSkillsByFav() {
-//        SQLiteDatabase db = this.getWritableDatabase();
 //        Cursor res = db.rawQuery("SELECT * FROM " + T_SKI + " ORDER BY Favorite DESC", null);
 //        return res;
 //    }
 
     //getRecentSkills()
     public Cursor getRecentSkills() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_SKI + " ORDER BY LastUsed DESC", null);
         return res;
     }
@@ -573,7 +537,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateSkillDT(skillID)
     public void updateSkillDT(int skillID, String newDT)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put("SkillID", skillID);
@@ -587,13 +550,24 @@ public class DataHelper extends SQLiteOpenHelper {
     public int getSIDBySN(String name)
     {
         int sID = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT SkillID FROM " + T_SKI + " WHERE SkillName = '" + name + "'", null);
 
         while (res.moveToNext())
             sID = res.getInt(0);
 
         return sID;
+    }
+
+    //getSNByID(int sID)
+    public String getSNByID(int sID)
+    {
+        String n = "";
+        Cursor res = db.rawQuery("SELECT SkillName FROM " + T_SKI + " WHERE SkillID = " + sID, null);
+
+        while (res.moveToNext())
+            n = res.getString(0);
+
+        return n;
     }
 
 
@@ -604,15 +578,12 @@ public class DataHelper extends SQLiteOpenHelper {
     //Adventure calls.
     //getAllAdv
     public Cursor getAllAdv() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_ADV, null);
         return res;
     }
 
     //addAdv
-    public void addAdv(Adventure adv)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void addAdv(Adventure adv) {
         ContentValues cv = new ContentValues();
 
         cv.put(ADV_1, adv.Name);
@@ -624,9 +595,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //updateAdv(Adv)
-    public void updateAdv(Adventure adv)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void updateAdv(Adventure adv) {
         ContentValues cv = new ContentValues();
 
         cv.put(ADV_1, adv.Name);
@@ -640,14 +609,11 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getAdv(advID)
-    public Adventure getAdv(int advID)
-    {
+    public Adventure getAdv(int advID) {
         Adventure adv = new Adventure();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_ADV + " WHERE AdvID = " + advID, null);
 
-        while (res.moveToNext())
-        {
+        while (res.moveToNext()) {
             adv.AdvID = res.getInt(0);
             adv.Name = res.getString(1);
             adv.Desc = res.getString(2);
@@ -659,9 +625,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getAdvTitle(int advID)
-    public String getAdvTitle(int advID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public String getAdvTitle(int advID) {
         Cursor res = db.rawQuery("SELECT Name FROM " + T_ADV + " WHERE AdvID = " + advID, null);
 
         String at = "";
@@ -672,10 +636,8 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getCharIDByAdvID
-    public int getCharIDByAdvID(int advID)
-    {
+    public int getCharIDByAdvID(int advID) {
         int charID = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT CharID FROM " + T_ADV + " WHERE AdvID = " + advID, null);
 
         while (res.moveToNext())
@@ -690,9 +652,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
 
     //addChap
-    public void addChap(Chapter c)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void addChap(Chapter c) {
         ContentValues cv = new ContentValues();
 
         cv.put(CH_1, c.AdvID);
@@ -703,9 +663,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getChapTitle(int chapID)
-    public String getChapTitle(int chapID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public String getChapTitle(int chapID) {
         Cursor res = db.rawQuery("SELECT Name FROM " + T_CHAP + " WHERE ChapID = " + chapID, null);
 
         String ct = "";
@@ -716,9 +674,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getChapsByAdv(int advID)
-    public Cursor getChapsByAdv(int a)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Cursor getChapsByAdv(int a) {
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE AdvID = " + a, null);
         return res;
     }
@@ -727,7 +683,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public Chapter getChap(int chapID)
     {
         Chapter c = new Chapter();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE ChapID = " + chapID, null);
 
         while (res.moveToNext()) {
@@ -741,9 +696,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //updateChap(chap)
-    public void updateChap(Chapter c)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void updateChap(Chapter c) {
         ContentValues cv = new ContentValues();
 
         cv.put(CH_1, c.AdvID);
@@ -751,7 +704,6 @@ public class DataHelper extends SQLiteOpenHelper {
         cv.put(CH_3, c.RollToHit);
 
         String strFilter = "ChapID=" + c.ChapID;
-
         db.update(T_CHAP, cv, strFilter, null);
     }
 
@@ -762,15 +714,12 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //getAllDie
     public Cursor getAllDie() {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DICE, null);
         return res;
     }
 
     //getDiceName(ID)
-    public String getDiceName(int ID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public String getDiceName(int ID) {
         Cursor res = db.rawQuery("SELECT Name FROM " + T_DICE + " WHERE DiceID = " + ID, null);
 
         String dn = "";
@@ -781,10 +730,8 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getDSD(int DSDID)
-    public DiceSetDie getDSD(int DSDID)
-    {
+    public DiceSetDie getDSD(int DSDID) {
         DiceSetDie dsd = new DiceSetDie();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DSD + " WHERE ID = " + DSDID, null);
 
         while (res.moveToNext())
@@ -870,7 +817,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //addDSD
     public boolean addDSD(DiceSetDie dsd)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(DSD_1, dsd.DiceSetID);
@@ -884,9 +830,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getDSDByDSID(int dsID)
-    public Cursor getDSDByDSID(int dsID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Cursor getDSDByDSID(int dsID) {
         Cursor res = db.rawQuery("SELECT * FROM " + T_DSD + " WHERE DiceSetID = " + dsID + " ORDER BY DiceID", null);
         return res;
     }
@@ -912,7 +856,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //addRS(rs)
     public boolean addRS(RollSkill rs)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(RS_1, rs.SkillID);
@@ -929,7 +872,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //updateRS(RollSkill rs)
     public void updateRS(RollSkill rs)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(RS_1, rs.SkillID);
@@ -944,7 +886,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //getRSByChapID(int chapID)
     public Cursor getRSByChapID(int chapID)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_RS + " WHERE ChapID = " + chapID, null);
         return res;
     }
@@ -953,7 +894,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public int getRollByRSID(int RSID)
     {
         int r = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT Roll FROM " + T_RS + " WHERE ID = " + RSID, null);
 
         while (res.moveToNext())
@@ -966,7 +906,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public int getSkillByRSID(int RSID)
     {
         int r = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT SkillID FROM " + T_RS + " WHERE ID = " + RSID, null);
 
         while (res.moveToNext())
@@ -982,7 +921,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //GetDieByDSID
     public Cursor getDieByDSID(int dsID)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DSD +  " WHERE DiceSetID = " + dsID, null);
 
         return res;
@@ -991,7 +929,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //addRA(RollAttack ra)
     public void addRA(RollAttack ra)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(RA_1, ra.RASID);
@@ -1002,18 +939,14 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getRAByRASID(int RASID)
-    public Cursor getRAByRASID(int RASID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Cursor getRAByRASID(int RASID) {
         Cursor res = db.rawQuery("SELECT * FROM " + T_RA + " WHERE RASID = " + RASID + " ORDER BY DID", null);
-
         return res;
     }
 
     //updateRA(RollAttack ra)
     public void updateRA(RollAttack ra)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(RA_1, ra.RASID);
@@ -1029,11 +962,9 @@ public class DataHelper extends SQLiteOpenHelper {
     public RollAttack getRA(int RAID)
     {
         RollAttack ra = new RollAttack();
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_RA + " WHERE ID = " + RAID, null);
 
-        while (res.moveToNext())
-        {
+        while (res.moveToNext()) {
             ra.ID = res.getInt(0);
             ra.RASID = res.getInt(1);
             ra.DID = res.getInt(2);
@@ -1050,7 +981,6 @@ public class DataHelper extends SQLiteOpenHelper {
     //addRAS(ras)
     public void addRAS(RollAttackSet ras)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(RAS_1, ras.ChapID);
@@ -1060,9 +990,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getRASetsByChapID
-    public Cursor getRASetsByChapID(int chapID)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Cursor getRASetsByChapID(int chapID) {
         Cursor res = db.rawQuery("SELECT * FROM " + T_RAS + " WHERE ChapID = " + chapID, null);
         return res;
     }
@@ -1071,7 +999,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public int getDSIDByRASID(int RASID)
     {
         int dsid = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT DSID FROM " + T_RAS + " WHERE ID = " + RASID, null);
 
         while (res.moveToNext())
@@ -1084,7 +1011,6 @@ public class DataHelper extends SQLiteOpenHelper {
     public int getLatestRASID()
     {
         int r = 0;
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT ID FROM " + T_RAS + " ORDER BY ID DESC LIMIT 1", null);
 
         while (res.moveToNext())

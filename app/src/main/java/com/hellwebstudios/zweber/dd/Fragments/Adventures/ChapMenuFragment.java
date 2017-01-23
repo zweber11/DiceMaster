@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -19,11 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
-import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
 import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.DataObjects.RollAttackSet;
 import com.hellwebstudios.zweber.dd.DataObjects.RollSkill;
-import com.hellwebstudios.zweber.dd.DataObjects.Skill;
 import com.hellwebstudios.zweber.dd.ListAdapters.RASetListAdapter;
 import com.hellwebstudios.zweber.dd.ListAdapters.RollSkillListAdapter;
 import com.hellwebstudios.zweber.dd.R;
@@ -43,7 +40,6 @@ public class ChapMenuFragment extends Fragment {
     private RollSkillListAdapter adapter;
     private List<RollSkill> mRSList;
     DataHelper db;
-
     int chapID = 0;
     TextView txtChapTitle;
     TextView txtAttack;
@@ -68,7 +64,6 @@ public class ChapMenuFragment extends Fragment {
     int add = 0;
     Integer RSID;
     int RASID;
-
     Chapter c;
     TextView txtRTH;
     int charID;
@@ -91,10 +86,7 @@ public class ChapMenuFragment extends Fragment {
 
         lvRSkills = (ListView) getView().findViewById(R.id.lvRollSkill);
         lvRASets = (ListView) getView().findViewById(R.id.lvRollAttackSets);
-
         txtRTH = (TextView) getView().findViewById(R.id.txtRTH);
-
-//        RTH = (Spinner) getView().findViewById(R.id.spinRollToHit);
 
         //Bundle it.
         Bundle bundle = getArguments();
@@ -102,7 +94,7 @@ public class ChapMenuFragment extends Fragment {
             chapID = bundle.getInt("ChapID", 0);
         }
 
-        //Grab the Chapter, and display the
+        //Grab the Chapter, and display the ChapterName.
         c = db.getChap(chapID);
         String rth = c.RollToHit + "";
         txtRTH.setText(rth);
@@ -111,7 +103,7 @@ public class ChapMenuFragment extends Fragment {
         txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);
         txtChapTitle.setText(c.Name);
 
-        //Tabs!
+        //Tabs
         TabHost th = (TabHost) getView().findViewById(R.id.tabHost);
         th.setup();
 
@@ -340,11 +332,17 @@ public class ChapMenuFragment extends Fragment {
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinSkills.setAdapter(ad);
 
+        //Grab the sName based on the sID.
+        String sName = db.getSNByID(sID);
+
         //Set the selectedSkill here.
         if (sID == 0)
             spinSkills.setSelection(0);
-        else
-            spinSkills.setSelection(sID - 1);
+        //http://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+        else if (!sName.equals(null)) {
+            int sPos = ad.getPosition(sName);
+            spinSkills.setSelection(sPos);
+        }
 
         //SpinnerD20
         spinD20 = (Spinner) view.findViewById(R.id.spinD20);
@@ -396,10 +394,6 @@ public class ChapMenuFragment extends Fragment {
 
                     if (db.addRS(rs)) {
                         Toast.makeText(getActivity(), "Skill: " + spinSkills.getSelectedItem().toString() + ", # rolled: " + spinD20.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-
-                        //Update LastUsed value for of the selected Skill.
-                        db.updateSkillDT(sID, dateText);
-
                         setRollSkills(chapID);
                     } else
                         Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
@@ -409,7 +403,12 @@ public class ChapMenuFragment extends Fragment {
 
                     db.updateRS(rs);
                     setRollSkills(chapID);
+
+                    Toast.makeText(getActivity(), "Roll updated.", Toast.LENGTH_SHORT).show();
                 }
+
+                //Update LastUsed value for of the selected Skill.
+                db.updateSkillDT(sID, dateText);
             }
         });
 
