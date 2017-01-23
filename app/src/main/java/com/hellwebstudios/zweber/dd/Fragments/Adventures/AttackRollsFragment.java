@@ -53,11 +53,13 @@ public class AttackRollsFragment extends Fragment {
     int number;
     int maxNumb;
     int sDID;
-//    int sRAID;
     Integer sRAID;
     int r;
     int Roll;
     int lastRAS;
+    int total;
+    TextView tvADTotal;
+    String t;
 
     public AttackRollsFragment() {
         // Required empty public constructor
@@ -78,6 +80,7 @@ public class AttackRollsFragment extends Fragment {
         lvAttackRolls = (ListView) getView().findViewById(R.id.lvAR);
         tvDSTitle = (TextView) getView().findViewById(R.id.txtADName);
         tvChapMenu = (TextView) getView().findViewById(R.id.txtChapMenu);
+        tvADTotal = (TextView) getView().findViewById(R.id.txtADTotal);
 
         //Bundle it.
         Bundle bundle = getArguments();
@@ -247,9 +250,19 @@ public class AttackRollsFragment extends Fragment {
         mRAList = new ArrayList<>();
         Cursor res = db.getRAByRASID(RAS);
 
+        total = 0;
+
         //Loop to populate the AttackRolls list.
         while (res.moveToNext())
+        {
             mRAList.add(new RollAttack(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3)));
+
+            //Loop through and calc the total roll for the given attack set.
+            total = total + res.getInt(3);
+        }
+
+        t = String.valueOf(total);
+        tvADTotal.setText(t);
 
         //init adapter
         adapter = new RollAttackListAdapter(getActivity(), mRAList);

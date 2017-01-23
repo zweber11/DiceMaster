@@ -20,7 +20,7 @@
             android:id="@+id/txtChapMenu"
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|center_horizontal"
-            android:layout_weight="0" />
+            android:layout_weight="1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +30,25 @@
             android:padding="5dp"
             android:layout_margin="5dp"
             android:id="@+id/txtADName"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: "
+            android:textColor="@color/color5"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/txt1Total"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textColor="@color/color5"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:paddingEnd="5dp"
+            android:layout_margin="5dp"
+            android:id="@+id/txtADTotal"
             android:layout_weight="1" />
 
     </LinearLayout>
