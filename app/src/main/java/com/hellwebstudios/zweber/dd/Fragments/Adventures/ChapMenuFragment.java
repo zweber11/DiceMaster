@@ -164,32 +164,44 @@ public class ChapMenuFragment extends Fragment {
                 //Finish up, and set the View.
                 abAddAdv.setView(view);
 
-                abAddAdv.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                abAddAdv.setPositiveButton("Roll", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        //Save selectedItem
-                        int sDSID = (int) spinDS.getSelectedItemId() + 1;
+                        String sDSN = (String) spinDS.getSelectedItem();
+//                        Toast.makeText(getActivity(), "DSN: " + sDSN, Toast.LENGTH_SHORT).show();
+
+                        //Convert the DSN to DSID.
+                        int sDSID = db.getDSIDByName(sDSN);
 
                         //Take the user to the AttackRollsFragment.
                         AttackRollsFragment fragment = new AttackRollsFragment();
 
-                        //Create a bundle, and setArguments of the fragment.
-                        Bundle bundle = new Bundle();
-                        bundle.putInt("DSID", sDSID);
+                        //Add check to ensure the DiceSet contains Die. If not, inform the User to create some.
+                        Cursor dsd = db.getDSDByDSID(sDSID);
+                        if (dsd.getCount() == 0)
+                        {
+                            Toast.makeText(getActivity(), "Please add Die to this Dice Set.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else {
+                            //Create a bundle, and setArguments of the fragment.
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("DSID", sDSID);
 
-                        //Pass the chapID as well for the RollAttack generation loop.
-                        bundle.putInt("ChapID", chapID);
+                            //Pass the chapID as well for the RollAttack generation loop.
+                            bundle.putInt("ChapID", chapID);
 
-                        //Flag to handle the next fragment.
-                        add = 1;
-                        bundle.putInt("Add", add);
+                            //Flag to handle the next fragment.
+                            add = 1;
+                            bundle.putInt("Add", add);
 
-                        fragment.setArguments(bundle);
+                            fragment.setArguments(bundle);
 
-                        android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.fragment_container, fragment, "attackRollsFragment");
-                        fragmentTransaction.commit();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container, fragment, "attackRollsFragment");
+                            fragmentTransaction.commit();
+                        }
                     }
                 });
 

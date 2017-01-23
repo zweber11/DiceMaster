@@ -846,6 +846,20 @@ public class DataHelper extends SQLiteOpenHelper {
         return dsn;
     }
 
+    //getDSIDByName(string name)
+    public int getDSIDByName(String name)
+    {
+        int id = 0;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DS + " WHERE Name = '" + name + "'", null);
+
+        while (res.moveToNext())
+            id = res.getInt(0);
+
+        return id;
+    }
+
 
     //endregion
 
