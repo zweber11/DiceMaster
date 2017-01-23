@@ -669,6 +669,19 @@ public class DataHelper extends SQLiteOpenHelper {
         return at;
     }
 
+    //getCharIDByAdvID
+    public int getCharIDByAdvID(int advID)
+    {
+        int charID = 0;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT CharID FROM " + T_ADV + " WHERE AdvID = " + advID, null);
+
+        while (res.moveToNext())
+            charID = res.getInt(0);
+
+        return charID;
+    }
+
     //endregion
 
     //region **Chapter calls.**
@@ -792,6 +805,15 @@ public class DataHelper extends SQLiteOpenHelper {
     public Cursor getAllDS() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DS, null);
+        return res;
+    }
+
+    //getCharDS(int charID)
+    public Cursor getCharDS(int charID)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM DiceSets WHERE CharID = " + charID, null);
+
         return res;
     }
 

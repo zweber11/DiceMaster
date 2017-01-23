@@ -69,13 +69,9 @@ public class ChapMenuFragment extends Fragment {
     Integer RSID;
     int RASID;
 
-    //RollToHit spinner
-//    Spinner RTH;
-//    int rNumber;
-//    int maxNumb;
-//    List<Integer> D20Hit;
     Chapter c;
     TextView txtRTH;
+    int charID;
 
     public ChapMenuFragment() {
         // Required empty public constructor
@@ -115,42 +111,6 @@ public class ChapMenuFragment extends Fragment {
         txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);
         txtChapTitle.setText(c.Name);
 
-        //Identify what Dice we're looking at, and generate a loop accordingly.
-//        rNumber = 1;
-//        maxNumb = 21;
-//        D20Hit = new ArrayList<>();
-//
-//        //Loop through and generate a list of possible rolls.
-//        while (rNumber < maxNumb) {
-//            D20Hit.add(rNumber);
-//            rNumber++;
-//        }
-
-        //Adapter
-//        ArrayAdapter<Integer> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, D20Hit);
-//        ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        RTH.setAdapter(ad2);
-//        RTH.setSelection(c.RollToHit + 1);
-//
-//        //Update Chapter on RTH,indexChanged
-//        RTH.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//                int rth = (int) RTH.getSelectedItemId() + 1;
-//                c.RollToHit = rth;
-//
-//                db.updateChap(c);
-//
-//                Toast.makeText(getActivity(), "Roll To Hit updated.", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
         //Tabs!
         TabHost th = (TabHost) getView().findViewById(R.id.tabHost);
         th.setup();
@@ -183,11 +143,15 @@ public class ChapMenuFragment extends Fragment {
                 spinDS = (Spinner) view.findViewById(R.id.spinDS);
                 sDS = new ArrayList<>();
 
+                //Select only the Character-specific DiceSets.
+                charID = db.getCharIDByAdvID(c.getAdvID());
                 db = new DataHelper(getActivity());
-                Cursor res = db.getAllDS();
+                Cursor res = db.getCharDS(charID);
 
-                if (res.getCount() == 0)
+                if (res.getCount() == 0) {
+                    Toast.makeText(getActivity(), "Please add Dice Sets for your Character.", Toast.LENGTH_SHORT).show();
                     return;
+                }
                 else
                     while (res.moveToNext()) //Loop and fill the List.
                         sDS.add(res.getString(1));
