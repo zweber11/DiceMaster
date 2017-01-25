@@ -24,7 +24,7 @@
                     android:text="Strength"
                     android:textSize="18sp"
                     android:textColor="@color/color6"
-                    android:layout_marginLeft="2dp" />
+                    android:layout_marginStart="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -32,14 +32,24 @@
                     android:text=" Check! "
                     android:textSize="18sp"
                     android:textColor="@color/color6"/>
+            </LinearLayout>
+        </TableRow>
 
+        <!--2nd row-->
+        <TableRow
+            android:layout_margin="2dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/rs_roll1"
                     android:text="You Rolled a "
                     android:textSize="18sp"
-                    android:textColor="@color/color5"/>
+                    android:textColor="@color/color5"
+                    android:layout_marginStart="2dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,5 +66,6 @@
                     android:textColor="@color/color5"/>
             </LinearLayout>
         </TableRow>
+
     </TableLayout>
 </LinearLayout>
