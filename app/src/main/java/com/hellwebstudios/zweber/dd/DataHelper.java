@@ -154,7 +154,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 "Desc TEXT, " +
                 "CharID INTEGER REFERENCES Characters (CharacterID), " +
                 "NumChapters INTEGER)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_ADV + " (AdvID, Name, Desc, CharID, NumChapters) VALUES (1, 'Elgost in Peril', 'Join Hans on his quest.', 1, 3)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_ADV + " (AdvID, Name, Desc, CharID, NumChapters) VALUES (1, 'Paradise in Peril', 'Join Hans on his quest.', 1, 3)");
         db.execSQL("INSERT OR IGNORE INTO " + T_ADV + " (AdvID, Name, Desc, CharID, NumChapters) VALUES (2, 'The Chosen Ones', 'Four enter, but will any survive?', 2, 3)");
 
         //Chapters table w/ data.
