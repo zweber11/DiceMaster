@@ -80,7 +80,7 @@ public class DataHelper extends SQLiteOpenHelper {
     //Chapters table.
     public static final String CH_1 = "AdvID";
     public static final String CH_2 = "Name";
-    public static final String CH_3 = "RollToHit";
+//    public static final String CH_3 = "RollToHit";
 
     //RollAttack table.
     public static final String RA_1 = "RASID";
@@ -90,6 +90,8 @@ public class DataHelper extends SQLiteOpenHelper {
     //RollAttackSet table.
     public static final String RAS_1 = "ChapID";
     public static final String RAS_2 = "DSID";
+    public static final String RAS_3 = "Initiative";
+    public static final String RAS_4 = "RollToHit";
 
     //RollSkill table.
     public static final String RS_1 = "SkillID";
@@ -158,14 +160,13 @@ public class DataHelper extends SQLiteOpenHelper {
         //Chapters table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_CHAP + " (ChapID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "AdvID INTEGER REFERENCES Adventures (AdvID), " +
-                "Name TEXT, " +
-                "RollToHit INTEGER)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (1, 1, 'Chapter 1: Humble Beginnings', 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (2, 1, 'Chapter 2: The Great Bridge', 2)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (3, 1, 'Chapter 3: Team Cohesion', 3)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (4, 2, 'Chapter 1: Formation', 4)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (5, 2, 'Chapter 2: Training', 5)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name, RollToHit) VALUES (6, 2, 'Chapter 3: Night Raid', 6)");
+                "Name TEXT)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (1, 1, 'Chapter 1: Humble Beginnings')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (2, 1, 'Chapter 2: The Great Bridge')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (3, 1, 'Chapter 3: Team Cohesion')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (4, 2, 'Chapter 1: Formation')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (5, 2, 'Chapter 2: Training')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (6, 2, 'Chapter 3: Night Raid')");
 
         //endregion
 
@@ -183,21 +184,21 @@ public class DataHelper extends SQLiteOpenHelper {
         //RollAttackSets table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_RAS + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "ChapID INTEGER REFERENCES Chapters (ChapID), " +
-                "DSID INTEGER REFERENCES DiceSets (ID))");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID) VALUES (1, 1, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID) VALUES (2, 1, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID) VALUES (3, 1, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID) VALUES (4, 1, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID) VALUES (5, 1, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID) VALUES (6, 1, 1)");
+                "DSID INTEGER REFERENCES DiceSets (ID)," +
+                "Initiative INTEGER," +
+                "RollToHit INTEGER)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID, Initiative, RollToHit) VALUES (1, 1, 1, 1, 1)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID, Initiative, RollToHit) VALUES (2, 1, 1, 2, 2)");
 
         //RollAttacks table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_RA + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "RASID INTEGER REFERENCES RollAttackSets (ID), " +
                 "DID INTEGER REFERENCES Dice (DiceID), " +
                 "Roll INTEGER)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (1, 1, 1, 2)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (2, 1, 3, 7)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (1, 1, 4, 1)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (2, 1, 3, 2)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (3, 2, 2, 3)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (4, 2, 1, 4)");
 
         //endregion
 
@@ -657,7 +658,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
         cv.put(CH_1, c.AdvID);
         cv.put(CH_2, c.Name);
-        cv.put(CH_3, c.RollToHit);
 
         db.insert(T_CHAP, null, cv);
     }
@@ -689,7 +689,6 @@ public class DataHelper extends SQLiteOpenHelper {
             c.ChapID = res.getInt(0);
             c.AdvID = res.getInt(1);
             c.Name = res.getString(2);
-            c.RollToHit = res.getInt(3);
         }
 
         return c;
@@ -701,7 +700,6 @@ public class DataHelper extends SQLiteOpenHelper {
 
         cv.put(CH_1, c.AdvID);
         cv.put(CH_2, c.Name);
-        cv.put(CH_3, c.RollToHit);
 
         String strFilter = "ChapID=" + c.ChapID;
         db.update(T_CHAP, cv, strFilter, null);
@@ -985,8 +983,27 @@ public class DataHelper extends SQLiteOpenHelper {
 
         cv.put(RAS_1, ras.ChapID);
         cv.put(RAS_2, ras.DSID);
+        cv.put(RAS_3, ras.Initiative);
+        cv.put(RAS_4, ras.RollToHit);
 
         db.insert(T_RAS, null, cv);
+    }
+
+    //getRAS(int RASID)
+    public RollAttackSet getRAS(int RASID)
+    {
+        RollAttackSet ras = new RollAttackSet();
+        Cursor res = db.rawQuery("SELECT * FROM " + T_RAS + " WHERE ID = " + RASID, null);
+
+        while (res.moveToNext()) {
+            ras.ID = res.getInt(0);
+            ras.ChapID = res.getInt(1);
+            ras.DSID = res.getInt(2);
+            ras.Initiative = res.getInt(3);
+            ras.RollToHit = res.getInt(4);
+        }
+
+        return ras;
     }
 
     //getRASetsByChapID

@@ -22,11 +22,44 @@
             android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp" />
-
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinDS"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+
+        <!--Initiative-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Initiative"
+            android:id="@+id/textView47"
+            android:textColor="@color/color5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinInit"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+
+        <!--RollToHit-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll To Hit"
+            android:id="@+id/textView4"
+            android:textColor="@color/color5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinRTH"
             android:background="@drawable/background"
             android:layout_margin="5dp" />
 

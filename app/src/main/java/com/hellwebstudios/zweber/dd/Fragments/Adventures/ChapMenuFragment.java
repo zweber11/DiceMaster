@@ -68,6 +68,16 @@ public class ChapMenuFragment extends Fragment {
     TextView txtRTH;
     int charID;
 
+    //AttackSet spinner calls.
+    Spinner spinInit;
+    Spinner spinRTH;
+    List<Integer> sRTH;
+    List<Integer> sInit;
+    int number;
+    int maxNumb;
+    int init;
+    int rth;
+
     public ChapMenuFragment() {
         // Required empty public constructor
     }
@@ -96,8 +106,6 @@ public class ChapMenuFragment extends Fragment {
 
         //Grab the Chapter, and display the ChapterName.
         c = db.getChap(chapID);
-        String rth = c.RollToHit + "";
-        txtRTH.setText(rth);
 
         //Initialize TextViews
         txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);
@@ -153,6 +161,34 @@ public class ChapMenuFragment extends Fragment {
                 ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinDS.setAdapter(ad);
 
+                //Spinners
+                spinInit = (Spinner) view.findViewById(R.id.spinInit); //Initiative
+                spinRTH = (Spinner) view.findViewById(R.id.spinRTH); //RTH
+
+                sInit = new ArrayList<>();
+                sRTH = new ArrayList<>();
+                number = 1;
+                maxNumb = 21;
+
+                //Loop through and generate a list of possible rolls.
+                while (number < maxNumb) {
+                    sInit.add(number);
+                    sRTH.add(number);
+                    number++;
+                }
+
+                //Initiative Adapter
+                ArrayAdapter<Integer> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sInit);
+                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinInit.setAdapter(ad2);
+                spinInit.setSelection(0);
+
+                //RTH Adapter
+                ArrayAdapter<Integer> ad3 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sRTH);
+                ad3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinRTH.setAdapter(ad3);
+                spinRTH.setSelection(0);
+
                 //Finish up, and set the View.
                 abAddAdv.setView(view);
 
@@ -187,6 +223,13 @@ public class ChapMenuFragment extends Fragment {
                             //Flag to handle the next fragment.
                             add = 1;
                             bundle.putInt("Add", add);
+
+                            //Send in the initiative & rth values from the Spinners.
+                            init = (int) spinInit.getSelectedItem();
+                            bundle.putInt("init", init);
+
+                            rth = (int) spinRTH.getSelectedItem();
+                            bundle.putInt("rth", rth);
 
                             fragment.setArguments(bundle);
 
@@ -298,7 +341,7 @@ public class ChapMenuFragment extends Fragment {
 
         //Loop to populate the RollAttackSet list.
         while (res.moveToNext())
-            mRASetList.add(new RollAttackSet(res.getInt(0), res.getInt(1), res.getInt(2)));
+            mRASetList.add(new RollAttackSet(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3), res.getInt(4)));
 
         //init adapter
         adapter2 = new RASetListAdapter(getActivity(), mRASetList);

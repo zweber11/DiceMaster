@@ -61,6 +61,11 @@ public class AttackRollsFragment extends Fragment {
     TextView tvADTotal;
     String t;
 
+    TextView txtInit;
+    TextView txtRTH;
+    int init;
+    int rth;
+
     public AttackRollsFragment() {
         // Required empty public constructor
     }
@@ -81,6 +86,8 @@ public class AttackRollsFragment extends Fragment {
         tvDSTitle = (TextView) getView().findViewById(R.id.txtADName);
         tvChapMenu = (TextView) getView().findViewById(R.id.txtChapMenu);
         tvADTotal = (TextView) getView().findViewById(R.id.txtADTotal);
+        txtInit = (TextView) getView().findViewById(R.id.txtInit);
+        txtRTH = (TextView) getView().findViewById(R.id.txtRTH);
 
         //Bundle it.
         Bundle bundle = getArguments();
@@ -89,6 +96,8 @@ public class AttackRollsFragment extends Fragment {
             chapID = bundle.getInt("ChapID", 0);
             RASID = bundle.getInt("RASID", 0);
             add = bundle.getInt("Add", 0);
+            init = bundle.getInt("init", 0);
+            rth = bundle.getInt("rth", 0);
         }
 
         //Handle add extra.
@@ -99,6 +108,8 @@ public class AttackRollsFragment extends Fragment {
             ras.ID = 0;
             ras.ChapID = chapID;
             ras.DSID = DSID;
+            ras.Initiative = init;
+            ras.RollToHit = rth;
 
             db.addRAS(ras);
 
@@ -119,7 +130,6 @@ public class AttackRollsFragment extends Fragment {
                 db.addRA(ra);
             }
 
-//            Toast.makeText(getActivity(), "# of RollAttack objects: " + db.getRACount(), Toast.LENGTH_SHORT).show();
             //Display new RollAttack entries
             getAttackRolls(lastRAS);
         }
@@ -250,6 +260,8 @@ public class AttackRollsFragment extends Fragment {
         mRAList = new ArrayList<>();
         Cursor res = db.getRAByRASID(RAS);
 
+        RollAttackSet ras = db.getRAS(RAS);
+
         total = 0;
 
         //Loop to populate the AttackRolls list.
@@ -263,6 +275,11 @@ public class AttackRollsFragment extends Fragment {
 
         t = String.valueOf(total);
         tvADTotal.setText(t);
+
+        String i = ras.Initiative + "";
+        String r = ras.RollToHit + "";
+        txtInit.setText(i);
+        txtRTH.setText(r);
 
         //init adapter
         adapter = new RollAttackListAdapter(getActivity(), mRAList);
