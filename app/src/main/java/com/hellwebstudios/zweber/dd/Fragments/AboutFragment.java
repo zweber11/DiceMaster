@@ -34,18 +34,17 @@ public class AboutFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        db = new DataHelper(getActivity());
 
-        TextView txtThanks = (TextView) getView().findViewById(R.id.txtThanks);
+        TextView txtGMS = (TextView) getView().findViewById(R.id.txtGMS);
 
-        txtThanks.setOnClickListener(new View.OnClickListener() {
+        txtGMS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent webLink = new Intent(Intent.ACTION_VIEW);
                 webLink.setData(Uri.parse("https://www.twitch.tv/gentlemenssword"));
                 startActivity(webLink);
-//                https://www.twitch.tv/gentlemenssword
+                //https://www.twitch.tv/gentlemenssword
 
             }
         });

@@ -13,17 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="About Menu"
-            android:textColor="@color/color5"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:background="@drawable/background"
-            android:layout_margin="5dp"
-            android:padding="5dp" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +32,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Special Thanks To: \nAaron Weber \nGentlemen's Sword"
+            android:text="Special Thanks To: \n\nAaron Weber \nGentlemen's Sword \nDavid Couturier \nCurtis Reinhold \n"
             android:textColor="@color/color5"
             android:background="@drawable/background"
             android:layout_margin="5dp"
@@ -57,5 +46,14 @@
             android:background="@drawable/background"
             android:layout_margin="5dp"
             android:padding="5dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n\n Click me to check out Gentlemen's Sword on Twitch! \n\n"
+            android:textColor="@color/color5"
+            android:background="@drawable/background"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:id="@+id/txtGMS"/>
     </LinearLayout>
 </FrameLayout>

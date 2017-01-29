@@ -46,6 +46,10 @@
             android:id="@+id/nav_other_apps"
             android:icon="@mipmap/playstore_icon"
             android:title="Other HellWeb Studios Apps!" />
+        <item
+            android:id="@+id/nav_gms_twitch"
+            android:icon="@mipmap/gms"
+            android:title="Gentlemen's Sword on Twitch!" />
     </group>
 
     <!--<item android:title="More">-->

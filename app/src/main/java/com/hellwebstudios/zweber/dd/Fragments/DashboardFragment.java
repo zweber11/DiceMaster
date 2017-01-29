@@ -1,6 +1,8 @@
 package com.hellwebstudios.zweber.dd.Fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -134,11 +136,10 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Display the Help Menu Fragment.
-                HelpFragment fragment = new HelpFragment();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "helpFragment");
-                fragmentTransaction.commit();
+                Intent webLink = new Intent(Intent.ACTION_VIEW);
+                webLink.setData(Uri.parse("https://docs.google.com/document/d/1-7EwIJYdVmmivkyp-dV0eznPsDFqz100nZpOeoZEFF0/edit"));
+                startActivity(webLink);
+                //https://docs.google.com/document/d/1-7EwIJYdVmmivkyp-dV0eznPsDFqz100nZpOeoZEFF0/edit
 
             }
         });

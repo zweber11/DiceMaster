@@ -165,11 +165,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_help) {
 
-            //Display the Help menu fragment
-            HelpFragment fragment = new HelpFragment();
-            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragment, "helpFragment");
-            fragmentTransaction.commit();
+            Intent webLink = new Intent(Intent.ACTION_VIEW);
+            webLink.setData(Uri.parse("https://docs.google.com/document/d/1-7EwIJYdVmmivkyp-dV0eznPsDFqz100nZpOeoZEFF0/edit"));
+            startActivity(webLink);
+            //https://docs.google.com/document/d/1-7EwIJYdVmmivkyp-dV0eznPsDFqz100nZpOeoZEFF0/edit
+
         }
 
         //More section...
@@ -194,6 +194,13 @@ public class MainActivity extends AppCompatActivity
             webLink.setData(Uri.parse("https://play.google.com/store/apps/developer?id=HellWeb+Studios"));
             startActivity(webLink);
             //https://play.google.com/store/apps/developer?id=HellWeb+Studios
+        }
+        else if (id == R.id.nav_gms_twitch) {
+
+            Intent webLink = new Intent(Intent.ACTION_VIEW);
+            webLink.setData(Uri.parse("https://www.twitch.tv/gentlemenssword"));
+            startActivity(webLink);
+            //https://www.twitch.tv/gentlemenssword
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
