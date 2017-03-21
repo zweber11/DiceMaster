@@ -18,11 +18,9 @@ import com.hellwebstudios.zweber.dd.R;
  */
 public class AboutFragment extends Fragment {
 
-
     public AboutFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,8 +46,5 @@ public class AboutFragment extends Fragment {
 
             }
         });
-
-
     }
-
 }

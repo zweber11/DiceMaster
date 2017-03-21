@@ -39,8 +39,7 @@ public class DiceSetDieFragment extends Fragment {
     DataHelper db;
 
     int dsID = 0;
-    TextView dsTitle;
-    TextView tvAdd;
+    TextView dsTitle, tvAdd;
     Spinner spinDice;
     List<String> sDie;
 
@@ -121,8 +120,7 @@ public class DiceSetDieFragment extends Fragment {
                         if (db.addDSD(dsd)) {
                             Toast.makeText(getActivity(), "Die added successfully.", Toast.LENGTH_SHORT).show();
                             setDSD(dsID);
-                        }
-                        else
+                        } else
                             Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -140,7 +138,6 @@ public class DiceSetDieFragment extends Fragment {
 
                 //Allow the User to add to & modify their dice sets, limiting them to only "Level" them up, and not decrease the DiceID...
                 dID = (Integer) view.getTag();
-
                 dsd = db.getDSD(dID);
 
                 //alertDialog popup.
@@ -166,8 +163,9 @@ public class DiceSetDieFragment extends Fragment {
                 ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinDice.setAdapter(ad);
                 spinDice.setSelection(dsd.DiceID - 1);
-
                 abAddDie.setView(view2);
+
+                res.close();
 
                 abAddDie.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
@@ -186,8 +184,7 @@ public class DiceSetDieFragment extends Fragment {
                             dsdUp.DiceID = dieID;
                             db.updateDSD(dsdUp);
                             setDSD(dsID);
-                        }
-                        else
+                        } else
                             Toast.makeText(getActivity(), "Please select a Die greater than your current selection.", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -196,7 +193,6 @@ public class DiceSetDieFragment extends Fragment {
                 a.show();
             }
         });
-
     }
 
     //setDSD()
@@ -213,22 +209,6 @@ public class DiceSetDieFragment extends Fragment {
         adapter = new DSDListAdapter(getActivity(), mDSDList);
         lvDSD.setAdapter(adapter);
 
+        res.close();
     }
-
-    //DieAlert()
-    private void DieAlert(int dieID)
-    {
-        //Check dieID parameter.
-        if (dieID == 0) //New DSD.
-        {
-
-        }
-        else //Editing an existing DSD.
-        {
-
-        }
-
-    }
-
-
 }

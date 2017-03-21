@@ -38,10 +38,8 @@ public class DiceSetsFragment extends Fragment {
     private DiceSetAdapter adapter;
     private List<DiceSet> mDSList;
     DataHelper db;
-
     List<String> sChars;
     private Spinner spinDSChars;
-
     TextView tvDSN;
 
     public DiceSetsFragment() {
@@ -95,6 +93,8 @@ public class DiceSetsFragment extends Fragment {
                 ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinDSChars.setAdapter(ad);
                 abAddDS.setView(view);
+
+                res.close();
 
                 abAddDS.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
@@ -155,6 +155,8 @@ public class DiceSetsFragment extends Fragment {
         //init adapter
         adapter = new DiceSetAdapter(getActivity(), mDSList);
         lvDS.setAdapter(adapter);
+
+        res.close();
     }
 
     //ValFields(DS ds)
@@ -193,5 +195,4 @@ public class DiceSetsFragment extends Fragment {
                 Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

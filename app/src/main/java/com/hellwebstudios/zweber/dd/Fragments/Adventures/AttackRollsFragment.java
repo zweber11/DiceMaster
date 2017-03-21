@@ -132,6 +132,8 @@ public class AttackRollsFragment extends Fragment {
 
             //Display new RollAttack entries
             getAttackRolls(lastRAS);
+
+            res.close();
         }
         else //Otherwise, just display existing RollAttack entries.
             getAttackRolls(RASID);
@@ -251,7 +253,6 @@ public class AttackRollsFragment extends Fragment {
 
             }
         });
-
     }
 
     //getAttackRolls()
@@ -284,6 +285,8 @@ public class AttackRollsFragment extends Fragment {
         //init adapter
         adapter = new RollAttackListAdapter(getActivity(), mRAList);
         lvAttackRolls.setAdapter(adapter);
+
+        res.close();
     }
 
 }

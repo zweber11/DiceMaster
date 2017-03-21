@@ -68,7 +68,6 @@ public class SkillsFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-
     }
 
     //Pulls objs from DB.
@@ -84,6 +83,8 @@ public class SkillsFragment extends Fragment {
         //Init adapter
         adapter = new SkillListAdapter(getActivity(), mSkillList);
         lvSkills.setAdapter(adapter);
+
+        res.close();
     }
 
     //OnFocusChangeListener
@@ -95,16 +96,4 @@ public class SkillsFragment extends Fragment {
 
         super.onResume();
     }
-
-    //NSF
-//    public void NSF()
-//    {
-//        //Take the user to the NewSkillFragment.
-//        NewSkillFrag fragment = new NewSkillFrag();
-//        android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-////        fragmentTransaction.replace(R.id.fragment_container, fragment);
-//        fragmentTransaction.replace(R.id.fragment_container, fragment, "skillsFragment");
-//        fragmentTransaction.commit();
-//    }
-
 }

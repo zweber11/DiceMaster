@@ -89,9 +89,6 @@ public class CharClassesFrag extends Fragment {
 
             }
         });
-
-
-
     }
 
     //setClasses()
@@ -107,6 +104,7 @@ public class CharClassesFrag extends Fragment {
         //init adapter
         adapter = new CharClassListAdapter(getActivity(), mClassList);
         lvClasses.setAdapter(adapter);
-    }
 
+        res.close();
+    }
 }

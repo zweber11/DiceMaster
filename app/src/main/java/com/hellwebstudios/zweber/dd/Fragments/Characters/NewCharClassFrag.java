@@ -29,7 +29,6 @@ public class NewCharClassFrag extends Fragment {
     Button btnSave;
 
     TextView tvTitle;
-
     TextView tvClassName;
 
     public NewCharClassFrag() {
@@ -44,8 +43,7 @@ public class NewCharClassFrag extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
         btnSave = (Button) getView().findViewById(R.id.btnSaveClass);
@@ -60,14 +58,12 @@ public class NewCharClassFrag extends Fragment {
         tvClassName = (TextView) getView().findViewById(R.id.txtClassName);
 
         //Handle Adds/Edits here. (Look @ sClassID passed in via the Intent.)
-        if (classID == 0) //New CharClass
-        {
+        if (classID == 0) { //New CharClass
             Toast.makeText(getActivity(), "Create a new Class to your liking.", Toast.LENGTH_SHORT).show();
             tvClassName.setEnabled(true);
         } else { //Existing Class
 
             db = new DataHelper(getActivity());
-
             btnSave.setText("Update");
 
             CharClass classFromDB = db.getClass(classID);
@@ -79,28 +75,22 @@ public class NewCharClassFrag extends Fragment {
             tvTitle = (TextView) getView().findViewById(R.id.txtAddEditChar);
 
             //Check to see if the ClassID is between 1 & 12. If so, disable being able to edit.
-            if (classID > 12)
-            {
+            if (classID > 12) {
                 tvTitle.setText("Edit Class");
                 tvClassName.setEnabled(true);
             }
-            else
-            {
+            else {
                 tvTitle.setText("Default Class - Can't Edit.");
                 tvClassName.setEnabled(false);
                 btnSave.setVisibility(View.GONE);
             }
-
-
-
         }
 
         //BtnCancel
         Button btnCancel = (Button) getView().findViewById(R.id.btnCancelClass);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 CCF();
             }
         });
@@ -109,11 +99,9 @@ public class NewCharClassFrag extends Fragment {
         Button btnSave = (Button) getView().findViewById(R.id.btnSaveClass);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-                //Save the Class
                 SaveClass();
             }
         });
@@ -141,7 +129,6 @@ public class NewCharClassFrag extends Fragment {
             classObj.ClassID = classID;
 
         classObj.ClassName = tvClassName.getText().toString();
-
         CheckFields(classObj);
     }
 

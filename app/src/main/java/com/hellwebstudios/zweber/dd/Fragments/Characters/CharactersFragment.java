@@ -36,14 +36,6 @@ public class CharactersFragment extends Fragment {
     private List<DDCharacter> mCharList;
     DataHelper db;
 
-    //NewChar controls
-    TextView txtName;
-    Spinner sClass;
-    Spinner sRace;
-
-    List<String> lstClasses;
-    List<String> lstRaces;
-
     public CharactersFragment() {
         // Required empty public constructor
     }
@@ -86,72 +78,6 @@ public class CharactersFragment extends Fragment {
                 fragmentTransaction.replace(R.id.fragment_container, fragment, "newCharFrag");
                 fragmentTransaction.commit();
 
-//                db = new DataHelper(getActivity());
-//
-//                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
-//                abAddAdv.setTitle("Please enter Character info below.");
-//
-//                View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_character, null));
-//
-//                //init controls
-//                txtName = (TextView) view.findViewById(R.id.txtName);
-//                sClass = (Spinner) view.findViewById(R.id.spinClass);
-//                lstClasses = new ArrayList<>();
-//                sRace = (Spinner) view.findViewById(R.id.spinRace);
-//                lstRaces = new ArrayList<>();
-//
-//                //Spinner-Classes
-//                Cursor res = db.getAllClasses();
-//                if (res.getCount() == 0)
-//                    return;
-//                else
-//                    while (res.moveToNext()) //Loop and fill the List.
-//                        lstClasses.add(res.getString(1));
-//
-//                //Init adapter
-//                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, lstClasses);
-//                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                sClass.setAdapter(ad);
-//
-//                //Spinner-Races
-//                Cursor res2 = db.getAllRaces();
-//                if (res2.getCount() == 0)
-//                    return;
-//                else
-//                    while (res2.moveToNext()) //Loop and fill the List.
-//                        lstRaces.add(res2.getString(1));
-//
-//                //Init adapter
-//                ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, lstRaces);
-//                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                sRace.setAdapter(ad2);
-//
-//                //Finish up and set the view.
-//                abAddAdv.setView(view);
-//
-//                abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        //Save logic here, or validate logic...
-//                        db = new DataHelper(getActivity());
-//                        DDCharacter c = new DDCharacter();
-//
-//                        c.CharacterID = 0;
-//                        c.CharacterName = txtName.getText().toString();
-//
-//                        int ClassID = (int) sClass.getSelectedItemId() + 1;
-//                        c.CharClassID = ClassID;
-//                        int RaceID = (int) sRace.getSelectedItemId() + 1;
-//                        c.CharRaceID = RaceID;
-//
-//                        //Validate here...
-//                        CheckFields(c);
-//                    }
-//                });
-//
-//                AlertDialog a = abAddAdv.create();
-//                a.show();
             }
         });
 
@@ -219,42 +145,7 @@ public class CharactersFragment extends Fragment {
         //init adapter
         adapter = new CharacterListAdapter(getActivity(), mCharList);
         lvChars.setAdapter(adapter);
+
+        res.close();
     }
-
-    //Method that does the error handling and then sends off to DB.
-    //Accepts cToSave as parameter, which either a new/existing Character object.
-//    public void CheckFields(DDCharacter c)
-//    {
-//        AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
-//        if (txtName.length() == 0) {
-//            myAlert.setMessage("Please enter a Character Name.")
-//                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    })
-//                    .create();
-//            myAlert.show();
-//        } else if (txtName.length() > 30) {
-//            myAlert.setMessage("Please enter a Character Name under 30 characters.")
-//                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//                            dialog.dismiss();
-//                        }
-//                    })
-//                    .create();
-//            myAlert.show();
-//        } else {
-//            if (db.addCharacter(c))
-//            {
-//                Toast.makeText(getActivity(), "Character added successfully.", Toast.LENGTH_SHORT).show();
-//                setChars();
-//            }
-//            else
-//                Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
 }

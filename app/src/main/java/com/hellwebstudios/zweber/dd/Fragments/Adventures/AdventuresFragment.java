@@ -102,6 +102,8 @@ public class AdventuresFragment extends Fragment {
                 spinChars.setAdapter(ad);
                 abAddAdv.setView(view);
 
+                res.close();
+
                 abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -187,8 +189,9 @@ public class AdventuresFragment extends Fragment {
                 ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinChars.setAdapter(ad2);
                 spinChars.setSelection(adv.CharID - 1);
-
                 abAddAdv.setView(view2);
+
+                res.close();
 
                 abAddAdv.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                     @Override
@@ -232,6 +235,8 @@ public class AdventuresFragment extends Fragment {
         //init adapter
         adapter = new AdvListAdapter(getActivity(), mAdvList);
         lvAdv.setAdapter(adapter);
+
+        res.close();
     }
 
     //valFields, will check fields for adding a new Adventure.
@@ -260,14 +265,11 @@ public class AdventuresFragment extends Fragment {
                     .create();
             myAlert.show();
         } else {
-            if (a.AdvID == 0) //New Adventure
-            {
+            if (a.AdvID == 0) { //New Adventure
                 //Add Adventure and refresh the list.
                 db.addAdv(a);
                 Toast.makeText(getActivity(), a.Name + " added.", Toast.LENGTH_SHORT).show();
-            }
-            else //Existing Adventure
-            {
+            } else { //Existing Adventure
                 db.updateAdv(a);
                 Toast.makeText(getActivity(), a.Name + " updated.", Toast.LENGTH_SHORT).show();
             }

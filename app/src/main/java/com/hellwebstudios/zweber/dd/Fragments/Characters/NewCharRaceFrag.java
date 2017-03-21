@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
-import com.hellwebstudios.zweber.dd.DataObjects.CharClass;
 import com.hellwebstudios.zweber.dd.DataObjects.CharRace;
 import com.hellwebstudios.zweber.dd.R;
 
@@ -61,8 +60,7 @@ public class NewCharRaceFrag extends Fragment {
         tvRaceName = (TextView) getView().findViewById(R.id.txtRaceName);
 
         //Handle Add/Edits here. (Look @ sRaceID passed in via the Intent.)
-        if (raceID == 0)
-        {
+        if (raceID == 0) {
             Toast.makeText(getActivity(), "Create a new Race to your liking.", Toast.LENGTH_SHORT).show();
             tvRaceName.setEnabled(true);
         } else {
@@ -77,13 +75,10 @@ public class NewCharRaceFrag extends Fragment {
             tvRaceName.setText(crFromDB.getRaceName());
 
             //Check to see if the RaceID is between 1 & 16. If so, disable being able to edit.
-            if (raceID > 16)
-            {
+            if (raceID > 16) {
                 tvTitle.setText("Edit Race");
                 tvRaceName.setEnabled(true);
-            }
-            else
-            {
+            } else {
                 tvTitle.setText("Default Race - Can't Edit.");
                 tvRaceName.setEnabled(false);
                 btnSave.setVisibility(View.GONE);
@@ -94,8 +89,7 @@ public class NewCharRaceFrag extends Fragment {
         Button btnCancel = (Button) getView().findViewById(R.id.btnCancelRace);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 CRF();
             }
         });
@@ -104,8 +98,7 @@ public class NewCharRaceFrag extends Fragment {
         Button btnSave = (Button) getView().findViewById(R.id.btnSaveRace);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
                 //Save the Race
@@ -125,8 +118,7 @@ public class NewCharRaceFrag extends Fragment {
     }
 
     //SaveRace()
-    public void SaveRace()
-    {
+    public void SaveRace() {
         db = new DataHelper(getActivity());
         CharRace raceObj = new CharRace();
 
@@ -136,7 +128,6 @@ public class NewCharRaceFrag extends Fragment {
             raceObj.RaceID = raceID;
 
         raceObj.RaceName = tvRaceName.getText().toString();
-
         CheckFields(raceObj);
     }
 

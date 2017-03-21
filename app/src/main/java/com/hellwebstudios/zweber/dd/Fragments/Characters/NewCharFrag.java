@@ -46,10 +46,8 @@ public class NewCharFrag extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_new_char, container, false);
     }
@@ -74,7 +72,6 @@ public class NewCharFrag extends Fragment {
         btnCancel = (Button) getView().findViewById(R.id.btnCancelChar);
         btnSave = (Button) getView().findViewById(R.id.btnSaveChar);
 
-
         lstClasses = new ArrayList<>();
         lstRaces = new ArrayList<>();
 
@@ -91,6 +88,8 @@ public class NewCharFrag extends Fragment {
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinClass.setAdapter(ad);
 
+        res.close();
+
         //Races spinner
         Cursor res2 = db.getAllRaces();
         if (res.getCount() == 0)
@@ -104,11 +103,12 @@ public class NewCharFrag extends Fragment {
         ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinRace.setAdapter(ad2);
 
+        res2.close();
+
         //Handle if we're dealing with a new or existing Character.
         if (CharID == 0) //New Character
             tvTitle.setText("New Character");
-        else
-        {
+        else {
             tvTitle.setText("Edit Character");
 
             DDCharacter charFromDB = db.getChar(CharID);
@@ -152,10 +152,8 @@ public class NewCharFrag extends Fragment {
                 charObj.CharRaceID = rID;
 
                 CheckFields(charObj);
-
             }
         });
-
     }
 
     //Method that does the error handling and then sends off to DB.

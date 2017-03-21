@@ -30,9 +30,7 @@ public class NewSkillFrag extends Fragment {
     DataHelper db;
     Skill skillFromDB;
     int skillID = 0;
-
-    TextView tvTitle;
-    TextView tvName;
+    TextView tvTitle, tvName;
     Button btnCancel;
 
     public NewSkillFrag() {

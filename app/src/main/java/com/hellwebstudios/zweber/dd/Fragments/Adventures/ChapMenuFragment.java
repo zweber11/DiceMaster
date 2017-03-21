@@ -41,13 +41,10 @@ public class ChapMenuFragment extends Fragment {
     private List<RollSkill> mRSList;
     DataHelper db;
     int chapID = 0;
-    TextView txtChapTitle;
-    TextView txtAttack;
-    TextView txtSkill;
+    TextView txtChapTitle, txtAttack, txtSkill;
 
     //Skill roll controls.
-    Spinner spinSkills;
-    Spinner spinD20;
+    Spinner spinSkills, spinD20;
     List<String> sSkills;
     List<Integer> sD20;
 
@@ -63,20 +60,15 @@ public class ChapMenuFragment extends Fragment {
     //Global int var, handles whether you're going to generate RollAttack entries in the preceding AttackRollsFragment.
     int add = 0;
     Integer RSID;
-    int RASID;
+    int RASID, charID;
     Chapter c;
     TextView txtRTH;
-    int charID;
 
     //AttackSet spinner calls.
-    Spinner spinInit;
-    Spinner spinRTH;
+    Spinner spinInit, spinRTH;
     List<Integer> sRTH;
     List<Integer> sInit;
-    int number;
-    int maxNumb;
-    int init;
-    int rth;
+    int number, maxNumb, init, rth;
 
     public ChapMenuFragment() {
         // Required empty public constructor
@@ -161,6 +153,8 @@ public class ChapMenuFragment extends Fragment {
                 ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinDS.setAdapter(ad);
 
+                res.close();
+
                 //Spinners
                 spinInit = (Spinner) view.findViewById(R.id.spinInit); //Initiative
                 spinRTH = (Spinner) view.findViewById(R.id.spinRTH); //RTH
@@ -197,7 +191,6 @@ public class ChapMenuFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String sDSN = (String) spinDS.getSelectedItem();
-//                        Toast.makeText(getActivity(), "DSN: " + sDSN, Toast.LENGTH_SHORT).show();
 
                         //Convert the DSN to DSID.
                         int sDSID = db.getDSIDByName(sDSN);
@@ -207,12 +200,9 @@ public class ChapMenuFragment extends Fragment {
 
                         //Add check to ensure the DiceSet contains Die. If not, inform the User to create some.
                         Cursor dsd = db.getDSDByDSID(sDSID);
-                        if (dsd.getCount() == 0)
-                        {
+                        if (dsd.getCount() == 0) {
                             Toast.makeText(getActivity(), "Please add Die to this Dice Set.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        else {
+                        } else {
                             //Create a bundle, and setArguments of the fragment.
                             Bundle bundle = new Bundle();
                             bundle.putInt("DSID", sDSID);
@@ -331,6 +321,8 @@ public class ChapMenuFragment extends Fragment {
         //init adapter
         adapter = new RollSkillListAdapter(getActivity(), mRSList);
         lvRSkills.setAdapter(adapter);
+
+        res.close();
     }
 
     //getRASets(int chapID)
@@ -346,6 +338,8 @@ public class ChapMenuFragment extends Fragment {
         //init adapter
         adapter2 = new RASetListAdapter(getActivity(), mRASetList);
         lvRASets.setAdapter(adapter2);
+
+        res.close();
     }
 
 
@@ -374,6 +368,8 @@ public class ChapMenuFragment extends Fragment {
         ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sSkills);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinSkills.setAdapter(ad);
+
+        res.close();
 
         //Grab the sName based on the sID.
         String sName = db.getSNByID(sID);

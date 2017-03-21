@@ -94,6 +94,8 @@ public class CharRacesFrag extends Fragment {
         //init adapter
         adapter = new CharRaceListAdapter(getActivity(), mRaceList);
         lvRaces.setAdapter(adapter);
+
+        res.close();
     }
 
     //NCCF

@@ -38,15 +38,7 @@ public class ChaptersFragment extends Fragment {
     DataHelper db;
 
     int advID = 0;
-    TextView advTitle;
-    TextView tvChapName;
-    TextView tvAddChap;
-
-    Spinner spinRTH;
-    Spinner spinRTH2;
-    List<Integer> sRTH;
-    int number;
-    int maxNumb;
+    TextView advTitle, tvChapName, tvAddChap;
 
     public ChaptersFragment() {
         // Required empty public constructor
@@ -95,26 +87,7 @@ public class ChaptersFragment extends Fragment {
                 abAddChap.setTitle("Please enter Chapter Details.");
 
                 View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
-
                 tvChapName = (TextView) view.findViewById(R.id.txtChapName);
-//                spinRTH = (Spinner) view.findViewById(R.id.spinRTH);
-//
-//                sRTH = new ArrayList<>();
-//                number = 1;
-//                maxNumb = 21;
-//
-//                //Loop through and generate a list of possible rolls.
-//                while (number < maxNumb) {
-//                    sRTH.add(number);
-//                    number++;
-//                }
-//
-//                //Adapter
-//                ArrayAdapter<Integer> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sRTH);
-//                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinRTH.setAdapter(ad);
-//                spinRTH.setSelection(0);
-
                 abAddChap.setView(view);
 
                 //Save action button.
@@ -220,6 +193,8 @@ public class ChaptersFragment extends Fragment {
         //init adapter
         adapter = new ChapsListAdapter(getActivity(), mChapList);
         lvChaps.setAdapter(adapter);
+
+        res.close();
     }
 
     //valFields, will check fields for adding a new Adventure.

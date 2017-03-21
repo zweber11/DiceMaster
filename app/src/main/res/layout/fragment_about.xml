@@ -16,10 +16,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dice Master 1.0"
+            android:text="Dice Master 1.1"
             android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:padding="5dp" />
         <TextView
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             android:text="HellWeb Studios \nProgramming: Zack Weber"
             android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:padding="5dp" />
         <TextView
             android:layout_width="match_parent"
@@ -35,7 +35,7 @@
             android:text="Special Thanks To: \n\nAaron Weber \nGentlemen's Sword \nDavid Couturier \nCurtis Reinhold \n"
             android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:padding="5dp"
             android:id="@+id/txtThanks" />
         <TextView
@@ -44,7 +44,7 @@
             android:text="Support &amp; Suggestions: HellWebStudios@gmail.com"
             android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:padding="5dp" />
         <TextView
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:text="\n\n Click me to check out Gentlemen's Sword on Twitch! \n\n"
             android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="5dp"
+            android:layout_margin="2dp"
             android:padding="5dp"
             android:id="@+id/txtGMS"/>
     </LinearLayout>

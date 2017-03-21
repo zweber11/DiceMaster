@@ -43,8 +43,8 @@ public class DataHelper extends SQLiteOpenHelper {
     public static final String T_RA = "RollAttacks"; //01/08/2017
     public static final String T_RAS = "RollAttackSets"; //01/10/2017
 
-    //DB Version. 1 = 1.0
-    public static final int DB_VERSION = 1;
+    //DB Version. 1 = 1.0, 2 = 1.1
+    public static final int DB_VERSION = 2;
 
     //region table column variables.
 
@@ -139,10 +139,7 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_CHAR + " (CharacterID INTEGER PRIMARY KEY AUTOINCREMENT, CharacterName TEXT, " +
                 "CharClassID INTEGER REFERENCES CharacterClasses (ClassID), " +
                 "CharRaceID INTEGER REFERENCES CharacterRaces (RaceID))");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAR + "(CharacterID, CharacterName, CharClassID, CharRaceID) VALUES(1, 'Hans', 6, 3)"); //Hans, the Monk Dwarf...
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAR + "(CharacterID, CharacterName, CharClassID, CharRaceID) VALUES(2, 'Leoz', 5, 4)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAR + "(CharacterID, CharacterName, CharClassID, CharRaceID) VALUES(3, 'Haas', 4, 5)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAR + "(CharacterID, CharacterName, CharClassID, CharRaceID) VALUES(4, 'Ofah', 3, 6)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_CHAR + "(CharacterID, CharacterName, CharClassID, CharRaceID) VALUES(1, 'Hans', 6, 3)"); //Hans, the Monk Dwarf.
 
         //endregion
 
@@ -155,7 +152,6 @@ public class DataHelper extends SQLiteOpenHelper {
                 "CharID INTEGER REFERENCES Characters (CharacterID), " +
                 "NumChapters INTEGER)");
         db.execSQL("INSERT OR IGNORE INTO " + T_ADV + " (AdvID, Name, Desc, CharID, NumChapters) VALUES (1, 'Paradise in Peril', 'Join Hans on his quest.', 1, 3)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_ADV + " (AdvID, Name, Desc, CharID, NumChapters) VALUES (2, 'The Chosen Ones', 'Four enter, but will any survive?', 2, 3)");
 
         //Chapters table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_CHAP + " (ChapID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -164,9 +160,6 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (1, 1, 'Chapter 1: Humble Beginnings')");
         db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (2, 1, 'Chapter 2: The Great Bridge')");
         db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (3, 1, 'Chapter 3: Team Cohesion')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (4, 2, 'Chapter 1: Formation')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (5, 2, 'Chapter 2: Training')");
-        db.execSQL("INSERT OR IGNORE INTO " + T_CHAP + "(ChapID, AdvID, Name) VALUES (6, 2, 'Chapter 3: Night Raid')");
 
         //endregion
 
@@ -178,8 +171,6 @@ public class DataHelper extends SQLiteOpenHelper {
                 "ChapID INTEGER REFERENCES Chapters (ChapID)," +
                 "Roll INTEGER)");
         db.execSQL("INSERT OR IGNORE INTO " + T_RS + " (ID, SkillID, ChapID, Roll) VALUES (1, 3, 1, 14)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RS + " (ID, SkillID, ChapID, Roll) VALUES (2, 15, 1, 12)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RS + " (ID, SkillID, ChapID, Roll) VALUES (3, 8, 1, 7)");
 
         //RollAttackSets table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_RAS + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -188,7 +179,6 @@ public class DataHelper extends SQLiteOpenHelper {
                 "Initiative INTEGER," +
                 "RollToHit INTEGER)");
         db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID, Initiative, RollToHit) VALUES (1, 1, 1, 1, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RAS + " (ID, ChapID, DSID, Initiative, RollToHit) VALUES (2, 1, 1, 2, 2)");
 
         //RollAttacks table w/ data.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_RA + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -196,9 +186,6 @@ public class DataHelper extends SQLiteOpenHelper {
                 "DID INTEGER REFERENCES Dice (DiceID), " +
                 "Roll INTEGER)");
         db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (1, 1, 4, 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (2, 1, 3, 2)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (3, 2, 2, 3)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_RA + " (ID, RASID, DID, Roll) VALUES (4, 2, 1, 4)");
 
         //endregion
 
@@ -229,13 +216,7 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (21, 'Survival', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (22, 'Wisdom (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Wisdom
 
-        ///Save rolls
-        //Charisma
-        //Constitution
-        //Dexterity
-        //Intelligence
-        //Strength
-        //Wisdom
+        ///Save rolls: Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom
 
         //endregion
 
@@ -254,7 +235,6 @@ public class DataHelper extends SQLiteOpenHelper {
         //DiceSets table
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DS + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, CharID INTEGER REFERENCES Characters (CharID))");
         db.execSQL("INSERT OR IGNORE INTO " + T_DS + " (ID, Name, CharID) VALUES (1, 'Jolt', 1)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DS + " (ID, Name, CharID) VALUES (2, 'Thunder', 2)");
 
         //DiceSetDie
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DSD + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -262,18 +242,44 @@ public class DataHelper extends SQLiteOpenHelper {
                 "DiceID INTEGER REFERENCES Dice (DiceID))");
         db.execSQL("INSERT OR IGNORE INTO " + T_DSD + " (ID, DiceSetID, DiceID) VALUES (1, 1, 1)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DSD + " (ID, DiceSetID, DiceID) VALUES (2, 1, 3)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DSD + " (ID, DiceSetID, DiceID) VALUES (3, 2, 2)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DSD + " (ID, DiceSetID, DiceID) VALUES (4, 2, 2)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DSD + " (ID, DiceSetID, DiceID) VALUES (5, 2, 5)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DSD + " (ID, DiceSetID, DiceID) VALUES (6, 2, 5)");
 
         //endregion
 
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-    {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //DB Version Check.
+        //Version 1 --> v2.
+        if (oldVersion < 2) {
+            //Update the default data, leaving only 1 entry/data object...
+            db.execSQL("DELETE FROM " + T_ADV + " WHERE AdvID = 2");
+
+            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 4");
+            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 5");
+            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 6");
+
+            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 2");
+            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 3");
+            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 4");
+
+            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 2");
+            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 3");
+
+            db.execSQL("DELETE FROM " + T_RAS + " WHERE ID = 2");
+
+            db.execSQL("DELETE FROM " + T_DS + " WHERE ID = 2");
+
+            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 2");
+            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 3");
+            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 4");
+
+            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 3");
+            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 4");
+            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 5");
+            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 6");
+        }
+
         onCreate(db);
     }
 
