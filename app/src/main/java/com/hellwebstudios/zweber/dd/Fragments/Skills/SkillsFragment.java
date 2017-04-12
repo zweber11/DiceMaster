@@ -55,17 +55,17 @@ public class SkillsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //Grab the selectedIndex
-                Integer sSkillID = (Integer) view.getTag();
-
-                //Create a bundle.
-                Bundle bundle = new Bundle();
-                bundle.putInt("SkillID", sSkillID);
-
-                NewSkillFrag fragment = new NewSkillFrag();
-                fragment.setArguments(bundle);
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "newSkillFragment");
-                fragmentTransaction.commit();
+//                Integer sSkillID = (Integer) view.getTag();
+//
+//                //Create a bundle.
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("SkillID", sSkillID);
+//
+//                NewSkillFrag fragment = new NewSkillFrag();
+//                fragment.setArguments(bundle);
+//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, fragment, "newSkillFragment");
+//                fragmentTransaction.commit();
             }
         });
     }

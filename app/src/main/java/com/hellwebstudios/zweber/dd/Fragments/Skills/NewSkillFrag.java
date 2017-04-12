@@ -103,8 +103,7 @@ public class NewSkillFrag extends Fragment {
     }
 
     //SF
-    public void SF()
-    {
+    public void SF() {
         //Take the user to the SkillsFragment.
         SkillsFragment fragment = new SkillsFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
