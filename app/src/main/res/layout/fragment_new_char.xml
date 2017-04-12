@@ -81,28 +81,29 @@
         android:paddingTop="10dp"
         android:layout_gravity="bottom"
         android:layout_margin="10dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/btnCancelChar"
-            android:background="@drawable/background"
-            android:textColor="@color/color5"
-            android:textAllCaps="false"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp" />
 
         <Button
+            android:id="@+id/btnCancelChar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/btnSaveChar"
-            android:layout_gravity="end"
-            android:background="@drawable/background"
-            android:textColor="@color/color5"
-            android:textAllCaps="false"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:layout_marginLeft="5dp" />
+            android:background="@drawable/background2"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/color5" />
+
+        <Button
+            android:id="@+id/btnSaveChar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/background2"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/color5" />
 
     </LinearLayout>
 

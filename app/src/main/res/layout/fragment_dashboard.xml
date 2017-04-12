@@ -25,20 +25,26 @@
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
                 android:id="@+id/boxSessions">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
                     android:text="Adventures"
+                    android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/ivDash1"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_adventures"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:backgroundTint="@color/color5"
-                    android:layout_gravity="center_horizontal" />
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_adventures" />
 
             </LinearLayout>
 
@@ -51,20 +57,26 @@
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
                 android:id="@+id/boxChars">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
                     android:text="Characters"
+                    android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/ivDash2"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_chars"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/black"/>
+                    android:backgroundTint="@color/black"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_chars" />
 
             </LinearLayout>
 
@@ -85,20 +97,26 @@
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
                 android:id="@+id/boxSkills">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
                     android:text="Skills"
+                    android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/ivDash3"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/black"/>
+                    android:backgroundTint="@color/black"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_skills" />
 
             </LinearLayout>
 
@@ -111,20 +129,26 @@
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
                 android:id="@+id/boxDiceSets">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
                     android:text="Dice Sets"
+                    android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/ivDash4"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_dice_sets"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/black"/>
+                    android:backgroundTint="@color/black"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_dice_sets" />
             </LinearLayout>
         </TableRow>
 
@@ -167,20 +191,26 @@
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
                 android:id="@+id/boxAbout">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
                     android:text="About"
+                    android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/ivDash6"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/black"/>
+                    android:backgroundTint="@color/black"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_about" />
             </LinearLayout>
             <!--3rd column-->
             <LinearLayout
@@ -191,20 +221,26 @@
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
                 android:id="@+id/boxHelp">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
                     android:text="Help"
+                    android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
                     android:id="@+id/ivDash7"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/black"/>
+                    android:backgroundTint="@color/black"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_help" />
             </LinearLayout>
         </TableRow>
 

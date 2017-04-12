@@ -34,7 +34,7 @@
             android:layout_gravity="center_vertical|end"
             android:gravity="center_vertical|center_horizontal"
             android:textColor="@color/color5"
-            android:background="@drawable/background"
+            android:background="@drawable/background2"
             android:layout_marginEnd="10dp" />
 
     </LinearLayout>
@@ -42,35 +42,37 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/txtClasses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Classes"
-            android:id="@+id/txtClasses"
-            android:textSize="20sp"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical|end"
-            android:gravity="center_vertical|center_horizontal"
-            android:textColor="@color/color5"
-            android:background="@drawable/background"
             android:layout_marginBottom="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/background2"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Classes"
+            android:textColor="@color/color5"
+            android:textSize="20sp" />
+
         <TextView
+            android:id="@+id/txtRaces"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Races"
-            android:id="@+id/txtRaces"
-            android:textSize="20sp"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical|end"
-            android:gravity="center_vertical|center_horizontal"
-            android:textColor="@color/color5"
-            android:background="@drawable/background"
             android:layout_marginBottom="5dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/background2"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Races"
+            android:textColor="@color/color5"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <!--ListView-->

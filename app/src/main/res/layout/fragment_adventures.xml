@@ -21,17 +21,18 @@
             android:layout_marginRight="5dp" />
 
         <TextView
+            android:id="@+id/txtNewAdventure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/background2"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
             android:text="New Adventure"
             android:textColor="@color/color5"
-            android:background="@drawable/background"
-            android:padding="5dp"
-            android:id="@+id/txtNewAdventure"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical|end"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_marginRight="15dp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <!--ListView-->

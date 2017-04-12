@@ -24,18 +24,19 @@
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:textColor="@color/color5" />
+
         <TextView
+            android:id="@+id/txtAddDS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Dice Set"
-            android:id="@+id/txtAddDS"
-            android:textSize="20sp"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/background2"
             android:gravity="center_vertical|center_horizontal"
+            android:text="New Dice Set"
             android:textColor="@color/color5"
-            android:background="@drawable/background"
-            android:layout_marginEnd="10dp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
