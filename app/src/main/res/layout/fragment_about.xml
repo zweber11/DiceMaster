@@ -14,44 +14,37 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:background="@drawable/background"
+            android:fontFamily="casual"
+            android:padding="5dp"
             android:text="@string/version"
+            android:textAlignment="center"
             android:textColor="@color/color5"
-            android:background="@drawable/background"
-            android:layout_margin="2dp"
-            android:padding="5dp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HellWeb Studios \nProgramming: Zack Weber"
-            android:textColor="@color/color5"
-            android:background="@drawable/background"
             android:layout_margin="2dp"
-            android:padding="5dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Special Thanks To: \n\nAaron Weber \nGentlemen's Sword \nDavid Couturier \nCurtis Reinhold \n"
-            android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="2dp"
+            android:fontFamily="casual"
             android:padding="5dp"
-            android:id="@+id/txtThanks" />
+            android:text="@string/about1"
+            android:textAlignment="center"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
         <TextView
+            android:id="@+id/txtGMS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Support &amp; Suggestions: HellWebStudios@gmail.com"
-            android:textColor="@color/color5"
-            android:background="@drawable/background"
             android:layout_margin="2dp"
-            android:padding="5dp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="\n\n Click me to check out Gentlemen's Sword on Twitch! \n\n"
-            android:textColor="@color/color5"
             android:background="@drawable/background"
-            android:layout_margin="2dp"
+            android:fontFamily="casual"
             android:padding="5dp"
-            android:id="@+id/txtGMS"/>
+            android:text="@string/aboutGMS"
+            android:textAlignment="center"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>
