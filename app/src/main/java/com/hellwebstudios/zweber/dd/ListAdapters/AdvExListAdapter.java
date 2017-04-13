@@ -8,6 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
+import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
 import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.R;
 
@@ -21,10 +22,10 @@ import java.util.Map;
 public class AdvExListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<String> adventures;
+    private List<Adventure> adventures;
     private Map<String, List<Chapter>> chapters;
 
-    public AdvExListAdapter(Context context, List<String> adventures, Map<String, List<Chapter>> chapters) {
+    public AdvExListAdapter(Context context, List<Adventure> adventures, Map<String, List<Chapter>> chapters) {
         this.context = context;
         this.adventures = adventures;
         this.chapters = chapters;
@@ -37,17 +38,18 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return chapters.get(adventures.get(groupPosition)).size();
+        return chapters.get(adventures.get(groupPosition).Name).size();
+//        return 0;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return adventures.get(groupPosition);
+        return adventures.get(groupPosition).Name;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return chapters.get(adventures.get(groupPosition)).get(childPosition);
+        return chapters.get(adventures.get(groupPosition)).get(childPosition).Name;
     }
 
     @Override
@@ -79,10 +81,10 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
         txtTitle.setText(adventureName);
 
         TextView txt2 = (TextView) convertView.findViewById(R.id.txtExParent2);
-        txt2.setVisibility(View.INVISIBLE);
+        txt2.setVisibility(View.GONE);
 
         TextView txt3 = (TextView) convertView.findViewById(R.id.txtExParent3);
-        txt3.setVisibility(View.INVISIBLE);
+        txt3.setVisibility(View.GONE);
 
         return convertView;
     }
@@ -90,10 +92,9 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        DataHelper db = new DataHelper(context);
-        Integer cID = chapters.get(adventures.get(groupPosition)).get(childPosition).ChapID;
+        Integer cID = chapters.get(adventures.get(groupPosition).Name).get(childPosition).ChapID;
 
-        String chapterName = db.getChapTitle(cID);
+        String chapterName = chapters.get(adventures.get(groupPosition).Name).get(childPosition).Name;
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -104,10 +105,10 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
         txtChapName.setText(chapterName);
 
         TextView txt2 = (TextView) convertView.findViewById(R.id.txtExChild2);
-        txt2.setVisibility(View.INVISIBLE);
+        txt2.setVisibility(View.GONE);
 
         TextView txt3 = (TextView) convertView.findViewById(R.id.txtExChild3);
-        txt3.setVisibility(View.INVISIBLE);
+        txt3.setVisibility(View.GONE);
 
         convertView.setTag(cID);
 

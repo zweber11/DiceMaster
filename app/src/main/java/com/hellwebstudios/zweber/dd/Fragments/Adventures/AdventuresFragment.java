@@ -53,11 +53,12 @@ public class AdventuresFragment extends Fragment {
     
     //ExpandableListView code.
     ExpandableListView exListView;
-    List<String> adventures;
+    List<Adventure> adventures;
     Map<String, List<Chapter>> chapters;
     Cursor res; 
     
     ExpandableListAdapter expandableListAdapter;
+    Adventure newAdv;
 
     public AdventuresFragment() {
         // Required empty public constructor
@@ -83,6 +84,15 @@ public class AdventuresFragment extends Fragment {
         //ExpandableListView code.
         exListView = (ExpandableListView) getView().findViewById(R.id.exAdvListView);
 
+        exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                Toast.makeText(getContext(), adventures.get(groupPosition) + " : " + chapters.get(adventures.get(groupPosition).Name).get(childPosition), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+
         exListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -98,8 +108,8 @@ public class AdventuresFragment extends Fragment {
 //                        Toast.makeText(getActivity(), "An error occurred...", Toast.LENGTH_SHORT).show();
 
                     //Call fillData() to refresh the DrinkList.
-                    res = db.getAllAdv();
-                    fillData(res);
+//                    res = db.getAllAdv();
+//                    fillData(res);
 
                     // Return true as we are handling the event.
                     return true;
@@ -108,13 +118,13 @@ public class AdventuresFragment extends Fragment {
             }
         });
 
-        exListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
-                Toast.makeText(getContext(), "Testing!", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
+//        exListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+//            @Override
+//            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+//                Toast.makeText(getContext(), "Testing!", Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
 
 //        lvAdv = (ListView) getView().findViewById(R.id.lvAdventures);
 //
@@ -292,7 +302,15 @@ public class AdventuresFragment extends Fragment {
         else {
             //Populate the ArrayList with Adventures.
             while (dbCall.moveToNext()) {
-                adventures.add(dbCall.getString(1));
+
+                newAdv = new Adventure();
+                newAdv.AdvID = dbCall.getInt(0);
+                newAdv.Name = dbCall.getString(1);
+                newAdv.Desc = dbCall.getString(2);
+                newAdv.CharID = dbCall.getInt(3);
+                newAdv.NumChapters = dbCall.getInt(4);
+
+                adventures.add(newAdv);
 
                 List<Chapter> chap = new ArrayList<>();
 
@@ -301,8 +319,10 @@ public class AdventuresFragment extends Fragment {
                 while (res2.moveToNext())
                     chap.add(new Chapter(res2.getInt(0), res2.getInt(1), res2.getString(2)));
 
-                chapters.put(dbCall.getString(0), chap);
+                chapters.put(newAdv.Name, chap);
             }
+
+            exListView.setGroupIndicator(null);
 
             //Init adapter
             expandableListAdapter = new AdvExListAdapter(this.getContext(), adventures, chapters);

@@ -5,40 +5,40 @@
 
     <TextView
         android:id="@+id/txtExChild1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/background2"
         android:fontFamily="serif-monospace"
         android:paddingLeft="2dp"
         android:text="Field 1 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/gray"
+        android:textColor="@color/color5"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtExChild2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/background2"
         android:fontFamily="serif-monospace"
         android:paddingLeft="2dp"
         android:text="Field 2 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/gray"
+        android:textColor="@color/color5"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtExChild3"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/background2"
         android:fontFamily="serif-monospace"
         android:paddingLeft="2dp"
         android:text="Field 3 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/gray"
+        android:textColor="@color/color5"
         android:textStyle="bold" />
 </LinearLayout>
