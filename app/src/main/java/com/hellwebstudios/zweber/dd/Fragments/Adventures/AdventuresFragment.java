@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,14 +21,18 @@ import android.widget.Toast;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
 import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
+import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
+import com.hellwebstudios.zweber.dd.ListAdapters.AdvExListAdapter;
 import com.hellwebstudios.zweber.dd.ListAdapters.AdvListAdapter;
 import com.hellwebstudios.zweber.dd.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,9 +40,9 @@ import java.util.ListIterator;
 public class AdventuresFragment extends Fragment {
 
     //Global vars
-    private ListView lvAdv;
-    private AdvListAdapter adapter;
-    private List<Adventure> mAdvList;
+//    private ListView lvAdv;
+//    private AdvListAdapter adapter;
+//    private List<Adventure> mAdvList;
     DataHelper db;
     List<String> sChars;
     private Spinner spinChars;
@@ -44,6 +50,14 @@ public class AdventuresFragment extends Fragment {
     TextView tvAdd;
     TextView tvAdvName;
     TextView tvAddDesc;
+    
+    //ExpandableListView code.
+    ExpandableListView exListView;
+    List<String> adventures;
+    Map<String, List<Chapter>> chapters;
+    Cursor res; 
+    
+    ExpandableListAdapter expandableListAdapter;
 
     public AdventuresFragment() {
         // Required empty public constructor
@@ -59,15 +73,57 @@ public class AdventuresFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        db = new DataHelper(getActivity());
-        lvAdv = (ListView) getView().findViewById(R.id.lvAdventures);
+        
+        db = new DataHelper(getContext());
+        
+        //Initial db call, to grab all Adventures.
+        res = db.getAllAdv();
+        fillData(res);
 
-        //Call setAdv()
-        setAdv();
+        //ExpandableListView code.
+        exListView = (ExpandableListView) getView().findViewById(R.id.exAdvListView);
 
-        //Give the user some instructions.
-        Toast.makeText(getActivity(), "Select an Adventure to view Chapters, or press and hold to update Adventure info.", Toast.LENGTH_LONG).show();
+        exListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
+                if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+
+                    Integer sDID = (Integer) view.getTag();
+
+                    //Delete the selectedDrink, and inform the user.
+//                    if (db.deleteDrink(sDID))
+//                        Toast.makeText(getActivity(), "Drink deleted successfully.", Toast.LENGTH_SHORT).show();
+//                    else
+//                        Toast.makeText(getActivity(), "An error occurred...", Toast.LENGTH_SHORT).show();
+
+                    //Call fillData() to refresh the DrinkList.
+                    res = db.getAllAdv();
+                    fillData(res);
+
+                    // Return true as we are handling the event.
+                    return true;
+                } else
+                    return false;
+            }
+        });
+
+        exListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
+                Toast.makeText(getContext(), "Testing!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+//        lvAdv = (ListView) getView().findViewById(R.id.lvAdventures);
+//
+//        //Call setAdv()
+//        setAdv();
+//
+//        //Give the user some instructions.
+//        Toast.makeText(getActivity(), "Select an Adventure to view Chapters, or press and hold to update Adventure info.", Toast.LENGTH_LONG).show();
+//
         tvAdd = (TextView) getView().findViewById(R.id.txtNewAdventure);
         tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,116 +184,149 @@ public class AdventuresFragment extends Fragment {
                 a.show();
             }
         });
+//
+//        //lvAdv onItemClick event handler.
+//        lvAdv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                //Grab the selectedIndex
+//                Integer sAdvID = (Integer) view.getTag();
+//
+//                //Take the user to the ChaptersFragment.
+//                ChaptersFragment cFragment = new ChaptersFragment();
+//
+//                //Create a bundle, and setArguments of the fragment.
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("AdvID", sAdvID);
+//                cFragment.setArguments(bundle);
+//
+//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, cFragment, "chaptersFragment");
+//                fragmentTransaction.commit();
+//            }
+//        });
+//
+//        lvAdv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                db = new DataHelper(getActivity());
+//
+//                //Bring up the AlertDialog & populate with selected Adventure information. Grab the selectedIndex.
+//                final Integer sAdvID = (Integer) view.getTag();
+//
+//                Adventure adv = db.getAdv(sAdvID);
+//
+//                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
+//                abAddAdv.setTitle("Please enter the info below.");
+//
+//                View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
+//
+//                tvAdvName = (TextView) view2.findViewById(R.id.txtAdvName);
+//                tvAddDesc = (TextView) view2.findViewById(R.id.txtAdvDesc);
+//                tvAdvName.setText(adv.getName());
+//                tvAddDesc.setText(adv.getDesc());
+//
+//                //Spinner Chars
+//                spinChars = (Spinner) view2.findViewById(R.id.spinChar);
+//                sChars = new ArrayList<>();
+//                Cursor res = db.getAllCharacters();
+//
+//                if (res.getCount() == 0)
+//                    Toast.makeText(getActivity(), "An error occurred. Please try again", Toast.LENGTH_SHORT).show();
+//                else
+//                    //Loop and fill the List.
+//                    while (res.moveToNext())
+//                        sChars.add(res.getString(1));
+//
+//                //Init adapter
+//                ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
+//                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                spinChars.setAdapter(ad2);
+//                spinChars.setSelection(adv.CharID - 1);
+//                abAddAdv.setView(view2);
+//
+//                res.close();
+//
+//                abAddAdv.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                        //Save logic here, or validate logic...
+//                        db = new DataHelper(getActivity());
+//                        Adventure a = new Adventure();
+//                        a.AdvID = sAdvID;
+//                        a.Name = tvAdvName.getText().toString();
+//                        a.Desc = tvAddDesc.getText().toString();
+//
+//                        int CharID = (int) spinChars.getSelectedItemId() + 1;
+//                        a.CharID = CharID;
+//
+//                        a.NumChapters = 0;
+//
+//                        valFields(a);
+//                    }
+//                });
+//
+//                AlertDialog a = abAddAdv.create();
+//                a.show();
+//
+//                return true;
+//            }
+//        });
 
-        //lvAdv onItemClick event handler.
-        lvAdv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }
 
-                //Grab the selectedIndex
-                Integer sAdvID = (Integer) view.getTag();
+    private void fillData(Cursor dbCall) {
 
-                //Take the user to the ChaptersFragment.
-                ChaptersFragment cFragment = new ChaptersFragment();
+        db = new DataHelper(getActivity());
+        adventures = new ArrayList<>();
+        chapters = new HashMap<>();
 
-                //Create a bundle, and setArguments of the fragment.
-                Bundle bundle = new Bundle();
-                bundle.putInt("AdvID", sAdvID);
-                cFragment.setArguments(bundle);
+        //expandableListView code.
+        exListView = (ExpandableListView) getView().findViewById(R.id.exAdvListView);
 
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, cFragment, "chaptersFragment");
-                fragmentTransaction.commit();
+        if (dbCall.getCount() == 0)
+            Toast.makeText(getActivity(), "No Adventures were found.", Toast.LENGTH_SHORT).show();
+        else {
+            //Populate the ArrayList with Adventures.
+            while (dbCall.moveToNext()) {
+                adventures.add(dbCall.getString(1));
+
+                List<Chapter> chap = new ArrayList<>();
+
+                Cursor res2 = db.getChapsByAdv(dbCall.getInt(0));
+
+                while (res2.moveToNext())
+                    chap.add(new Chapter(res2.getInt(0), res2.getInt(1), res2.getString(2)));
+
+                chapters.put(dbCall.getString(0), chap);
             }
-        });
 
-        lvAdv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-                db = new DataHelper(getActivity());
-
-                //Bring up the AlertDialog & populate with selected Adventure information. Grab the selectedIndex.
-                final Integer sAdvID = (Integer) view.getTag();
-
-                Adventure adv = db.getAdv(sAdvID);
-
-                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
-                abAddAdv.setTitle("Please enter the info below.");
-
-                View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
-
-                tvAdvName = (TextView) view2.findViewById(R.id.txtAdvName);
-                tvAddDesc = (TextView) view2.findViewById(R.id.txtAdvDesc);
-                tvAdvName.setText(adv.getName());
-                tvAddDesc.setText(adv.getDesc());
-
-                //Spinner Chars
-                spinChars = (Spinner) view2.findViewById(R.id.spinChar);
-                sChars = new ArrayList<>();
-                Cursor res = db.getAllCharacters();
-
-                if (res.getCount() == 0)
-                    Toast.makeText(getActivity(), "An error occurred. Please try again", Toast.LENGTH_SHORT).show();
-                else
-                    //Loop and fill the List.
-                    while (res.moveToNext())
-                        sChars.add(res.getString(1));
-
-                //Init adapter
-                ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
-                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinChars.setAdapter(ad2);
-                spinChars.setSelection(adv.CharID - 1);
-                abAddAdv.setView(view2);
-
-                res.close();
-
-                abAddAdv.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        //Save logic here, or validate logic...
-                        db = new DataHelper(getActivity());
-                        Adventure a = new Adventure();
-                        a.AdvID = sAdvID;
-                        a.Name = tvAdvName.getText().toString();
-                        a.Desc = tvAddDesc.getText().toString();
-
-                        int CharID = (int) spinChars.getSelectedItemId() + 1;
-                        a.CharID = CharID;
-
-                        a.NumChapters = 0;
-
-                        valFields(a);
-                    }
-                });
-
-                AlertDialog a = abAddAdv.create();
-                a.show();
-
-                return true;
-            }
-        });
+            //Init adapter
+            expandableListAdapter = new AdvExListAdapter(this.getContext(), adventures, chapters);
+            exListView.setAdapter(expandableListAdapter);
+        }
 
     }
 
     //setAdv(), populates the ListView with Adventures.
-    private void setAdv()
-    {
-        mAdvList = new ArrayList<>();
-        Cursor res = db.getAllAdv();
-
-        //Loop to populate the Adventure list.
-        while (res.moveToNext())
-            mAdvList.add(new Adventure(res.getInt(0), res.getString(1), res.getString(2), res.getInt(3), res.getInt(4)));
-
-        //init adapter
-        adapter = new AdvListAdapter(getActivity(), mAdvList);
-        lvAdv.setAdapter(adapter);
-
-        res.close();
-    }
+//    private void setAdv()
+//    {
+//        mAdvList = new ArrayList<>();
+//        Cursor res = db.getAllAdv();
+//
+//        //Loop to populate the Adventure list.
+//        while (res.moveToNext())
+//            mAdvList.add(new Adventure(res.getInt(0), res.getString(1), res.getString(2), res.getInt(3), res.getInt(4)));
+//
+//        //init adapter
+//        adapter = new AdvListAdapter(getActivity(), mAdvList);
+//        lvAdv.setAdapter(adapter);
+//
+//        res.close();
+//    }
 
     //valFields, will check fields for adding a new Adventure.
     private void valFields(Adventure a)
@@ -274,7 +363,8 @@ public class AdventuresFragment extends Fragment {
                 Toast.makeText(getActivity(), a.Name + " updated.", Toast.LENGTH_SHORT).show();
             }
 
-            setAdv();
+            res = db.getAllAdv();
+            fillData(res);
         }
     }
 }

@@ -141,7 +141,7 @@ public class ChaptersFragment extends Fragment {
                 //Grab the selectedIndex.
                 final Integer sChapID = (Integer) view.getTag();
 
-                Chapter c = db.getChap(sChapID);
+//                Chapter c = db.getChap(sChapID);
 
                 AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
                 abAddChap.setTitle("Please enter Chapter details.");
@@ -149,7 +149,7 @@ public class ChaptersFragment extends Fragment {
                 View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
 
                 tvChapName = (TextView) view2.findViewById(R.id.txtChapName);
-                tvChapName.setText(c.getName());
+//                tvChapName.setText(c.getName());
 
                 abAddChap.setView(view2);
 

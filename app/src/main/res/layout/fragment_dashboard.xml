@@ -29,7 +29,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="casual"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Adventures"
                     android:textAllCaps="false"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="casual"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Characters"
                     android:textAllCaps="false"
@@ -101,7 +101,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="casual"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Skills"
                     android:textAllCaps="false"
@@ -133,7 +133,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="casual"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Dice Sets"
                     android:textAllCaps="false"
@@ -195,7 +195,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="casual"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="About"
                     android:textAllCaps="false"
@@ -225,7 +225,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="casual"
+                    android:fontFamily="serif-monospace"
                     android:gravity="center"
                     android:text="Help"
                     android:textAllCaps="false"

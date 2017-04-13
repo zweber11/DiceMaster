@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/txtAddChap"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_marginBottom="10dp"

@@ -253,31 +253,31 @@ public class DataHelper extends SQLiteOpenHelper {
         //Version 1 --> v2.
         if (oldVersion < 2) {
             //Update the default data, leaving only 1 entry/data object...
-            db.execSQL("DELETE FROM " + T_ADV + " WHERE AdvID = 2");
-
-            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 4");
-            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 5");
-            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 6");
-
-            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 2");
-            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 3");
-            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 4");
-
-            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 2");
-            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 3");
-
-            db.execSQL("DELETE FROM " + T_RAS + " WHERE ID = 2");
-
-            db.execSQL("DELETE FROM " + T_DS + " WHERE ID = 2");
-
-            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 2");
-            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 3");
-            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 4");
-
-            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 3");
-            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 4");
-            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 5");
-            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 6");
+//            db.execSQL("DELETE FROM " + T_ADV + " WHERE AdvID = 2");
+//
+//            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 4");
+//            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 5");
+//            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 6");
+//
+//            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 2");
+//            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 3");
+//            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 4");
+//
+//            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 2");
+//            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 3");
+//
+//            db.execSQL("DELETE FROM " + T_RAS + " WHERE ID = 2");
+//
+//            db.execSQL("DELETE FROM " + T_DS + " WHERE ID = 2");
+//
+//            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 2");
+//            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 3");
+//            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 4");
+//
+//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 3");
+//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 4");
+//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 5");
+//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 6");
         }
 
         onCreate(db);
@@ -686,18 +686,18 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getChap(int chapID)
-    public Chapter getChap(int chapID)
+    public Cursor getChap(int chapID)
     {
-        Chapter c = new Chapter();
+//        Chapter c = new Chapter();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE ChapID = " + chapID, null);
 
-        while (res.moveToNext()) {
-            c.ChapID = res.getInt(0);
-            c.AdvID = res.getInt(1);
-            c.Name = res.getString(2);
-        }
+//        while (res.moveToNext()) {
+//            c.ChapID = res.getInt(0);
+//            c.AdvID = res.getInt(1);
+//            c.Name = res.getString(2);
+//        }
 
-        return c;
+        return res;
     }
 
     //updateChap(chap)
