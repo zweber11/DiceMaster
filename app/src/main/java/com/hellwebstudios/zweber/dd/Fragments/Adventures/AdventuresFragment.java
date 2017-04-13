@@ -37,11 +37,11 @@ public class AdventuresFragment extends Fragment {
     List<String> sChars;
     private Spinner spinChars;
 
-    TextView tvAddAdv;
-    TextView tvAdvName;
-    TextView tvAddDesc;
+    TextView tvAddAdv, tvAdvName, tvAddDesc;
+    TextView tvAddChap, tvChapName;
 
-    TextView tvAddChap;
+    Spinner spinAdvChaps;
+    List<String> sAdvChaps;
     
     //ExpandableListView code.
     ExpandableListView exListView;
@@ -101,10 +101,7 @@ public class AdventuresFragment extends Fragment {
 
                 //Spinner
                 spinChars = (Spinner) view.findViewById(R.id.spinChar);
-
                 sChars = new ArrayList<>();
-
-                db = new DataHelper(getActivity());
                 Cursor res = db.getAllCharacters();
 
                 if (res.getCount() == 0)
@@ -155,7 +152,55 @@ public class AdventuresFragment extends Fragment {
         tvAddChap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
+                abAddChap.setTitle("Please enter Chapter Details.");
+
+                View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
+
+                spinAdvChaps = (Spinner) v.findViewById(R.id.spinAdvChap);
+
+                sAdvChaps = new ArrayList<>();
+
+                Cursor res = db.getAllAdv();
+
+                if (res.getCount() == 0)
+                    return;
+                else
+                    //Loop and fill the List.
+                    while (res.moveToNext())
+                        sAdvChaps.add(res.getString(1));
+
+                //Init adapter
+                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sAdvChaps);
+                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinAdvChaps.setAdapter(ad);
+                abAddChap.setView(view);
+
+                res.close();
+
+                tvChapName = (TextView) v.findViewById(R.id.txtChapName);
+                abAddChap.setView(v);
+
+                //Save action button.
+                abAddChap.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        Chapter c = new Chapter();
+                        c.ChapID = 0;
+
+                        int AdvID = (int) spinAdvChaps.getSelectedItemId() + 1;
+                        c.AdvID = AdvID;
+                        c.Name = tvChapName.getText().toString();
+
+                        valChapFields(c);
+                    }
+                });
+
+                AlertDialog a = abAddChap.create();
+                a.show();
             }
         });
 
@@ -333,6 +378,46 @@ public class AdventuresFragment extends Fragment {
             } else { //Existing Adventure
                 db.updateAdv(a);
                 Toast.makeText(getActivity(), a.Name + " updated.", Toast.LENGTH_SHORT).show();
+            }
+
+            res = db.getAllAdv();
+            fillData(res);
+        }
+    }
+
+    //valFields, will check fields for adding a new Adventure.
+    private void valChapFields(Chapter c)
+    {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
+
+        if (tvChapName.length() == 0) {
+            myAlert.setMessage("Please enter a Chapter Name.")
+                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            myAlert.show();
+        } else if (tvChapName.length() > 30) {
+            myAlert.setMessage("Please enter a Chapter Name under 30 characters.")
+                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create();
+            myAlert.show();
+        } else {
+            if (c.ChapID == 0) { //New Chapter
+                db.addChap(c);
+                Toast.makeText(getActivity(), c.Name + " added.", Toast.LENGTH_SHORT).show();
+            }
+            else { //Existing Chapter
+                db.updateChap(c);
+                Toast.makeText(getActivity(), c.Name + " updated.", Toast.LENGTH_SHORT).show();
             }
 
             res = db.getAllAdv();

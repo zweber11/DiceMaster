@@ -13,7 +13,21 @@
         android:background="@drawable/background"
         android:layout_margin="10dp">
 
-        <!--Chap Name-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adventure"
+            android:id="@+id/tvChapAdvName"
+            android:textColor="@color/color5"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+
+        <Spinner
+            android:id="@+id/spinAdvChap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background2" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,23 +44,6 @@
             android:textColor="@color/color5"
             android:background="@drawable/background"
             android:layout_margin="5dp" />
-
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Roll To Hit"-->
-            <!--android:id="@+id/textView4"-->
-            <!--android:textColor="@color/color5"-->
-            <!--android:layout_marginLeft="5dp"-->
-            <!--android:layout_marginTop="5dp" />-->
-
-        <!--<Spinner-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/spinRTH"-->
-            <!--android:background="@drawable/background"-->
-            <!--android:layout_margin="5dp" />-->
-
 
     </LinearLayout>
 </FrameLayout>
