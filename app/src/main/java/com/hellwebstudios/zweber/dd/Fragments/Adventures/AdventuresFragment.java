@@ -37,9 +37,11 @@ public class AdventuresFragment extends Fragment {
     List<String> sChars;
     private Spinner spinChars;
 
-    TextView tvAdd;
+    TextView tvAddAdv;
     TextView tvAdvName;
     TextView tvAddDesc;
+
+    TextView tvAddChap;
     
     //ExpandableListView code.
     ExpandableListView exListView;
@@ -82,8 +84,10 @@ public class AdventuresFragment extends Fragment {
             }
         });
 
-        tvAdd = (TextView) getView().findViewById(R.id.txtNewAdventure);
-        tvAdd.setOnClickListener(new View.OnClickListener() {
+        //region **AddAdventure**
+
+        tvAddAdv = (TextView) getView().findViewById(R.id.txtNewAdventure);
+        tvAddAdv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -142,6 +146,23 @@ public class AdventuresFragment extends Fragment {
                 a.show();
             }
         });
+
+        //endregion
+
+        //region **AddChapter**
+
+        tvAddChap = (TextView) getView().findViewById(R.id.txtNewChapter);
+        tvAddChap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //endregion
+
+
+
 //
 //        //lvAdv onItemClick event handler.
 //        lvAdv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
