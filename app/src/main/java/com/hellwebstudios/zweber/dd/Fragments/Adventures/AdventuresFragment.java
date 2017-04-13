@@ -5,16 +5,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,15 +20,11 @@ import com.hellwebstudios.zweber.dd.DataHelper;
 import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
 import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.ListAdapters.AdvExListAdapter;
-import com.hellwebstudios.zweber.dd.ListAdapters.AdvListAdapter;
 import com.hellwebstudios.zweber.dd.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 /**
@@ -40,9 +33,6 @@ import java.util.Map;
 public class AdventuresFragment extends Fragment {
 
     //Global vars
-//    private ListView lvAdv;
-//    private AdvListAdapter adapter;
-//    private List<Adventure> mAdvList;
     DataHelper db;
     List<String> sChars;
     private Spinner spinChars;
@@ -87,53 +77,11 @@ public class AdventuresFragment extends Fragment {
         exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
-                Toast.makeText(getContext(), adventures.get(groupPosition) + " : " + chapters.get(adventures.get(groupPosition).Name).get(childPosition), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), adventures.get(groupPosition).Name + ": " + chapters.get(adventures.get(groupPosition).Name).get(childPosition).Name, Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
 
-
-        exListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-                if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-
-                    Integer sDID = (Integer) view.getTag();
-
-                    //Delete the selectedDrink, and inform the user.
-//                    if (db.deleteDrink(sDID))
-//                        Toast.makeText(getActivity(), "Drink deleted successfully.", Toast.LENGTH_SHORT).show();
-//                    else
-//                        Toast.makeText(getActivity(), "An error occurred...", Toast.LENGTH_SHORT).show();
-
-                    //Call fillData() to refresh the DrinkList.
-//                    res = db.getAllAdv();
-//                    fillData(res);
-
-                    // Return true as we are handling the event.
-                    return true;
-                } else
-                    return false;
-            }
-        });
-
-//        exListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-//            @Override
-//            public boolean onGroupClick(ExpandableListView expandableListView, View view, int i, long l) {
-//                Toast.makeText(getContext(), "Testing!", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
-
-//        lvAdv = (ListView) getView().findViewById(R.id.lvAdventures);
-//
-//        //Call setAdv()
-//        setAdv();
-//
-//        //Give the user some instructions.
-//        Toast.makeText(getActivity(), "Select an Adventure to view Chapters, or press and hold to update Adventure info.", Toast.LENGTH_LONG).show();
-//
         tvAdd = (TextView) getView().findViewById(R.id.txtNewAdventure);
         tvAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,23 +278,6 @@ public class AdventuresFragment extends Fragment {
         }
 
     }
-
-    //setAdv(), populates the ListView with Adventures.
-//    private void setAdv()
-//    {
-//        mAdvList = new ArrayList<>();
-//        Cursor res = db.getAllAdv();
-//
-//        //Loop to populate the Adventure list.
-//        while (res.moveToNext())
-//            mAdvList.add(new Adventure(res.getInt(0), res.getString(1), res.getString(2), res.getInt(3), res.getInt(4)));
-//
-//        //init adapter
-//        adapter = new AdvListAdapter(getActivity(), mAdvList);
-//        lvAdv.setAdapter(adapter);
-//
-//        res.close();
-//    }
 
     //valFields, will check fields for adding a new Adventure.
     private void valFields(Adventure a)

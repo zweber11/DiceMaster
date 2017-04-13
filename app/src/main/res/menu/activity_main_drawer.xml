@@ -5,50 +5,50 @@
         <item
             android:id="@+id/nav_dashboard"
             android:icon="@drawable/ic_dashboard"
-            android:title="Dashboard" />
+            android:title="@string/dashboard" />
         <item
             android:id="@+id/nav_sessions"
             android:icon="@drawable/ic_adventures"
-            android:title="Adventures" />
+            android:title="@string/adventures" />
         <item
             android:id="@+id/nav_characters"
             android:icon="@drawable/ic_chars"
-            android:title="Characters" />
+            android:title="@string/characters" />
         <item
             android:id="@+id/nav_skills"
             android:icon="@drawable/ic_skills"
-            android:title="Skills" />
+            android:title="@string/skills" />
         <item
             android:id="@+id/nav_dice_sets"
             android:icon="@drawable/ic_dice_sets"
-            android:title="Dice Sets" />
+            android:title="@string/dicesets" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
-            android:title="Settings" />
+            android:title="@string/settings" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
-            android:title="About" />
+            android:title="@string/about" />
         <item
             android:id="@+id/nav_help"
             android:icon="@drawable/ic_help"
-            android:title="Help" />
+            android:title="@string/help" />
         <item
             android:id="@+id/nav_facebook"
             android:icon="@mipmap/fb_icon"
-            android:title="Our Facebook Page" />
+            android:title="@string/fb" />
         <item
             android:id="@+id/nav_twitter"
             android:icon="@mipmap/twitter_icon"
-            android:title="Our Twitter Page" />
+            android:title="@string/twitter" />
         <item
             android:id="@+id/nav_other_apps"
             android:icon="@mipmap/playstore_icon"
-            android:title="Other HellWeb Studios Apps!" />
+            android:title="@string/playstore" />
         <item
             android:id="@+id/nav_gms_twitch"
             android:icon="@mipmap/gms"
-            android:title="Gentlemen's Sword on Twitch!" />
+            android:title="@string/gms" />
     </group>
 </menu>

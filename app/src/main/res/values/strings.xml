@@ -6,7 +6,18 @@
 
     <string name="version">Dice Master 1.5</string>
     <string name="about1">HellWeb Studios \nProgramming: Zack Weber\n\n Special Thanks To: \n\nAaron Weber \nGentlemen\'s Sword \nDavid Couturier \nCurtis Reinhold \n\n Support &amp; Suggestions: HellWebStudios@gmail.com</string>
-    <string name="aboutGMS">\n\n Click me to check out Gentlemen\'s Sword on Twitch! \n\n</string>
+    <string name="aboutGMS">Click me to check out Gentlemen\'s Sword on Twitch!</string>
 
-
+    <string name="dashboard">Dashboard</string>
+    <string name="adventures">Adventures</string>
+    <string name="characters">Characters</string>
+    <string name="skills">Skills</string>
+    <string name="dicesets">Dice Sets</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="help">Help</string>
+    <string name="fb">Our Facebook Page</string>
+    <string name="twitter">Our Twitter Page</string>
+    <string name="playstore">Other HellWeb Studios Apps!</string>
+    <string name="gms">Gentlemen\'s Sword on Twitch</string>
 </resources>

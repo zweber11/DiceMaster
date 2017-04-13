@@ -81,10 +81,10 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
         txtTitle.setText(adventureName);
 
         TextView txt2 = (TextView) convertView.findViewById(R.id.txtExParent2);
-        txt2.setVisibility(View.GONE);
+        txt2.setText("Test Description Here.");
 
         TextView txt3 = (TextView) convertView.findViewById(R.id.txtExParent3);
-        txt3.setVisibility(View.GONE);
+        txt3.setText("Test Character Here");
 
         return convertView;
     }
