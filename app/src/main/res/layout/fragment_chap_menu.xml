@@ -18,8 +18,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:padding="5dp"
             android:layout_margin="5dp"
+            android:fontFamily="serif-monospace"
+            android:textStyle="bold"
             android:id="@+id/txtChapTitle"/>
-
     </LinearLayout>
 
         <!--Attack/Skill roll buttons-->
@@ -28,12 +29,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/tabHost"
             android:layout_weight="1">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
                 <TabWidget
                     android:id="@android:id/tabs"
                     android:layout_width="match_parent"
@@ -42,19 +41,16 @@
                     android:theme="@style/AppThemeTabs"
                     android:background="@drawable/background"
                     android:layout_margin="5dp"></TabWidget>
-
                 <FrameLayout
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
                     <!--Attack Rolls-->
                     <LinearLayout
                         android:id="@+id/tab1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-
                         <LinearLayout
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -72,12 +68,6 @@
                                 android:id="@+id/txtAttackRoll"
                                 android:layout_gravity="center_vertical|end"
                                 android:gravity="center_vertical|center_horizontal" />
-
-                            <!--<ExpandableListView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:id="@+id/expandableListView" />-->
-
                             <ListView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -107,8 +97,8 @@
                                 android:text="Skill Roll"
                                 android:textColor="@color/color5"
                                 android:background="@drawable/background"
-                                android:padding="5dp"
-                                android:layout_margin="10dp"
+                                android:padding="10dp"
+                                android:layout_margin="5dp"
                                 android:id="@+id/txtSkillRoll"
                                 android:layout_gravity="center_vertical|end"
                                 android:gravity="center_vertical|center_horizontal" />
@@ -126,5 +116,4 @@
                 </FrameLayout>
             </LinearLayout>
         </TabHost>
-
 </LinearLayout>

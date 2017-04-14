@@ -35,34 +35,15 @@ public class AttackRollsFragment extends Fragment {
 
     //Global vars
     DataHelper db;
-
     int DSID = 0;
-    int chapID;
-    int RASID;
+    int chapID, RASID, number, maxNumb, sDID, rth, r, Roll, lastRAS, total;
     int add = 0;
-    TextView tvDSTitle;
-    TextView tvChapMenu;
-
+    TextView tvDSTitle, tvChapMenu, tvADTotal, txtRTH;
     private ListView lvAttackRolls;
-
     Spinner spinD12;
     List<Integer> sD12;
-
-    int number;
-    int maxNumb;
-    int sDID;
     Integer sRAID;
-    int r;
-    int Roll;
-    int lastRAS;
-    int total;
-    TextView tvADTotal;
     String t;
-
-    TextView txtInit;
-    TextView txtRTH;
-    int init;
-    int rth;
 
     public AttackRollsFragment() {
         // Required empty public constructor
@@ -84,7 +65,6 @@ public class AttackRollsFragment extends Fragment {
         tvDSTitle = (TextView) getView().findViewById(R.id.txtADName);
         tvChapMenu = (TextView) getView().findViewById(R.id.txtChapMenu);
         tvADTotal = (TextView) getView().findViewById(R.id.txtADTotal);
-        txtInit = (TextView) getView().findViewById(R.id.txtInit);
         txtRTH = (TextView) getView().findViewById(R.id.txtRTH);
 
         //Bundle it.
@@ -94,7 +74,6 @@ public class AttackRollsFragment extends Fragment {
             chapID = bundle.getInt("ChapID", 0);
             RASID = bundle.getInt("RASID", 0);
             add = bundle.getInt("Add", 0);
-            init = bundle.getInt("init", 0);
             rth = bundle.getInt("rth", 0);
         }
 
@@ -106,7 +85,6 @@ public class AttackRollsFragment extends Fragment {
             ras.ID = 0;
             ras.ChapID = chapID;
             ras.DSID = DSID;
-            ras.Initiative = init;
             ras.RollToHit = rth;
 
             db.addRAS(ras);
@@ -117,8 +95,7 @@ public class AttackRollsFragment extends Fragment {
             Cursor res = db.getDieByDSID(DSID);
 
             //Loop... Will need to lock down if you've already created the RollAttack entries...
-            while (res.moveToNext())
-            {
+            while (res.moveToNext()) {
                 RollAttack ra = new RollAttack();
                 ra.ID = 0;
                 ra.RASID = lastRAS;
@@ -254,18 +231,15 @@ public class AttackRollsFragment extends Fragment {
     }
 
     //getAttackRolls()
-    public void getAttackRolls(int RAS)
-    {
+    public void getAttackRolls(int RAS) {
+
         List<RollAttack> mRAList = new ArrayList<>();
         Cursor res = db.getRAByRASID(RAS);
-
         RollAttackSet ras = db.getRAS(RAS);
-
         total = 0;
 
         //Loop to populate the AttackRolls list.
-        while (res.moveToNext())
-        {
+        while (res.moveToNext()) {
             mRAList.add(new RollAttack(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3)));
 
             //Loop through and calc the total roll for the given attack set.
@@ -274,10 +248,7 @@ public class AttackRollsFragment extends Fragment {
 
         t = String.valueOf(total);
         tvADTotal.setText(t);
-
-        String i = ras.Initiative + "";
         String r = ras.RollToHit + "";
-        txtInit.setText(i);
         txtRTH.setText(r);
 
         //init adapter
@@ -286,5 +257,4 @@ public class AttackRollsFragment extends Fragment {
 
         res.close();
     }
-
 }

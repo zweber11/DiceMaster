@@ -65,9 +65,8 @@ public class ChapMenuFragment extends Fragment {
     TextView txtRTH;
 
     //AttackSet spinner calls.
-    Spinner spinInit, spinRTH;
+    Spinner spinRTH;
     List<Integer> sRTH;
-    List<Integer> sInit;
     int number, maxNumb, init, rth;
 
     public ChapMenuFragment() {
@@ -163,26 +162,17 @@ public class ChapMenuFragment extends Fragment {
                 res.close();
 
                 //Spinners
-                spinInit = (Spinner) view.findViewById(R.id.spinInit); //Initiative
                 spinRTH = (Spinner) view.findViewById(R.id.spinRTH); //RTH
 
-                sInit = new ArrayList<>();
                 sRTH = new ArrayList<>();
                 number = 1;
                 maxNumb = 21;
 
                 //Loop through and generate a list of possible rolls.
                 while (number < maxNumb) {
-                    sInit.add(number);
                     sRTH.add(number);
                     number++;
                 }
-
-                //Initiative Adapter
-                ArrayAdapter<Integer> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sInit);
-                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinInit.setAdapter(ad2);
-                spinInit.setSelection(0);
 
                 //RTH Adapter
                 ArrayAdapter<Integer> ad3 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sRTH);
@@ -222,7 +212,7 @@ public class ChapMenuFragment extends Fragment {
                             bundle.putInt("Add", add);
 
                             //Send in the initiative & rth values from the Spinners.
-                            init = (int) spinInit.getSelectedItem();
+                            init = 1;
                             bundle.putInt("init", init);
 
                             rth = (int) spinRTH.getSelectedItem();

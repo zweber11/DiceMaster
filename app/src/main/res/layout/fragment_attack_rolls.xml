@@ -10,89 +10,92 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/txtChapMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/background2"
+            android:fontFamily="serif-monospace"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="5dp"
             android:text="&lt; Chapter Menu"
             android:textColor="@color/color5"
-            android:background="@drawable/background"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:id="@+id/txtChapMenu"
-            android:layout_gravity="center_vertical|end"
-            android:gravity="center_vertical|center_horizontal"
-            android:layout_weight="1" />
+            android:textStyle="bold" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DiceSet Here"
-            android:textColor="@color/color5"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:padding="5dp"
-            android:layout_margin="5dp"
             android:id="@+id/txtADName"
-            android:layout_weight="1" />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total: "
-            android:textColor="@color/color5"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:fontFamily="serif-monospace"
             android:padding="5dp"
-            android:layout_margin="5dp"
-            android:id="@+id/txt1Total"
-            android:layout_weight="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            android:textColor="@color/color5"
+            android:text="DiceSet Here"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:paddingEnd="5dp"
-            android:layout_margin="5dp"
-            android:id="@+id/txtADTotal"
-            android:layout_weight="1" />
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 
-    <!--Initiative/RTH-->
+    <!--RTH/Total-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Initiative:"
-            android:id="@+id/textView9"
-            android:textColor="@color/color6"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:gravity="right" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NW"
-            android:id="@+id/txtInit"
-            android:textColor="@color/color5"
-            android:layout_margin="5dp"
-            android:layout_weight="1" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Roll To Hit:"
             android:id="@+id/textView2"
-            android:textColor="@color/color6"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:gravity="right" />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="NW"
-            android:id="@+id/txtRTH"
-            android:textColor="@color/color5"
             android:layout_margin="5dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:fontFamily="serif-monospace"
+            android:gravity="right"
+            android:text="Roll To Hit:"
+            android:textColor="@color/color6"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtRTH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:fontFamily="serif-monospace"
+            android:text="NW"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt1Total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:fontFamily="serif-monospace"
+            android:gravity="right"
+            android:padding="5dp"
+            android:text="Total: "
+            android:textColor="@color/color6"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtADTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:fontFamily="serif-monospace"
+            android:paddingEnd="5dp"
+            android:text="5"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!--ListView-->
@@ -100,13 +103,11 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
         android:layout_margin="5dp">
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lvAR"
-            android:layout_margin="10dp"
             android:dividerHeight="10dp"
             android:divider="@color/colorPrimary"/>
     </LinearLayout>
