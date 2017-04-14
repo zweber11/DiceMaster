@@ -44,8 +44,6 @@ public class AttackRollsFragment extends Fragment {
     TextView tvChapMenu;
 
     private ListView lvAttackRolls;
-    private RollAttackListAdapter adapter;
-    private List<RollAttack> mRAList;
 
     Spinner spinD12;
     List<Integer> sD12;
@@ -258,7 +256,7 @@ public class AttackRollsFragment extends Fragment {
     //getAttackRolls()
     public void getAttackRolls(int RAS)
     {
-        mRAList = new ArrayList<>();
+        List<RollAttack> mRAList = new ArrayList<>();
         Cursor res = db.getRAByRASID(RAS);
 
         RollAttackSet ras = db.getRAS(RAS);
@@ -283,7 +281,7 @@ public class AttackRollsFragment extends Fragment {
         txtRTH.setText(r);
 
         //init adapter
-        adapter = new RollAttackListAdapter(getActivity(), mRAList);
+        RollAttackListAdapter adapter = new RollAttackListAdapter(getActivity(), mRAList);
         lvAttackRolls.setAdapter(adapter);
 
         res.close();

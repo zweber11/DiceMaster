@@ -14,41 +14,50 @@
         android:layout_margin="5dp">
 
         <TextView
+            android:id="@+id/txtAddEditCharacter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:fontFamily="serif-monospace"
+            android:padding="2dp"
             android:text="New Character"
-            android:id="@+id/txtAddEditCharacter"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/color5"
-            android:padding="2dp" />
+            android:textStyle="bold" />
 
         <!--Char Name-->
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
-            android:id="@+id/textView"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Name"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+
         <EditText
+            android:id="@+id/txtCharName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtCharName"
             android:layout_gravity="center"
-            android:textColor="@color/color5"
+            android:layout_margin="5dp"
             android:background="@drawable/background"
-            android:layout_margin="5dp" />
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
 
         <!--Class-->
         <TextView
+            android:id="@+id/textView233"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Class"
-            android:id="@+id/textView233"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Class"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,13 +67,15 @@
 
         <!--Race-->
         <TextView
+            android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Race"
-            android:id="@+id/textView23"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Race"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -86,24 +97,30 @@
             android:id="@+id/btnCancelChar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="2dp"
             android:layout_weight="1"
             android:background="@drawable/background2"
+            android:fontFamily="serif-monospace"
             android:text="Cancel"
             android:textAllCaps="false"
-            android:textColor="@color/color5" />
+            android:textColor="@color/color5"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnSaveChar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="2dp"
             android:layout_weight="1"
             android:background="@drawable/background2"
+            android:fontFamily="serif-monospace"
             android:text="Save"
             android:textAllCaps="false"
-            android:textColor="@color/color5" />
+            android:textColor="@color/color5"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
