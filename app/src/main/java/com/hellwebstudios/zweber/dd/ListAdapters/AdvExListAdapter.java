@@ -44,7 +44,9 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return adventures.get(groupPosition).Name;
+
+        Integer advID = adventures.get(groupPosition).AdvID;
+        return advID;
     }
 
     @Override
@@ -70,7 +72,9 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
-        String adventureName = (String) getGroup(groupPosition);
+        DataHelper db = new DataHelper(context);
+        Integer advID = (Integer) getGroup(groupPosition);
+        Adventure advFromView = db.getAdv(advID);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -78,13 +82,13 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtTitle = (TextView) convertView.findViewById(R.id.txtExParent1);
-        txtTitle.setText(adventureName);
+        txtTitle.setText(advFromView.Name);
 
         TextView txt2 = (TextView) convertView.findViewById(R.id.txtExParent2);
-        txt2.setText("Test Description Here.");
+        txt2.setText(advFromView.Desc);
 
         TextView txt3 = (TextView) convertView.findViewById(R.id.txtExParent3);
-        txt3.setText("Test Character Here");
+        txt3.setText(db.getCharName(advFromView.CharID));
 
         return convertView;
     }

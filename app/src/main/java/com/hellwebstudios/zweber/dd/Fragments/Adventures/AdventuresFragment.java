@@ -79,7 +79,23 @@ public class AdventuresFragment extends Fragment {
         exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
-                Toast.makeText(getContext(), adventures.get(groupPosition).Name + ": " + chapters.get(adventures.get(groupPosition).Name).get(childPosition).Name, Toast.LENGTH_SHORT).show();
+
+                Integer chapID = chapters.get(adventures.get(groupPosition).Name).get(childPosition).ChapID;
+
+//                Toast.makeText(getContext(), adventures.get(groupPosition).Name + ": " + chapID, Toast.LENGTH_SHORT).show();
+
+                //Take the use to the ChapMenuFragment.
+                ChapMenuFragment fragment = new ChapMenuFragment();
+
+                //Create a bundle to save the chapID.
+                Bundle bundle = new Bundle();
+                bundle.putInt("ChapID", chapID);
+                fragment.setArguments(bundle);
+
+                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "chapMenuFragment");
+                fragmentTransaction.commit();
+
                 return false;
             }
         });
