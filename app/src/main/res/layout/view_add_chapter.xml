@@ -14,13 +14,15 @@
         android:layout_margin="10dp">
 
         <TextView
+            android:id="@+id/tvChapAdvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adventure"
-            android:id="@+id/tvChapAdvName"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Adventure"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinAdvChap"
@@ -29,21 +31,26 @@
             android:background="@drawable/background2" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chapter Name"
-            android:id="@+id/textView"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Chapter Name"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+
         <EditText
+            android:id="@+id/txtChapName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtChapName"
             android:layout_gravity="center"
-            android:textColor="@color/color5"
+            android:layout_margin="5dp"
             android:background="@drawable/background"
-            android:layout_margin="5dp" />
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </FrameLayout>

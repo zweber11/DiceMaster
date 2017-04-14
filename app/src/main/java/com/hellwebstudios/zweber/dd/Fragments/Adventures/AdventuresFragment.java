@@ -222,31 +222,8 @@ public class AdventuresFragment extends Fragment {
 
         //endregion
 
+        //region **Old advList onItemLongClickListener **
 
-
-//
-//        //lvAdv onItemClick event handler.
-//        lvAdv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                //Grab the selectedIndex
-//                Integer sAdvID = (Integer) view.getTag();
-//
-//                //Take the user to the ChaptersFragment.
-//                ChaptersFragment cFragment = new ChaptersFragment();
-//
-//                //Create a bundle, and setArguments of the fragment.
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("AdvID", sAdvID);
-//                cFragment.setArguments(bundle);
-//
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, cFragment, "chaptersFragment");
-//                fragmentTransaction.commit();
-//            }
-//        });
-//
 //        lvAdv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override
 //            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -315,6 +292,8 @@ public class AdventuresFragment extends Fragment {
 //                return true;
 //            }
 //        });
+
+        //endregion
 
     }
 

@@ -15,9 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hellwebstudios.zweber.dd.Fragments.AboutFragment;
-import com.hellwebstudios.zweber.dd.Fragments.Adventures.AttackRollsFragment;
-import com.hellwebstudios.zweber.dd.Fragments.Adventures.ChapMenuFragment;
-import com.hellwebstudios.zweber.dd.Fragments.Adventures.ChaptersFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharClassesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharRacesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharactersFragment;
@@ -212,17 +209,6 @@ public class MainActivity extends AppCompatActivity
             AdventuresFragment adventuresFragment = (AdventuresFragment) fmgr.findFragmentByTag("adventuresFragment");
             if (adventuresFragment != null && adventuresFragment.isVisible())
                 DashFrag();
-
-            //Chapters Frag
-            ChaptersFragment chaptersFragment = (ChaptersFragment) fmgr.findFragmentByTag("chaptersFragment");
-            if (chaptersFragment != null && chaptersFragment.isVisible())
-            {
-                //Take the user back to the Characters menu fragment.
-                AdventuresFragment fragment = new AdventuresFragment();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "adventuresFragment");
-                fragmentTransaction.commit();
-            }
 
             //ChapMenuFragment
 //            ChapMenuFragment chapMenuFragment = (ChapMenuFragment) fmgr.findFragmentByTag("chapMenuFragment");

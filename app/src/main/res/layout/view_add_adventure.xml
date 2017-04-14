@@ -15,49 +15,61 @@
 
         <!--Adv Name-->
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adventure Name"
-            android:id="@+id/textView"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Adventure Name"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+
         <EditText
+            android:id="@+id/txtAdvName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtAdvName"
             android:layout_gravity="center"
-            android:textColor="@color/color5"
+            android:layout_margin="5dp"
             android:background="@drawable/background"
-            android:layout_margin="5dp" />
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
 
         <!--Description-->
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adventure Description"
-            android:id="@+id/textView3"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Adventure Description"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+
         <EditText
+            android:id="@+id/txtAdvDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtAdvDesc"
             android:layout_gravity="center"
-            android:textColor="@color/color5"
+            android:layout_margin="5dp"
             android:background="@drawable/background"
-            android:layout_margin="5dp" />
+            android:fontFamily="serif-monospace"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
 
         <!--Character-->
         <TextView
+            android:id="@+id/textView23"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Character"
-            android:id="@+id/textView23"
-            android:textColor="@color/color5"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Character"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
 
         <Spinner
             android:layout_width="match_parent"
