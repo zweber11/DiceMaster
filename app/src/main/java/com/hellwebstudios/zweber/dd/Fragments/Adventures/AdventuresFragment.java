@@ -82,8 +82,6 @@ public class AdventuresFragment extends Fragment {
 
                 Integer chapID = chapters.get(adventures.get(groupPosition).Name).get(childPosition).ChapID;
 
-//                Toast.makeText(getContext(), adventures.get(groupPosition).Name + ": " + chapID, Toast.LENGTH_SHORT).show();
-
                 //Take the use to the ChapMenuFragment.
                 ChapMenuFragment fragment = new ChapMenuFragment();
 

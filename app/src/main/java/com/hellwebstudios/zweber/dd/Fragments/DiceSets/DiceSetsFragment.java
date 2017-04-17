@@ -41,14 +41,9 @@ public class DiceSetsFragment extends Fragment {
 
     //Global vars
     DataHelper db;
-//    private ListView lvDS;
-//    private DiceSetAdapter adapter;
-//    private List<DiceSet> mDSList;
     List<String> sChars;
     private Spinner spinDSChars;
-    TextView tvDSN;
-
-    TextView tvAddDS, tvAddDie;
+    TextView tvDSN, tvAddDS, tvAddDie;
 
     //ExpandableListView code.
     ExpandableListView exListView;
@@ -58,6 +53,7 @@ public class DiceSetsFragment extends Fragment {
 
     ExpandableListAdapter exListAdapter;
     DiceSet newDS;
+    Integer dsdID;
 
     public DiceSetsFragment() {
         // Required empty public constructor
@@ -79,10 +75,20 @@ public class DiceSetsFragment extends Fragment {
         res = db.getAllDS();
         fillData(res);
         
-//        lvDS = (ListView) getView().findViewById(R.id.lvDiceSets);
+        //ExListView code.
+        exListView = (ExpandableListView) getView().findViewById(R.id.exDiceSetsListView);
 
-        //Call setDS()
-//        setDS();
+        exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+
+                Integer dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).ID;
+
+                //TODO: Get code from DSDFragment's onItemClick call...
+
+                return false;
+            }
+        });
 
         //region ***New DS/DSD buttons***
 
@@ -144,6 +150,12 @@ public class DiceSetsFragment extends Fragment {
 
         //DSD
         tvAddDie = (TextView) getView().findViewById(R.id.txtAddDie);
+        tvAddDie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Wire this up based on the DSDFragment code...
+            }
+        });
 
         //endregion
 
@@ -206,29 +218,10 @@ public class DiceSetsFragment extends Fragment {
             exListAdapter = new DiceSetExListAdapter(this.getContext(), diceSets, dsd);
             exListView.setAdapter(exListAdapter);
         }
-
     }
 
-    //setDS
-//    private void setDS()
-//    {
-//        mDSList = new ArrayList<>();
-//        Cursor res = db.getAllDS();
-//
-//        //Loop to populate the DiceSets list.
-//        while (res.moveToNext())
-//            mDSList.add(new DiceSet(res.getInt(0), res.getString(1), res.getInt(2)));
-//
-//        //init adapter
-//        adapter = new DiceSetAdapter(getActivity(), mDSList);
-//        lvDS.setAdapter(adapter);
-//
-//        res.close();
-//    }
-
     //ValFields(DS ds)
-    private void valFields(DiceSet ds)
-    {
+    private void valFields(DiceSet ds) {
         AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
 
         if (tvDSN.length() == 0) { //Blank DSN Check
