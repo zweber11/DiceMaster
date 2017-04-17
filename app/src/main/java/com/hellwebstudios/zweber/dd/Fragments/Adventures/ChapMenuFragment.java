@@ -85,10 +85,6 @@ public class ChapMenuFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         db = new DataHelper(getActivity());
 
-        lvRSkills = (ListView) getView().findViewById(R.id.lvRollSkill);
-        lvRASets = (ListView) getView().findViewById(R.id.lvRollAttackSets);
-        txtRTH = (TextView) getView().findViewById(R.id.txtRTH);
-
         //Bundle it.
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -108,22 +104,6 @@ public class ChapMenuFragment extends Fragment {
         //Initialize TextViews
         txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);
         txtChapTitle.setText(c.Name);
-
-        //Tabs
-        TabHost th = (TabHost) getView().findViewById(R.id.tabHost);
-        th.setup();
-
-        //Attack Tab
-        TabHost.TabSpec specs = th.newTabSpec("tag1");
-        specs.setContent(R.id.tab1);
-        specs.setIndicator("Attack Rolls");
-        th.addTab(specs);
-
-        //Skill Tab
-        specs = th.newTabSpec("tag2");
-        specs.setContent(R.id.tab2);
-        specs.setIndicator("Skill Rolls");
-        th.addTab(specs);
 
         //region *** Roll Attack calls
         //Attack roll button - separate .xml from the Skill roll. Dropdown to select a DS.
@@ -245,18 +225,18 @@ public class ChapMenuFragment extends Fragment {
         });
 
         //Roll Skills onItemClick event.
-        lvRSkills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //Grab the selectedIndex.
-                RSID = (Integer) view.getTag();
-                int sID = db.getSkillByRSID(RSID);
-                int r = db.getRollByRSID(RSID);
-
-                RSAlert(RSID, sID, r);
-            }
-        });
+//        lvRSkills.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                //Grab the selectedIndex.
+//                RSID = (Integer) view.getTag();
+//                int sID = db.getSkillByRSID(RSID);
+//                int r = db.getRollByRSID(RSID);
+//
+//                RSAlert(RSID, sID, r);
+//            }
+//        });
 
         //endregion
 
@@ -264,80 +244,80 @@ public class ChapMenuFragment extends Fragment {
         //region **RollAttackSets
 
         //Roll Attack sets .itemClick event handler.
-        lvRASets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //Grab the selectedIndex.
-                RASID = (Integer) view.getTag();
-
-                //Take the user to the AttackRollsFragment.
-                AttackRollsFragment fragment = new AttackRollsFragment();
-
-                //Create a bundle to save the sRASID.
-                Bundle bundle = new Bundle();
-
-                //Convert the RASID into a DSID.
-                Integer DSID = db.getDSIDByRASID(RASID);
-
-                bundle.putInt("DSID", DSID);
-                bundle.putInt("ChapID", chapID);
-                bundle.putInt("RASID", RASID);
-
-                //Flag to handle the next fragment.
-                add = 0;
-                bundle.putInt("Add", add);
-
-                fragment.setArguments(bundle);
-
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "attackRollsFragment");
-                fragmentTransaction.commit();
-            }
-        });
+//        lvRASets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                //Grab the selectedIndex.
+//                RASID = (Integer) view.getTag();
+//
+//                //Take the user to the AttackRollsFragment.
+//                AttackRollsFragment fragment = new AttackRollsFragment();
+//
+//                //Create a bundle to save the sRASID.
+//                Bundle bundle = new Bundle();
+//
+//                //Convert the RASID into a DSID.
+//                Integer DSID = db.getDSIDByRASID(RASID);
+//
+//                bundle.putInt("DSID", DSID);
+//                bundle.putInt("ChapID", chapID);
+//                bundle.putInt("RASID", RASID);
+//
+//                //Flag to handle the next fragment.
+//                add = 0;
+//                bundle.putInt("Add", add);
+//
+//                fragment.setArguments(bundle);
+//
+//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, fragment, "attackRollsFragment");
+//                fragmentTransaction.commit();
+//            }
+//        });
 
         //endregion
 
         //Call setRollSkills()
-        setRollSkills(chapID);
-
-        //Call getRASets();
-        getRASets(chapID);
+//        setRollSkills(chapID);
+//
+//        //Call getRASets();
+//        getRASets(chapID);
     }
 
     //Populates the ListView with the appropriate rolls from the db based on the passed in Chapter.
-    private void setRollSkills(int chapID)
-    {
-        mRSList = new ArrayList<>();
-        Cursor res = db.getRSByChapID(chapID);
-
-        //Loop to populate the RollSkill list.
-        while (res.moveToNext())
-            mRSList.add(new RollSkill(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3)));
-
-        //init adapter
-        adapter = new RollSkillListAdapter(getActivity(), mRSList);
-        lvRSkills.setAdapter(adapter);
-
-        res.close();
-    }
+//    private void setRollSkills(int chapID)
+//    {
+//        mRSList = new ArrayList<>();
+//        Cursor res = db.getRSByChapID(chapID);
+//
+//        //Loop to populate the RollSkill list.
+//        while (res.moveToNext())
+//            mRSList.add(new RollSkill(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3)));
+//
+//        //init adapter
+//        adapter = new RollSkillListAdapter(getActivity(), mRSList);
+//        lvRSkills.setAdapter(adapter);
+//
+//        res.close();
+//    }
 
     //getRASets(int chapID)
-    private void getRASets(int chapID)
-    {
-        mRASetList = new ArrayList<>();
-        Cursor res = db.getRASetsByChapID(chapID);
-
-        //Loop to populate the RollAttackSet list.
-        while (res.moveToNext())
-            mRASetList.add(new RollAttackSet(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3), res.getInt(4)));
-
-        //init adapter
-        adapter2 = new RASetListAdapter(getActivity(), mRASetList);
-        lvRASets.setAdapter(adapter2);
-
-        res.close();
-    }
+//    private void getRASets(int chapID)
+//    {
+//        mRASetList = new ArrayList<>();
+//        Cursor res = db.getRASetsByChapID(chapID);
+//
+//        //Loop to populate the RollAttackSet list.
+//        while (res.moveToNext())
+//            mRASetList.add(new RollAttackSet(res.getInt(0), res.getInt(1), res.getInt(2), res.getInt(3), res.getInt(4)));
+//
+//        //init adapter
+//        adapter2 = new RASetListAdapter(getActivity(), mRASetList);
+//        lvRASets.setAdapter(adapter2);
+//
+//        res.close();
+//    }
 
 
     //private void RSAlert(), creates an alertDialog, served up for a new/existing RollSkill.
@@ -430,7 +410,7 @@ public class ChapMenuFragment extends Fragment {
 
                     if (db.addRS(rs)) {
                         Toast.makeText(getActivity(), "Skill: " + spinSkills.getSelectedItem().toString() + ", # rolled: " + spinD20.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                        setRollSkills(chapID);
+//                        setRollSkills(chapID);
                     } else
                         Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
                 }
@@ -438,7 +418,7 @@ public class ChapMenuFragment extends Fragment {
                     rs.ID = RSID;
 
                     db.updateRS(rs);
-                    setRollSkills(chapID);
+//                    setRollSkills(chapID);
 
                     Toast.makeText(getActivity(), "Roll updated.", Toast.LENGTH_SHORT).show();
                 }
