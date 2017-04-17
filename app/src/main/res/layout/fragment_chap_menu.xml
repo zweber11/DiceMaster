@@ -58,18 +58,24 @@
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ExpandableListView
-            android:id="@+id/exAttack"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ExpandableListView
-            android:id="@+id/exSkill"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvRollAttackSets"
+            android:dividerHeight="10dp"
+            android:divider="@color/colorPrimary"
+            android:layout_weight="0.5"
+            android:padding="4dp" />
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:id="@+id/lvRollSkill"
+            android:dividerHeight="10dp"
+            android:divider="@color/colorPrimary"
+            android:layout_weight="0.5"
+            android:padding="4dp" />
     </LinearLayout>
 </LinearLayout>

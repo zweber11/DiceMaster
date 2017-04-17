@@ -20,7 +20,6 @@ import com.hellwebstudios.zweber.dd.DataHelper;
 import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
 import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.DataObjects.DiceSetDie;
-import com.hellwebstudios.zweber.dd.ListAdapters.ChapsListAdapter;
 import com.hellwebstudios.zweber.dd.ListAdapters.DSDListAdapter;
 import com.hellwebstudios.zweber.dd.R;
 
