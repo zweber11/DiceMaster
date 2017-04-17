@@ -753,6 +753,20 @@ public class DataHelper extends SQLiteOpenHelper {
 
     //region **DiceSet table calls.
 
+    //getDSByID(int DSID)
+    public DiceSet getDSByID(int dsID) {
+        DiceSet dsFromDB = new DiceSet();
+
+        Cursor res = db.rawQuery("SELECT * FROM DiceSets WHERE ID = " + dsID, null);
+
+        while (res.moveToNext()) {
+            dsFromDB.ID = res.getInt(0);
+            dsFromDB.Name = res.getString(1);
+            dsFromDB.CharID = res.getInt(2);
+        }
+
+        return dsFromDB;
+    }
 
     //getAllDS
     public Cursor getAllDS() {
@@ -923,10 +937,8 @@ public class DataHelper extends SQLiteOpenHelper {
     //region **RollAttack table calls.
 
     //GetDieByDSID
-    public Cursor getDieByDSID(int dsID)
-    {
+    public Cursor getDieByDSID(int dsID) {
         Cursor res = db.rawQuery("SELECT * FROM " + T_DSD +  " WHERE DiceSetID = " + dsID, null);
-
         return res;
     }
 

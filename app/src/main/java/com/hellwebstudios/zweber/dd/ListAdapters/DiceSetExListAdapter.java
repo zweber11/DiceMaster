@@ -8,49 +8,51 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
-import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
-import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
+import com.hellwebstudios.zweber.dd.DataObjects.DiceSet;
+import com.hellwebstudios.zweber.dd.DataObjects.DiceSetDie;
 import com.hellwebstudios.zweber.dd.R;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by zweber on 4/12/2017.
+ * Created by zweber on 4/16/2017.
  */
 
-public class AdvExListAdapter extends BaseExpandableListAdapter {
+public class DiceSetExListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<Adventure> adventures;
-    private Map<String, List<Chapter>> chapters;
+    private List<DiceSet> diceSets;
+    private Map<String, List<DiceSetDie>> dsd;
 
-    public AdvExListAdapter(Context context, List<Adventure> adventures, Map<String, List<Chapter>> chapters) {
+    public DiceSetExListAdapter(Context context, List<DiceSet> diceSets, Map<String, List<DiceSetDie>> dsd) {
         this.context = context;
-        this.adventures = adventures;
-        this.chapters = chapters;
+        this.diceSets = diceSets;
+        this.dsd = dsd;
     }
 
     @Override
     public int getGroupCount() {
-        return adventures.size();
+        return diceSets.size();
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return chapters.get(adventures.get(groupPosition).Name).size();
+        return dsd.get(diceSets.get(groupPosition).Name).size();
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-
-        Integer advID = adventures.get(groupPosition).AdvID;
-        return advID;
+        Integer dsID = diceSets.get(groupPosition).ID;
+        return dsID;
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return chapters.get(adventures.get(groupPosition)).get(childPosition).Name;
+
+        DataHelper db = new DataHelper(context);
+        String dName = db.getDiceName(dsd.get(diceSets.get(groupPosition)).get(childPosition).DiceID);
+        return dName;
     }
 
     @Override
@@ -72,22 +74,23 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 
         DataHelper db = new DataHelper(context);
-        Integer advID = (Integer) getGroup(groupPosition);
-        Adventure advFromView = db.getAdv(advID);
+        Integer dsID = (Integer) getGroup(groupPosition);
+        DiceSet dsFromView = db.getDSByID(dsID);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_ex_par_object, null);
         }
 
+        //Manipulate the textViews to either display data/hide the ones you don't need.
         TextView txtTitle = (TextView) convertView.findViewById(R.id.txtExParent1);
-        txtTitle.setText(advFromView.Name);
+        txtTitle.setText(dsFromView.Name);
 
         TextView txt2 = (TextView) convertView.findViewById(R.id.txtExParent2);
-        txt2.setText(advFromView.Desc);
+        txt2.setText(db.getCharName(dsFromView.CharID));
 
         TextView txt3 = (TextView) convertView.findViewById(R.id.txtExParent3);
-        txt3.setText(db.getCharName(advFromView.CharID));
+        txt3.setVisibility(View.GONE);
 
         return convertView;
     }
@@ -95,9 +98,9 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
-        Integer cID = chapters.get(adventures.get(groupPosition).Name).get(childPosition).ChapID;
-
-        String chapterName = chapters.get(adventures.get(groupPosition).Name).get(childPosition).Name;
+        DataHelper db = new DataHelper(context);
+        Integer dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).ID;
+        String dName = db.getDiceName(dsdID);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -105,7 +108,7 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView txtChapName = (TextView) convertView.findViewById(R.id.txtExChild1);
-        txtChapName.setText(chapterName);
+        txtChapName.setText(dName);
 
         TextView txt2 = (TextView) convertView.findViewById(R.id.txtExChild2);
         txt2.setVisibility(View.GONE);
@@ -113,7 +116,7 @@ public class AdvExListAdapter extends BaseExpandableListAdapter {
         TextView txt3 = (TextView) convertView.findViewById(R.id.txtExChild3);
         txt3.setVisibility(View.GONE);
 
-        convertView.setTag(cID);
+        convertView.setTag(dsdID);
 
         return convertView;
     }

@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,12 +23,16 @@ import com.hellwebstudios.zweber.dd.DataObjects.Adventure;
 import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.DataObjects.DDCharacter;
 import com.hellwebstudios.zweber.dd.DataObjects.DiceSet;
+import com.hellwebstudios.zweber.dd.DataObjects.DiceSetDie;
 import com.hellwebstudios.zweber.dd.ListAdapters.CharacterListAdapter;
 import com.hellwebstudios.zweber.dd.ListAdapters.DiceSetAdapter;
+import com.hellwebstudios.zweber.dd.ListAdapters.DiceSetExListAdapter;
 import com.hellwebstudios.zweber.dd.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,13 +40,24 @@ import java.util.List;
 public class DiceSetsFragment extends Fragment {
 
     //Global vars
-    private ListView lvDS;
-    private DiceSetAdapter adapter;
-    private List<DiceSet> mDSList;
     DataHelper db;
+//    private ListView lvDS;
+//    private DiceSetAdapter adapter;
+//    private List<DiceSet> mDSList;
     List<String> sChars;
     private Spinner spinDSChars;
     TextView tvDSN;
+
+    TextView tvAddDS, tvAddDie;
+
+    //ExpandableListView code.
+    ExpandableListView exListView;
+    List<DiceSet> diceSets;
+    Map<String, List<DiceSetDie>> dsd;
+    Cursor res;
+
+    ExpandableListAdapter exListAdapter;
+    DiceSet newDS;
 
     public DiceSetsFragment() {
         // Required empty public constructor
@@ -54,18 +71,24 @@ public class DiceSetsFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
-    {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        db = new DataHelper(getActivity());
-        lvDS = (ListView) getView().findViewById(R.id.lvDiceSets);
+        db = new DataHelper(getContext());
+        
+        //Initial db call, to grab all DiceSets.
+        res = db.getAllDS();
+        fillData(res);
+        
+//        lvDS = (ListView) getView().findViewById(R.id.lvDiceSets);
 
         //Call setDS()
-        setDS();
+//        setDS();
 
-        //new Button
-        final TextView tvAdd = (TextView) getView().findViewById(R.id.txtAddDS);
-        tvAdd.setOnClickListener(new View.OnClickListener() {
+        //region ***New DS/DSD buttons***
+
+        //DS
+        tvAddDS = (TextView) getView().findViewById(R.id.txtAddDS);
+        tvAddDS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -119,45 +142,89 @@ public class DiceSetsFragment extends Fragment {
             }
         });
 
+        //DSD
+        tvAddDie = (TextView) getView().findViewById(R.id.txtAddDie);
+
+        //endregion
+
         //Handle onItemClick event.
-        lvDS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//        lvDS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                //Grab the selectedIndex.
+//                Integer sDSID = (Integer) view.getTag();
+//
+//                //Take the user to the DiceSetDieFragment.
+//                DiceSetDieFragment fragment = new DiceSetDieFragment();
+//
+//                //Create a bundle, and setArguments of the fragment.
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("DSID", sDSID);
+//                fragment.setArguments(bundle);
+//
+//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetDieFragment");
+//                fragmentTransaction.commit();
+//            }
+//        });
+    }
 
-                //Grab the selectedIndex.
-                Integer sDSID = (Integer) view.getTag();
+    private void fillData(Cursor res) {
 
-                //Take the user to the DiceSetDieFragment.
-                DiceSetDieFragment fragment = new DiceSetDieFragment();
+        db = new DataHelper(getContext());
+        diceSets = new ArrayList<>();
+        dsd = new HashMap<>();
 
-                //Create a bundle, and setArguments of the fragment.
-                Bundle bundle = new Bundle();
-                bundle.putInt("DSID", sDSID);
-                fragment.setArguments(bundle);
+        //exListView code.
+        exListView = (ExpandableListView) getView().findViewById(R.id.exDiceSetsListView);
 
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetDieFragment");
-                fragmentTransaction.commit();
+        if (res.getCount() == 0)
+            Toast.makeText(getContext(), "No Dice Sets found.", Toast.LENGTH_SHORT).show();
+        else {  //Populate the ArrayList with DiceSets.
+            while (res.moveToNext()) {
+                newDS = new DiceSet();
+                newDS.ID = res.getInt(0);
+                newDS.Name = res.getString(1);
+                newDS.CharID = res.getInt(2);
+
+                diceSets.add(newDS);
+
+                List<DiceSetDie> diceSetDice = new ArrayList<>();
+
+                Cursor res2 = db.getDieByDSID(newDS.ID);
+
+                while (res2.moveToNext())
+                    diceSetDice.add(new DiceSetDie(res2.getInt(0), res2.getInt(1), res2.getInt(2)));
+
+                dsd.put(newDS.Name, diceSetDice);
             }
-        });
+
+            exListView.setGroupIndicator(null);
+
+            //Init adapter
+            exListAdapter = new DiceSetExListAdapter(this.getContext(), diceSets, dsd);
+            exListView.setAdapter(exListAdapter);
+        }
+
     }
 
     //setDS
-    private void setDS()
-    {
-        mDSList = new ArrayList<>();
-        Cursor res = db.getAllDS();
-
-        //Loop to populate the DiceSets list.
-        while (res.moveToNext())
-            mDSList.add(new DiceSet(res.getInt(0), res.getString(1), res.getInt(2)));
-
-        //init adapter
-        adapter = new DiceSetAdapter(getActivity(), mDSList);
-        lvDS.setAdapter(adapter);
-
-        res.close();
-    }
+//    private void setDS()
+//    {
+//        mDSList = new ArrayList<>();
+//        Cursor res = db.getAllDS();
+//
+//        //Loop to populate the DiceSets list.
+//        while (res.moveToNext())
+//            mDSList.add(new DiceSet(res.getInt(0), res.getString(1), res.getInt(2)));
+//
+//        //init adapter
+//        adapter = new DiceSetAdapter(getActivity(), mDSList);
+//        lvDS.setAdapter(adapter);
+//
+//        res.close();
+//    }
 
     //ValFields(DS ds)
     private void valFields(DiceSet ds)
@@ -189,7 +256,8 @@ public class DiceSetsFragment extends Fragment {
         } else {
             if (db.addDS(ds)) {
                 Toast.makeText(getActivity(), "Dice Set added successfully.", Toast.LENGTH_SHORT).show();
-                setDS();
+                res = db.getAllDS();
+                fillData(res);
             }
             else
                 Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
