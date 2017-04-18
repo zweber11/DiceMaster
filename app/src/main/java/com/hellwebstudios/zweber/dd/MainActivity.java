@@ -19,7 +19,6 @@ import com.hellwebstudios.zweber.dd.Fragments.Characters.CharClassesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharRacesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharactersFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DashboardFragment;
-import com.hellwebstudios.zweber.dd.Fragments.DiceSets.DiceSetDieFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DiceSets.DiceSetsFragment;
 import com.hellwebstudios.zweber.dd.Fragments.HelpFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Adventures.AdventuresFragment;
@@ -65,11 +64,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        else
             super.onBackPressed();
-        }
     }
 
     @Override
@@ -133,7 +131,6 @@ public class MainActivity extends AppCompatActivity
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetsFragment");
             fragmentTransaction.commit();
-
         }
 //        else if (id == R.id.nav_settings) {
 //
@@ -158,11 +155,7 @@ public class MainActivity extends AppCompatActivity
             webLink.setData(Uri.parse("https://docs.google.com/document/d/1-7EwIJYdVmmivkyp-dV0eznPsDFqz100nZpOeoZEFF0/edit"));
             startActivity(webLink);
             //https://docs.google.com/document/d/1-7EwIJYdVmmivkyp-dV0eznPsDFqz100nZpOeoZEFF0/edit
-
-        }
-
-        //More section...
-        else if (id == R.id.nav_facebook) {
+        } else if (id == R.id.nav_facebook) {
 
             Intent webLink = new Intent(Intent.ACTION_VIEW);
             webLink.setData(Uri.parse("https://www.facebook.com/HellWebStudios"));
@@ -176,15 +169,13 @@ public class MainActivity extends AppCompatActivity
             startActivity(webLink);
             //https://twitter.com/HellWeb_Studios
 
-        }
-        else if (id == R.id.nav_other_apps) {
+        } else if (id == R.id.nav_other_apps) {
 
             Intent webLink = new Intent(Intent.ACTION_VIEW);
             webLink.setData(Uri.parse("https://play.google.com/store/apps/developer?id=HellWeb+Studios"));
             startActivity(webLink);
             //https://play.google.com/store/apps/developer?id=HellWeb+Studios
-        }
-        else if (id == R.id.nav_gms_twitch) {
+        } else if (id == R.id.nav_gms_twitch) {
 
             Intent webLink = new Intent(Intent.ACTION_VIEW);
             webLink.setData(Uri.parse("https://www.twitch.tv/gentlemenssword"));
@@ -199,10 +190,8 @@ public class MainActivity extends AppCompatActivity
 
     //Handle Fragment navigation...
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             FragmentManager fmgr = getSupportFragmentManager();
 
             //Adventures Frag
@@ -250,8 +239,7 @@ public class MainActivity extends AppCompatActivity
 
             //CharClassesFrag
             CharClassesFrag charClassesFrag = (CharClassesFrag) fmgr.findFragmentByTag("charClassesFrag");
-            if (charClassesFrag != null && charClassesFrag.isVisible())
-            {
+            if (charClassesFrag != null && charClassesFrag.isVisible()) {
                 //Take the user back to the Characters menu fragment.
                 CharactersFragment fragment = new CharactersFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
@@ -264,8 +252,7 @@ public class MainActivity extends AppCompatActivity
 
             //CharRacesFrag
             CharRacesFrag charRacesFrag = (CharRacesFrag) fmgr.findFragmentByTag("charRacesFrag");
-            if (charRacesFrag != null && charRacesFrag.isVisible())
-            {
+            if (charRacesFrag != null && charRacesFrag.isVisible()) {
                 //Take the user back to the Characters menu fragment.
                 CharactersFragment fragment = new CharactersFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
@@ -280,8 +267,7 @@ public class MainActivity extends AppCompatActivity
 
             //AddSkill Frag
             NewSkillFrag newSkillFrag = (NewSkillFrag) fmgr.findFragmentByTag("newSkillFragment");
-            if (newSkillFrag != null && newSkillFrag.isVisible())
-            {
+            if (newSkillFrag != null && newSkillFrag.isVisible()) {
                 //Take the user back to the Skills menu fragment.
                 SkillsFragment fragment = new SkillsFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
@@ -293,17 +279,6 @@ public class MainActivity extends AppCompatActivity
             DiceSetsFragment diceSetsFragment = (DiceSetsFragment) fmgr.findFragmentByTag("diceSetsFragment");
             if (diceSetsFragment != null && diceSetsFragment.isVisible())
                 DashFrag();
-
-            //DiceSetDie Frag
-            DiceSetDieFragment dsdF = (DiceSetDieFragment) fmgr.findFragmentByTag("diceSetDieFragment");
-            if (dsdF != null && dsdF.isVisible())
-            {
-                //Take the user back to the DiceSetsFragment.
-                DiceSetsFragment fragment = new DiceSetsFragment();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetsFragment");
-                fragmentTransaction.commit();
-            }
 
             //Child DiceSets Frag
             //TO-DO:
@@ -322,15 +297,13 @@ public class MainActivity extends AppCompatActivity
             HelpFragment helpFragment = (HelpFragment) fmgr.findFragmentByTag("helpFragment");
             if (helpFragment != null && helpFragment.isVisible())
                 DashFrag();
-
         }
 
         return true;
     }
 
     //DashFrag()
-    public void DashFrag()
-    {
+    public void DashFrag() {
         FragmentManager fmgr = getSupportFragmentManager();
 
         //Take the user to the Dashboard fragment.
