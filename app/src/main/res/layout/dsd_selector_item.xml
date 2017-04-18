@@ -4,13 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background">
-
-        <!--1st row-->
         <TableRow
             android:layout_margin="2dp">
             <LinearLayout
@@ -29,6 +26,5 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </TableRow>
-
     </TableLayout>
 </LinearLayout>
