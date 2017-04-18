@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:theme="@style/Platform.AppCompat.Light">
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -13,13 +12,40 @@
         android:background="@drawable/background"
         android:layout_margin="10dp">
 
-        <!--Dice-->
+        <!--DS-->
+        <TextView
+            android:id="@+id/tvDSName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Dice Set"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinDS"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+
+        <!--Die-->
+        <TextView
+            android:id="@+id/tvDSDName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Die"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinDie"
             android:background="@drawable/background"
             android:layout_margin="5dp" />
-
     </LinearLayout>
 </FrameLayout>

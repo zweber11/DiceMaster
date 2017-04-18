@@ -99,7 +99,7 @@ public class DiceSetExListAdapter extends BaseExpandableListAdapter {
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 
         DataHelper db = new DataHelper(context);
-        Integer dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).ID;
+        Integer dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).DiceID;
         String dName = db.getDiceName(dsdID);
 
         if (convertView == null) {

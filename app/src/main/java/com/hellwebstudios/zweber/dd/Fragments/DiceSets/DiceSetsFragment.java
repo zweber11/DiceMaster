@@ -55,6 +55,13 @@ public class DiceSetsFragment extends Fragment {
     DiceSet newDS;
     Integer dsdID;
 
+    //AddDie code.
+    Spinner spinDS;
+    List<String> sDS;
+
+    Spinner spinDice;
+    List<String> sDie;
+
     public DiceSetsFragment() {
         // Required empty public constructor
     }
@@ -82,9 +89,10 @@ public class DiceSetsFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
 
-                Integer dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).ID;
+                dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).DiceID;
+                String dsdName = db.getDiceName(dsdID);
 
-                //TODO: Get code from DSDFragment's onItemClick call...
+                Toast.makeText(getContext(), "Selected dID: " + dsdName, Toast.LENGTH_SHORT).show();
 
                 return false;
             }
@@ -153,7 +161,74 @@ public class DiceSetsFragment extends Fragment {
         tvAddDie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: Wire this up based on the DSDFragment code...
+
+                db = new DataHelper(getActivity());
+                AlertDialog.Builder abAddDie = new AlertDialog.Builder(getActivity());
+                abAddDie.setTitle("Please enter the info below.");
+                View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_die, null));
+
+                //DS Spinner
+                spinDS = (Spinner) v.findViewById(R.id.spinDS);
+                sDS = new ArrayList<>();
+                Cursor res2 = db.getAllDS();
+
+                if (res2.getCount() == 0)
+                    return;
+                else
+                    while (res2.moveToNext())
+                        sDS.add(res2.getString(1));
+
+                //Init DS adapter
+                ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sDS);
+                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinDS.setAdapter(ad2);
+
+
+                //Die Spinner
+                spinDice = (Spinner) v.findViewById(R.id.spinDie);
+                sDie = new ArrayList<>();
+                Cursor res = db.getAllDie();
+
+                if (res.getCount() == 0)
+                    return;
+                else
+                    while (res.moveToNext())
+                        sDie.add(res.getString(1));
+
+                //Init Die adapter
+                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sDie);
+                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinDice.setAdapter(ad);
+                abAddDie.setView(v);
+
+                abAddDie.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        DiceSetDie dsd = new DiceSetDie();
+                        dsd.ID = 0;
+
+                        //Grab the DiceSetID from the DS Spinner control.
+                        int dsID = (int) spinDS.getSelectedItemId() + 1;
+                        dsd.DiceSetID = dsID;
+
+                        int dieID = (int) spinDice.getSelectedItemId() + 1;
+                        dsd.DiceID = dieID;
+
+                        if (db.addDSD(dsd)) {
+                            Toast.makeText(getActivity(), "Die added successfully.", Toast.LENGTH_SHORT).show();
+                            Cursor res3 = db.getAllDS();
+                            fillData(res3);
+                        } else
+                            Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog a = abAddDie.create();
+                a.show();
+
             }
         });
 
@@ -204,7 +279,7 @@ public class DiceSetsFragment extends Fragment {
 
                 List<DiceSetDie> diceSetDice = new ArrayList<>();
 
-                Cursor res2 = db.getDieByDSID(newDS.ID);
+                Cursor res2 = db.getDSDByDSID(newDS.ID);
 
                 while (res2.moveToNext())
                     diceSetDice.add(new DiceSetDie(res2.getInt(0), res2.getInt(1), res2.getInt(2)));
