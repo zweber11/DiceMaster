@@ -42,7 +42,7 @@ public class DashboardFragment extends Fragment {
 
         //Box clicks.
         //Sessions
-        LinearLayout boxSessions = (LinearLayout) getView().findViewById(R.id.boxSessions);
+        LinearLayout boxSessions = (LinearLayout) getView().findViewById(R.id.llD1);
         boxSessions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +56,7 @@ public class DashboardFragment extends Fragment {
         });
 
         //Characters
-        LinearLayout boxChars = (LinearLayout) getView().findViewById(R.id.boxChars);
+        LinearLayout boxChars = (LinearLayout) getView().findViewById(R.id.llD2);
         boxChars.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +86,7 @@ public class DashboardFragment extends Fragment {
 //        });
 
         //DiceSets
-        LinearLayout boxDiceSets = (LinearLayout) getView().findViewById(R.id.boxDiceSets);
+        LinearLayout boxDiceSets = (LinearLayout) getView().findViewById(R.id.llD3);
         boxDiceSets.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +101,7 @@ public class DashboardFragment extends Fragment {
         });
 
         //Settings
-        LinearLayout boxSettings = (LinearLayout) getView().findViewById(R.id.boxSettings);
+        LinearLayout boxSettings = (LinearLayout) getView().findViewById(R.id.llD4);
         boxSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +116,7 @@ public class DashboardFragment extends Fragment {
         });
 
         //About
-        LinearLayout boxAbout = (LinearLayout) getView().findViewById(R.id.boxAbout);
+        LinearLayout boxAbout = (LinearLayout) getView().findViewById(R.id.llD5);
         boxAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,7 +131,7 @@ public class DashboardFragment extends Fragment {
         });
 
         //Help
-        LinearLayout boxHelp = (LinearLayout) getView().findViewById(R.id.boxHelp);
+        LinearLayout boxHelp = (LinearLayout) getView().findViewById(R.id.llD6);
         boxHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

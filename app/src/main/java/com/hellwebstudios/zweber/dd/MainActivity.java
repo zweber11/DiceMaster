@@ -132,8 +132,7 @@ public class MainActivity extends AppCompatActivity
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetsFragment");
             fragmentTransaction.commit();
-        }
-        else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_settings) {
 
             //Display the Settings Menu Fragment.
             SettingsFragment fragment = new SettingsFragment();
@@ -141,8 +140,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, fragment, "settingsFragment");
             fragmentTransaction.commit();
 
-        }
-        else if (id == R.id.nav_about) {
+        } else if (id == R.id.nav_about) {
 
             //Display the About Menu fragment.
             AboutFragment fragment = new AboutFragment();

@@ -21,9 +21,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
-                android:id="@+id/boxSessions">
+                android:id="@+id/llD1">
 
                 <TextView
+                    android:id="@+id/tvD1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
@@ -50,9 +51,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
-                android:id="@+id/boxChars">
+                android:id="@+id/llD2">
 
                 <TextView
+                    android:id="@+id/tvD2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
@@ -85,9 +87,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
-                android:id="@+id/boxDiceSets">
+                android:id="@+id/llD3">
 
                 <TextView
+                    android:id="@+id/tvD3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
@@ -114,9 +117,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
-                android:id="@+id/boxSettings">
+                android:id="@+id/llD4">
 
                 <TextView
+                    android:id="@+id/tvD4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
@@ -148,9 +152,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
-                android:id="@+id/boxAbout">
+                android:id="@+id/llD5">
 
                 <TextView
+                    android:id="@+id/tvD5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
@@ -160,8 +165,9 @@
                     android:textColor="@color/color6"
                     android:textSize="22sp"
                     android:textStyle="bold" />
+
                 <ImageView
-                    android:id="@+id/ivDash6"
+                    android:id="@+id/ivDash5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -177,9 +183,10 @@
                 android:layout_weight="1"
                 android:background="@drawable/background"
                 android:layout_margin="2dp"
-                android:id="@+id/boxHelp">
+                android:id="@+id/llD6">
 
                 <TextView
+                    android:id="@+id/tvD6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="serif-monospace"
@@ -189,8 +196,9 @@
                     android:textColor="@color/color6"
                     android:textSize="22sp"
                     android:textStyle="bold" />
+
                 <ImageView
-                    android:id="@+id/ivDash7"
+                    android:id="@+id/ivDash6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
