@@ -738,8 +738,7 @@ public class DataHelper extends SQLiteOpenHelper {
         DiceSetDie dsd = new DiceSetDie();
         Cursor res = db.rawQuery("SELECT * FROM " + T_DSD + " WHERE ID = " + DSDID, null);
 
-        while (res.moveToNext())
-        {
+        while (res.moveToNext()) {
             dsd.ID = res.getInt(0);
             dsd.DiceSetID = res.getInt(1);
             dsd.DiceID = res.getInt(2);

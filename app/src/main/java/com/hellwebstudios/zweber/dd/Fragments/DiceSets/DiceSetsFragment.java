@@ -61,6 +61,7 @@ public class DiceSetsFragment extends Fragment {
 
     Spinner spinDice;
     List<String> sDie;
+    DiceSetDie dsdFromDB;
 
     public DiceSetsFragment() {
         // Required empty public constructor
@@ -84,15 +85,77 @@ public class DiceSetsFragment extends Fragment {
         
         //ExListView code.
         exListView = (ExpandableListView) getView().findViewById(R.id.exDiceSetsListView);
-
         exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
 
-                dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).DiceID;
-                String dsdName = db.getDiceName(dsdID);
+                //Allow the User to add to & modify their dice sets, limiting them to only "Level" them up, and not decrease the DiceID...
+                dsdID = dsd.get(diceSets.get(groupPosition).Name).get(childPosition).ID;
+                dsdFromDB = db.getDSD(dsdID);
 
-                Toast.makeText(getContext(), "Selected dID: " + dsdName, Toast.LENGTH_SHORT).show();
+                //alertDialog popup.
+                AlertDialog.Builder abAddDie = new AlertDialog.Builder(getActivity());
+                abAddDie.setTitle("Please select a Die.");
+                View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_die, null));
+
+                //Disable DS txtView and Spinner for now...
+                tvDSN = (TextView) view2.findViewById(R.id.tvDSName);
+                tvDSN.setVisibility(View.INVISIBLE);
+
+                spinDS = (Spinner) view2.findViewById(R.id.spinDS2);
+                spinDS.setVisibility(View.INVISIBLE);
+
+
+                //Spinner
+                spinDice = (Spinner) view2.findViewById(R.id.spinDie);
+                sDie = new ArrayList<>();
+
+                db = new DataHelper(getActivity());
+                Cursor res = db.getAllDie();
+
+                while (res.moveToNext())
+                    sDie.add(res.getString(1));
+
+                //Init adapter
+                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sDie);
+                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinDice.setAdapter(ad);
+                spinDice.setSelection(dsdFromDB.DiceID - 1);
+                abAddDie.setView(view2);
+
+                res.close();
+
+                abAddDie.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        DiceSetDie dsdUp = new DiceSetDie();
+                        dsdUp.ID = dsdFromDB.ID;
+                        dsdUp.DiceSetID = dsdFromDB.DiceSetID;
+
+                        int dieID = (int) spinDice.getSelectedItemId() + 1;
+
+                        //Check DiceID's here.
+                        if (dieID > dsdFromDB.DiceID - 1) {
+                            dsdUp.DiceID = dieID;
+                            db.updateDSD(dsdUp);
+
+                            //Refresh the view.
+                            Cursor res5 = db.getAllDS();
+                            fillData(res5);
+
+                            Toast.makeText(getActivity(), "Die updated successfully.", Toast.LENGTH_SHORT).show();
+
+                        } else
+                            Toast.makeText(getActivity(), "Please select a Die greater than your current selection.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog a = abAddDie.create();
+                a.show();
+
 
                 return false;
             }
@@ -233,28 +296,6 @@ public class DiceSetsFragment extends Fragment {
         });
 
         //endregion
-
-        //Handle onItemClick event.
-//        lvDS.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                //Grab the selectedIndex.
-//                Integer sDSID = (Integer) view.getTag();
-//
-//                //Take the user to the DiceSetDieFragment.
-//                DiceSetDieFragment fragment = new DiceSetDieFragment();
-//
-//                //Create a bundle, and setArguments of the fragment.
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("DSID", sDSID);
-//                fragment.setArguments(bundle);
-//
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetDieFragment");
-//                fragmentTransaction.commit();
-//            }
-//        });
     }
 
     private void fillData(Cursor res) {
