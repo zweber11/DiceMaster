@@ -4,18 +4,15 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.DashboardFragment"
     android:background="@color/colorPrimary">
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="60dp">
-
         <!--1st row-->
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
             <!--1st column-->
             <LinearLayout
                 android:orientation="vertical"
@@ -34,9 +31,8 @@
                     android:text="Adventures"
                     android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-
                 <ImageView
                     android:id="@+id/ivDash1"
                     android:layout_width="match_parent"
@@ -45,9 +41,7 @@
                     android:backgroundTint="@color/color5"
                     android:gravity="center_vertical|center_horizontal"
                     android:src="@drawable/ic_adventures" />
-
             </LinearLayout>
-
             <!--2nd column-->
             <LinearLayout
                 android:orientation="vertical"
@@ -66,9 +60,8 @@
                     android:text="Characters"
                     android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-
                 <ImageView
                     android:id="@+id/ivDash2"
                     android:layout_width="match_parent"
@@ -77,50 +70,14 @@
                     android:backgroundTint="@color/black"
                     android:gravity="center_vertical|center_horizontal"
                     android:src="@drawable/ic_chars" />
-
             </LinearLayout>
-
         </TableRow>
-
         <!--2nd row-->
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-
             <!--1st column-->
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/background"
-                android:layout_margin="2dp"
-                android:id="@+id/boxSkills">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="serif-monospace"
-                    android:gravity="center"
-                    android:text="Skills"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color6"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/ivDash3"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/black"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:src="@drawable/ic_skills" />
-
-            </LinearLayout>
-
-            <!--2nd column-->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -138,11 +95,10 @@
                     android:text="Dice Sets"
                     android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-
                 <ImageView
-                    android:id="@+id/ivDash4"
+                    android:id="@+id/ivDash3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -150,39 +106,41 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:src="@drawable/ic_dice_sets" />
             </LinearLayout>
-        </TableRow>
+            <!--2nd column-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/background"
+                android:layout_margin="2dp"
+                android:id="@+id/boxSettings">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="serif-monospace"
+                    android:gravity="center"
+                    android:text="Settings"
+                    android:textAllCaps="false"
+                    android:textColor="@color/color6"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/ivDash4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/black"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_settings" />
+            </LinearLayout>
+        </TableRow>
         <!--3rd row-->
         <TableRow android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
             <!--1st column-->
-            <!--<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:layout_weight="1"-->
-                <!--android:background="@drawable/background"-->
-                <!--android:layout_margin="2dp"-->
-                <!--android:id="@+id/boxSettings">-->
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Settings"-->
-                    <!--android:textColor="@color/color5"-->
-                    <!--android:gravity="center" />-->
-                <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="fill_parent"-->
-                    <!--android:id="@+id/ivDash5"-->
-                    <!--android:gravity="center_vertical|center_horizontal"-->
-                    <!--android:src="@drawable/ic_settings"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:backgroundTint="@color/black"/>-->
-
-            <!--</LinearLayout>-->
-
-            <!--2nd column-->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -200,9 +158,8 @@
                     android:text="About"
                     android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-
                 <ImageView
                     android:id="@+id/ivDash6"
                     android:layout_width="match_parent"
@@ -212,7 +169,7 @@
                     android:gravity="center_vertical|center_horizontal"
                     android:src="@drawable/ic_about" />
             </LinearLayout>
-            <!--3rd column-->
+            <!--2nd column-->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -230,9 +187,8 @@
                     android:text="Help"
                     android:textAllCaps="false"
                     android:textColor="@color/color6"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
-
                 <ImageView
                     android:id="@+id/ivDash7"
                     android:layout_width="match_parent"

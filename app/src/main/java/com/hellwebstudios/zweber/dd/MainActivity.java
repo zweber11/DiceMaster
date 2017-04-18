@@ -22,6 +22,7 @@ import com.hellwebstudios.zweber.dd.Fragments.DashboardFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DiceSets.DiceSetsFragment;
 import com.hellwebstudios.zweber.dd.Fragments.HelpFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Adventures.AdventuresFragment;
+import com.hellwebstudios.zweber.dd.Fragments.SettingsFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Skills.NewSkillFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Skills.SkillsFragment;
 
@@ -132,15 +133,15 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.fragment_container, fragment, "diceSetsFragment");
             fragmentTransaction.commit();
         }
-//        else if (id == R.id.nav_settings) {
-//
-//            //Display the Settings Menu Fragment.
-//            SettingsFragment fragment = new SettingsFragment();
-//            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.fragment_container, fragment, "settingsFragment");
-//            fragmentTransaction.commit();
-//
-//        }
+        else if (id == R.id.nav_settings) {
+
+            //Display the Settings Menu Fragment.
+            SettingsFragment fragment = new SettingsFragment();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment, "settingsFragment");
+            fragmentTransaction.commit();
+
+        }
         else if (id == R.id.nav_about) {
 
             //Display the About Menu fragment.

@@ -71,19 +71,19 @@ public class DashboardFragment extends Fragment {
         });
 
         //Skills
-        LinearLayout boxSkills = (LinearLayout) getView().findViewById(R.id.boxSkills);
-        boxSkills.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Display the SkillsMenu Fragment.
-                SkillsFragment fragment = new SkillsFragment();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "skillsFragment");
-                fragmentTransaction.commit();
-
-            }
-        });
+//        LinearLayout boxSkills = (LinearLayout) getView().findViewById(R.id.boxSkills);
+//        boxSkills.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                //Display the SkillsMenu Fragment.
+//                SkillsFragment fragment = new SkillsFragment();
+//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                fragmentTransaction.replace(R.id.fragment_container, fragment, "skillsFragment");
+//                fragmentTransaction.commit();
+//
+//            }
+//        });
 
         //DiceSets
         LinearLayout boxDiceSets = (LinearLayout) getView().findViewById(R.id.boxDiceSets);
@@ -101,19 +101,19 @@ public class DashboardFragment extends Fragment {
         });
 
         //Settings
-//        LinearLayout boxSettings = (LinearLayout) getView().findViewById(R.id.boxSettings);
-//        boxSettings.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                //Display the Settings Menu Fragment.
-//                SettingsFragment fragment = new SettingsFragment();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragment, "settingsFragment");
-//                fragmentTransaction.commit();
-//
-//            }
-//        });
+        LinearLayout boxSettings = (LinearLayout) getView().findViewById(R.id.boxSettings);
+        boxSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Display the Settings Menu Fragment.
+                SettingsFragment fragment = new SettingsFragment();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "settingsFragment");
+                fragmentTransaction.commit();
+
+            }
+        });
 
         //About
         LinearLayout boxAbout = (LinearLayout) getView().findViewById(R.id.boxAbout);
