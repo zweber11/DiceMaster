@@ -26,25 +26,26 @@ import java.util.List;
  */
 public class DataHelper extends SQLiteOpenHelper {
 
-    //DB info
-    public static final String DATABASE_NAME = "DM.db";
-    public static final String T_CHAR = "Characters"; //12/28/2016 v1
-    public static final String T_SKI = "Skills"; //12/28/2016 v1
-    public static final String T_CLASS = "CharacterClasses"; //12/31/2016 v1
-    public static final String T_RACE = "CharacterRaces"; //12/31/2016 v1
-    public static final String T_DICE = "Dice"; //01/03/2017 v1
-    public static final String T_ADV = "Adventures"; //01/04/2017
-    public static final String T_CHAP = "Chapters"; //01/04/2017
+    //DB table names.
+    private static final String DATABASE_NAME = "DM.db";
+    private static final String T_CHAR = "Characters"; //12/28/2016 v1
+    private static final String T_SKI = "Skills"; //12/28/2016 v1
+    private static final String T_CLASS = "CharacterClasses"; //12/31/2016 v1
+    private static final String T_RACE = "CharacterRaces"; //12/31/2016 v1
+    private static final String T_DICE = "Dice"; //01/03/2017 v1
+    private static final String T_ADV = "Adventures"; //01/04/2017 v1
+    private static final String T_CHAP = "Chapters"; //01/04/2017 v1
+    private static final String T_DS = "DiceSets"; //01/06/2017 v1
+    private static final String T_DSD = "DiceSetDie"; //01/06/2017 v1
+    private static final String T_RS = "RollSkills"; //01/08/2017 v1
+    private static final String T_RA = "RollAttacks"; //01/08/2017 v1
+    private static final String T_RAS = "RollAttackSets"; //01/10/2017 v1
 
-    public static final String T_DS = "DiceSets"; //01/06/2017 v1
-    public static final String T_DSD = "DiceSetDie"; //01/06/2017 v1
+    private static final String T_DASH = "DashboardSettings"; //4/19/2017 v2
+    private static final String T_DASH_GRID = "DashboardGrid"; //4/19/2017 v2
 
-    public static final String T_RS = "RollSkills"; //01/08/2017
-    public static final String T_RA = "RollAttacks"; //01/08/2017
-    public static final String T_RAS = "RollAttackSets"; //01/10/2017
-
-    //DB Version. 1 = 1.0, 2 = 1.1
-    public static final int DB_VERSION = 2;
+    //DB Version. 1 = 1.0, 2 = 1.5
+    private static final int DB_VERSION = 2;
 
     //region table column variables.
 
@@ -101,15 +102,45 @@ public class DataHelper extends SQLiteOpenHelper {
     //endregion
 
     //Testing the global db call to reduce calls.
-    SQLiteDatabase db = this.getWritableDatabase();
+    private SQLiteDatabase db = this.getWritableDatabase();
 
     public DataHelper(Context context) {
         super(context, DATABASE_NAME, null, DB_VERSION);
     }
 
+    private void genVerTwoData() {
+
+        //region **DashboardSettings table.**
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Description TEXT)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(1, 'Adventures', 'Allows you to add and view Adventures.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(2, 'Characters', 'Allows you to add and view Characters.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(3, 'Skills', 'Allows you to view Skills.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(4, 'Dice Sets', 'Allows you to add, edit, and view Dice Sets.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(5, 'Settings', 'Allows you to view and modify Settings.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(6, 'About', 'About page.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(7, 'Help', 'Link to a Google Doc containing Dice Master help information.')");
+
+        //endregion
+
+        //region **DashboardGrid table w/ initial data.**
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH_GRID + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Position TEXT, DSID INTEGER REFERENCES DashboardSettings(ID), TileColor TEXT, TileTextColor TEXT)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 1, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 2, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (3, 'Middle Left Tile', 3, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (4, 'Middle Right Tile', 4, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (5, 'Lower Left Tile', 5, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (6, 'Lower Right Tile', 6, 3556946, 5685952)");
+
+        //endregion
+
+        //        3556946 (Primary Color grey)
+        //        5685952 (secondary color, light blue)
+    }
+
     @Override
-    public void onCreate(SQLiteDatabase db)
-    {
+    public void onCreate(SQLiteDatabase db) {
 
         //region **Classes/Races/Characters**
 
@@ -245,6 +276,7 @@ public class DataHelper extends SQLiteOpenHelper {
 
         //endregion
 
+        genVerTwoData();
     }
 
     @Override
@@ -252,32 +284,9 @@ public class DataHelper extends SQLiteOpenHelper {
         //DB Version Check.
         //Version 1 --> v2.
         if (oldVersion < 2) {
-            //Update the default data, leaving only 1 entry/data object...
-//            db.execSQL("DELETE FROM " + T_ADV + " WHERE AdvID = 2");
-//
-//            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 4");
-//            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 5");
-//            db.execSQL("DELETE FROM " + T_CHAP + " WHERE ChapID = 6");
-//
-//            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 2");
-//            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 3");
-//            db.execSQL("DELETE FROM " + T_CHAR + " WHERE CharacterID = 4");
-//
-//            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 2");
-//            db.execSQL("DELETE FROM " + T_RS + " WHERE ID = 3");
-//
-//            db.execSQL("DELETE FROM " + T_RAS + " WHERE ID = 2");
-//
-//            db.execSQL("DELETE FROM " + T_DS + " WHERE ID = 2");
-//
-//            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 2");
-//            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 3");
-//            db.execSQL("DELETE FROM " + T_RA + " WHERE ID = 4");
-//
-//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 3");
-//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 4");
-//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 5");
-//            db.execSQL("DELETE FROM " + T_DSD + " WHERE ID = 6");
+
+            //Call genVerTwoData, creating the two new tables.
+            genVerTwoData();
         }
 
         onCreate(db);
