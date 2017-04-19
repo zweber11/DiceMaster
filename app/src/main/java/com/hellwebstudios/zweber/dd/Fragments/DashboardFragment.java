@@ -37,6 +37,7 @@ public class DashboardFragment extends Fragment {
     DashboardGrid dg1, dg2, dg3, dg4, dg5, dg6;
     DashboardSetting ds1, ds2, ds3, ds4, ds5, ds6;
     FragmentManager fmgr;
+    int draw;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -323,5 +324,37 @@ public class DashboardFragment extends Fragment {
         tvD5.setText(ds5.Name);
         tvD6.setText(ds6.Name);
 
+        //Initialize IVs
+        ivD1 = (ImageView) getView().findViewById(R.id.ivDash1);
+        ivD2 = (ImageView) getView().findViewById(R.id.ivDash2);
+        ivD3 = (ImageView) getView().findViewById(R.id.ivDash3);
+        ivD4 = (ImageView) getView().findViewById(R.id.ivDash4);
+        ivD5 = (ImageView) getView().findViewById(R.id.ivDash5);
+        ivD6 = (ImageView) getView().findViewById(R.id.ivDash6);
+
+        //Populate IVs.
+        ivD1.setImageResource(setGridSVG(ds1.ID));
+        ivD2.setImageResource(setGridSVG(ds2.ID));
+        ivD3.setImageResource(setGridSVG(ds3.ID));
+        ivD4.setImageResource(setGridSVG(ds4.ID));
+        ivD5.setImageResource(setGridSVG(ds5.ID));
+        ivD6.setImageResource(setGridSVG(ds6.ID));
+    }
+
+    //setGridSVG
+    public int setGridSVG(int DSID) {
+        draw = R.drawable.ic_dashboard;
+        switch (DSID) {
+            case 1: draw = R.drawable.ic_adventures; break;
+            case 2: draw = R.drawable.ic_chars; break;
+            case 3: draw = R.drawable.ic_skills; break;
+            case 4: draw = R.drawable.ic_dice_sets; break;
+            case 5: draw = R.drawable.ic_settings; break;
+            case 6: draw = R.drawable.ic_about; break;
+            case 7: draw = R.drawable.ic_help; break;
+            default: draw = R.drawable.ic_adventures; break;
+        }
+
+        return draw;
     }
 }
