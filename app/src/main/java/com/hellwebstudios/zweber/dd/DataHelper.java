@@ -11,6 +11,8 @@ import com.hellwebstudios.zweber.dd.DataObjects.Chapter;
 import com.hellwebstudios.zweber.dd.DataObjects.CharClass;
 import com.hellwebstudios.zweber.dd.DataObjects.CharRace;
 import com.hellwebstudios.zweber.dd.DataObjects.DDCharacter;
+import com.hellwebstudios.zweber.dd.DataObjects.DashboardGrid;
+import com.hellwebstudios.zweber.dd.DataObjects.DashboardSetting;
 import com.hellwebstudios.zweber.dd.DataObjects.DiceSet;
 import com.hellwebstudios.zweber.dd.DataObjects.DiceSetDie;
 import com.hellwebstudios.zweber.dd.DataObjects.RollAttack;
@@ -108,7 +110,7 @@ public class DataHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DB_VERSION);
     }
 
-    private void genVerTwoData() {
+    public void genVerTwoData() {
 
         //region **DashboardSettings table.**
 
@@ -125,9 +127,10 @@ public class DataHelper extends SQLiteOpenHelper {
 
         //region **DashboardGrid table w/ initial data.**
 
+        //Adv/Char flipped for testing purposes.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH_GRID + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Position TEXT, DSID INTEGER REFERENCES DashboardSettings(ID), TileColor TEXT, TileTextColor TEXT)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 1, 3556946, 5685952)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 2, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 2, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 1, 3556946, 5685952)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (3, 'Middle Left Tile', 3, 3556946, 5685952)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (4, 'Middle Right Tile', 4, 3556946, 5685952)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (5, 'Lower Left Tile', 5, 3556946, 5685952)");
@@ -276,7 +279,36 @@ public class DataHelper extends SQLiteOpenHelper {
 
         //endregion
 
-        genVerTwoData();
+//        genVerTwoData();
+
+        //region **DashboardSettings table.**
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Description TEXT)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(1, 'Adventures', 'Allows you to add and view Adventures.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(2, 'Characters', 'Allows you to add and view Characters.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(3, 'Skills', 'Allows you to view Skills.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(4, 'Dice Sets', 'Allows you to add, edit, and view Dice Sets.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(5, 'Settings', 'Allows you to view and modify Settings.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(6, 'About', 'About page.')");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(7, 'Help', 'Link to a Google Doc containing Dice Master help information.')");
+
+        //endregion
+
+        //region **DashboardGrid table w/ initial data.**
+
+        //Adv/Char flipped for testing purposes.
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH_GRID + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Position TEXT, DSID INTEGER REFERENCES DashboardSettings(ID), TileColor TEXT, TileTextColor TEXT)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 2, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 1, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (3, 'Middle Left Tile', 3, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (4, 'Middle Right Tile', 4, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (5, 'Lower Left Tile', 5, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (6, 'Lower Right Tile', 6, 3556946, 5685952)");
+
+        //endregion
+//
+//        //        3556946 (Primary Color grey)
+//        //        5685952 (secondary color, light blue)
     }
 
     @Override
@@ -286,7 +318,33 @@ public class DataHelper extends SQLiteOpenHelper {
         if (oldVersion < 2) {
 
             //Call genVerTwoData, creating the two new tables.
-            genVerTwoData();
+//            genVerTwoData();
+
+            //region **DashboardSettings table.**
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Description TEXT)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(1, 'Adventures', 'Allows you to add and view Adventures.')");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(2, 'Characters', 'Allows you to add and view Characters.')");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(3, 'Skills', 'Allows you to view Skills.')");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(4, 'Dice Sets', 'Allows you to add, edit, and view Dice Sets.')");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(5, 'Settings', 'Allows you to view and modify Settings.')");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(6, 'About', 'About page.')");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH + "(ID, Name, Description) VALUES(7, 'Help', 'Link to a Google Doc containing Dice Master help information.')");
+
+            //endregion
+
+            //region **DashboardGrid table w/ initial data.**
+
+            //Adv/Char flipped for testing purposes.
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH_GRID + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Position TEXT, DSID INTEGER REFERENCES DashboardSettings(ID), TileColor TEXT, TileTextColor TEXT)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 2, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 1, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (3, 'Middle Left Tile', 3, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (4, 'Middle Right Tile', 4, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (5, 'Lower Left Tile', 5, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (6, 'Lower Right Tile', 6, 3556946, 5685952)");
+
+            //endregion
         }
 
         onCreate(db);
@@ -695,24 +753,14 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getChap(int chapID)
-    public Cursor getChap(int chapID)
-    {
-//        Chapter c = new Chapter();
+    public Cursor getChap(int chapID) {
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE ChapID = " + chapID, null);
-
-//        while (res.moveToNext()) {
-//            c.ChapID = res.getInt(0);
-//            c.AdvID = res.getInt(1);
-//            c.Name = res.getString(2);
-//        }
-
         return res;
     }
 
     //updateChap(chap)
     public void updateChap(Chapter c) {
         ContentValues cv = new ContentValues();
-
         cv.put(CH_1, c.AdvID);
         cv.put(CH_2, c.Name);
 
@@ -1060,6 +1108,112 @@ public class DataHelper extends SQLiteOpenHelper {
             r = res.getInt(0);
 
         return r;
+    }
+
+    //endregion
+
+    //v2
+    //region **DashboardSetting table calls**
+
+    //getDSNByID
+    public String getDSNByID(int DSID) {
+        String dsn = "";
+        Cursor res = db.rawQuery("SELECT Name FROM " + T_DASH + " WHERE ID = " + DSID, null);
+
+        while (res.moveToNext())
+            dsn = res.getString(0);
+
+        return dsn;
+    }
+
+    //getDSID(string DSN)
+    public int getDSID(String DSN) {
+        int dsid = 0;
+        Cursor res = db.rawQuery("SELECT ID FROM " + T_DASH + " WHERE Name = '" + DSN + "'", null);
+
+        while (res.moveToNext())
+            dsid = res.getInt(0);
+
+        return dsid;
+    }
+
+    //getAllDS
+    public Cursor getAllDash() {
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH, null);
+        return res;
+    }
+
+    //endregion
+
+    //v2
+    //region **DashboardGrid table calls**
+
+    //getAllDashboardGrids
+    public Cursor getAllDashboardGrids() {
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH_GRID, null);
+        return res;
+    }
+
+    //getDGByID(int ID)
+    public DashboardGrid getGridByID(int ID) {
+        DashboardGrid dg = new DashboardGrid();
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH_GRID + " WHERE ID = " + ID, null);
+
+        while (res.moveToNext()) {
+            dg.ID = res.getInt(0);
+            dg.Position = res.getString(1);
+            dg.DSID = res.getInt(2);
+            dg.TileColor = res.getString(3);
+            dg.TileTextColor = res.getString(4);
+        }
+
+        return dg;
+    }
+
+    //getDSByID(int DSID)
+    public DashboardSetting getDSByDSID(int DSID) {
+        DashboardSetting ds = new DashboardSetting();
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH + " WHERE ID = " + DSID, null);
+
+        while (res.moveToNext()) {
+            ds.ID  = res.getInt(0);
+            ds.Name = res.getString(1);
+            ds.Description = res.getString(2);
+        }
+
+        return ds;
+    }
+
+    //updateDG(DGID, DSID)
+    public void updateDG(int DGID, int DSID, String color) {
+        ContentValues cv = new ContentValues();
+
+        cv.put("ID", DGID);
+        cv.put("DSID", DSID);
+        cv.put("TileColor", color);
+
+        String strFilter = "ID=" + DGID;
+
+        db.update(T_DASH_GRID, cv, strFilter, null);
+    }
+
+    //validDG(DGID, DSID)
+    public boolean validDG(int DGID, int DSID) {
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH_GRID + " WHERE DSID = " + DSID + " AND ID IS NOT " + DGID, null);
+        if (res.getCount() == 1)
+            return false;
+        else
+            return true;
+    }
+
+    //getTileColor(DGID)
+    public String getTileColor(int DGID) {
+        String color = "";
+        Cursor res = db.rawQuery("SELECT TileColor FROM " + T_DASH_GRID + " WHERE ID = " + DGID, null);
+        while (res.moveToNext())
+            color = res.getString(0);
+
+        return color;
     }
 
     //endregion
