@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:theme="@style/Platform.AppCompat.Light">
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -42,13 +41,11 @@
             android:text="Roll To Hit"
             android:textColor="@color/color5"
             android:textStyle="bold" />
-
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinRTH"
             android:background="@drawable/background"
             android:layout_margin="5dp" />
-
     </LinearLayout>
 </FrameLayout>

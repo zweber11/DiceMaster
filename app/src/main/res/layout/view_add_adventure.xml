@@ -5,14 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:theme="@style/Platform.AppCompat.Light">
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:layout_margin="10dp">
-
         <!--Adv Name-->
         <TextView
             android:id="@+id/textView"
@@ -24,7 +22,6 @@
             android:text="Adventure Name"
             android:textColor="@color/color5"
             android:textStyle="bold" />
-
         <EditText
             android:id="@+id/txtAdvName"
             android:layout_width="match_parent"
@@ -47,7 +44,6 @@
             android:text="Adventure Description"
             android:textColor="@color/color5"
             android:textStyle="bold" />
-
         <EditText
             android:id="@+id/txtAdvDesc"
             android:layout_width="match_parent"
@@ -70,14 +66,11 @@
             android:text="Character"
             android:textColor="@color/color5"
             android:textStyle="bold" />
-
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinChar"
             android:background="@drawable/background2"
             android:layout_margin="5dp" />
-
-
     </LinearLayout>
 </FrameLayout>

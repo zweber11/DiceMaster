@@ -25,10 +25,8 @@ import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharRaceFrag;
 import com.hellwebstudios.zweber.dd.Fragments.DashTileFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DashboardFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DiceSets.DiceSetsFragment;
-import com.hellwebstudios.zweber.dd.Fragments.HelpFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Adventures.AdventuresFragment;
 import com.hellwebstudios.zweber.dd.Fragments.SettingsFragment;
-import com.hellwebstudios.zweber.dd.Fragments.Skills.NewSkillFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Skills.SkillsFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -299,10 +297,6 @@ public class MainActivity extends AppCompatActivity
             if (aboutFragment != null && aboutFragment.isVisible())
                 DashFrag();
 
-            //Help Frag
-            HelpFragment helpFragment = (HelpFragment) fmgr.findFragmentByTag("helpFragment");
-            if (helpFragment != null && helpFragment.isVisible())
-                DashFrag();
         }
 
         return true;
