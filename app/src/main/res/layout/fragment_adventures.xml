@@ -16,7 +16,7 @@
             android:layout_marginRight="5dp"
             android:fontFamily="serif-monospace"
             android:padding="5dp"
-            android:text="Adventures"
+            android:text="@string/adventures"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/color5"
             android:textStyle="bold" />

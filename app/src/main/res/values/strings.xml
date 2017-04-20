@@ -20,4 +20,7 @@
     <string name="twitter">Our Twitter Page</string>
     <string name="playstore">Other HellWeb Studios Apps!</string>
     <string name="gms">Gentlemen\'s Sword on Twitch</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
