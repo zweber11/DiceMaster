@@ -133,8 +133,7 @@ public class CharactersFragment extends Fragment {
     }
 
     //setChars(), populates the ListView with Characters.
-    private void setChars()
-    {
+    private void setChars() {
         mCharList = new ArrayList<>();
         Cursor res = db.getAllCharacters();
 

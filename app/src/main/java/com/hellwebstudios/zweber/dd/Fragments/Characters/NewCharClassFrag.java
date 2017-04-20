@@ -108,8 +108,7 @@ public class NewCharClassFrag extends Fragment {
     }
 
     //CCF
-    public void CCF()
-    {
+    public void CCF() {
         //Take the user to the ClassesFragment.
         CharClassesFrag fragment = new CharClassesFrag();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -118,8 +117,7 @@ public class NewCharClassFrag extends Fragment {
     }
 
     //SaveClass()
-    public void SaveClass()
-    {
+    public void SaveClass() {
         db = new DataHelper(getActivity());
         CharClass classObj = new CharClass();
 
@@ -134,8 +132,7 @@ public class NewCharClassFrag extends Fragment {
 
     //Method that does the error handling and then sends off to DB.
     //Accepts cToSave as parameter, which either a new/existing Class object.
-    public void CheckFields(CharClass ccToSave)
-    {
+    public void CheckFields(CharClass ccToSave) {
         AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
         if (tvClassName.length() == 0) {
             myAlert.setMessage("Please enter a Class Name.")

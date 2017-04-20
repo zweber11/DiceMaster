@@ -200,12 +200,11 @@ public class NewCharFrag extends Fragment {
     }
 
     //CF
-    public void CF()
-    {
+    public void CF() {
         //Take the User back to the CharactersFragment.
         CharactersFragment fragment = new CharactersFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment, "charactersFragment");
         fragmentTransaction.commit();
     }
 

@@ -113,7 +113,7 @@ public class NewCharRaceFrag extends Fragment {
         //Take the user to the RacesFragment.
         CharRacesFrag fragment = new CharRacesFrag();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.replace(R.id.fragment_container, fragment, "charRacesFrag");
         fragmentTransaction.commit();
     }
 

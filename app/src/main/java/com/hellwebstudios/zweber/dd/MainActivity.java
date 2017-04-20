@@ -15,9 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hellwebstudios.zweber.dd.Fragments.AboutFragment;
+import com.hellwebstudios.zweber.dd.Fragments.Adventures.ChapMenuFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharClassesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharRacesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharactersFragment;
+import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharClassFrag;
+import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharFrag;
+import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharRaceFrag;
+import com.hellwebstudios.zweber.dd.Fragments.DashTileFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DashboardFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DiceSets.DiceSetsFragment;
 import com.hellwebstudios.zweber.dd.Fragments.HelpFragment;
@@ -199,26 +204,15 @@ public class MainActivity extends AppCompatActivity
                 DashFrag();
 
             //ChapMenuFragment
-//            ChapMenuFragment chapMenuFragment = (ChapMenuFragment) fmgr.findFragmentByTag("chapMenuFragment");
-//            if (chapMenuFragment != null && chapMenuFragment.isVisible())
-//            {
-//                //Take the user back to the Chapters fragment.
-//                ChaptersFragment fragment = new ChaptersFragment();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragment, "chaptersFragment");
-//                fragmentTransaction.commit();
-//            }
-
-            //AttackRolls Fragment
-//            AttackRollsFragment attackRollsFragment = (AttackRollsFragment) fmgr.findFragmentByTag("attackRollsFragment");
-//            if (attackRollsFragment != null && attackRollsFragment.isVisible())
-//            {
-//                //Take the user back to the ChapMenuFragment.
-//                ChapMenuFragment fragment = new ChapMenuFragment();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragment, "chapMenuFragment");
-//                fragmentTransaction.commit();
-//            }
+            ChapMenuFragment chapMenuFragment = (ChapMenuFragment) fmgr.findFragmentByTag("chapMenuFragment");
+            if (chapMenuFragment != null && chapMenuFragment.isVisible())
+            {
+                //Take the user back to the Adventures fragment.
+                AdventuresFragment fragment = new AdventuresFragment();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "adventuresFragment");
+                fragmentTransaction.commit();
+            }
 
             //Characters Frag
             CharactersFragment charactersFragment = (CharactersFragment) fmgr.findFragmentByTag("charactersFragment");
@@ -226,15 +220,15 @@ public class MainActivity extends AppCompatActivity
                 DashFrag();
 
             //NewCharFrag
-//            NewCharFrag newCharFrag = (NewCharFrag) fmgr.findFragmentByTag("newCharFrag");
-//            if (newCharFrag != null && newCharFrag.isVisible())
-//            {
-//                //Take the user back to the Characters menu fragment.
-//                CharactersFragment fragment = new CharactersFragment();
-//                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-//                fragmentTransaction.replace(R.id.fragment_container, fragment, "charactersFragment");
-//                fragmentTransaction.commit();
-//            }
+            NewCharFrag newCharFrag = (NewCharFrag) fmgr.findFragmentByTag("newCharFrag");
+            if (newCharFrag != null && newCharFrag.isVisible())
+            {
+                //Take the user back to the Characters menu fragment.
+                CharactersFragment fragment = new CharactersFragment();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "charactersFragment");
+                fragmentTransaction.commit();
+            }
 
             //CharClassesFrag
             CharClassesFrag charClassesFrag = (CharClassesFrag) fmgr.findFragmentByTag("charClassesFrag");
@@ -247,7 +241,14 @@ public class MainActivity extends AppCompatActivity
             }
 
             //NewCharClassFrag
-
+            NewCharClassFrag newCharClassFrag = (NewCharClassFrag) fmgr.findFragmentByTag("newCharClassFrag");
+            if (newCharClassFrag != null && newCharClassFrag.isVisible()) {
+                //Take the user back to the CharClasses menu fragment.
+                CharClassesFrag fragment = new CharClassesFrag();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "charClassesFragment");
+                fragmentTransaction.commit();
+            }
 
             //CharRacesFrag
             CharRacesFrag charRacesFrag = (CharRacesFrag) fmgr.findFragmentByTag("charRacesFrag");
@@ -259,33 +260,39 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.commit();
             }
 
+            //NewCharRaceFrag
+            NewCharRaceFrag newCharRaceFrag = (NewCharRaceFrag) fmgr.findFragmentByTag("newCharRaceFrag");
+            if (newCharRaceFrag != null && newCharRaceFrag.isVisible()) {
+                //Take the user back to the Races menu fragment.
+                CharRacesFrag fragment = new CharRacesFrag();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "charRacesFrag");
+                fragmentTransaction.commit();
+            }
+
             //Skills Frag
             SkillsFragment skillsFragment = (SkillsFragment) fmgr.findFragmentByTag("skillsFragment");
             if (skillsFragment != null && skillsFragment.isVisible())
                 DashFrag();
-
-            //AddSkill Frag
-            NewSkillFrag newSkillFrag = (NewSkillFrag) fmgr.findFragmentByTag("newSkillFragment");
-            if (newSkillFrag != null && newSkillFrag.isVisible()) {
-                //Take the user back to the Skills menu fragment.
-                SkillsFragment fragment = new SkillsFragment();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "skillsFragment");
-                fragmentTransaction.commit();
-            }
 
             //DiceSets Frag
             DiceSetsFragment diceSetsFragment = (DiceSetsFragment) fmgr.findFragmentByTag("diceSetsFragment");
             if (diceSetsFragment != null && diceSetsFragment.isVisible())
                 DashFrag();
 
-            //Child DiceSets Frag
-            //TO-DO:
-
             //Settings Frag
-//            SettingsFragment settingsFragment = (SettingsFragment) fmgr.findFragmentByTag("settingsFragment");
-//            if (settingsFragment != null && settingsFragment.isVisible())
-//                DashFrag();
+            SettingsFragment settingsFragment = (SettingsFragment) fmgr.findFragmentByTag("settingsFragment");
+            if (settingsFragment != null && settingsFragment.isVisible())
+                DashFrag();
+
+            DashTileFragment dashTileFragment = (DashTileFragment) fmgr.findFragmentByTag("dashTileFragment");
+            if (dashTileFragment != null && dashTileFragment.isVisible()) {
+                //Take the user back to the Settings menu fragment.
+                SettingsFragment fragment = new SettingsFragment();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragment, "settingsFragment");
+                fragmentTransaction.commit();
+            }
 
             //About Frag
             AboutFragment aboutFragment = (AboutFragment) fmgr.findFragmentByTag("aboutFragment");
