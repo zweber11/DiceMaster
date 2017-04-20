@@ -1197,15 +1197,6 @@ public class DataHelper extends SQLiteOpenHelper {
         db.update(T_DASH_GRID, cv, strFilter, null);
     }
 
-    //validDG(DGID, DSID)
-    public boolean validDG(int DGID, int DSID) {
-        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH_GRID + " WHERE DSID = " + DSID + " AND ID IS NOT " + DGID, null);
-        if (res.getCount() == 1)
-            return false;
-        else
-            return true;
-    }
-
     //getTileColor(DGID)
     public String getTileColor(int DGID) {
         String color = "";
@@ -1214,6 +1205,15 @@ public class DataHelper extends SQLiteOpenHelper {
             color = res.getString(0);
 
         return color;
+    }
+
+    //valDGOptions(int DSID)
+    public boolean valDGOptions(int DSID) {
+        Cursor res = db.rawQuery("SELECT * FROM " + T_DASH_GRID + " WHERE DSID = "  + DSID, null);
+        if (res.getCount() == 1)
+            return false;
+        else
+            return true;
     }
 
     //endregion

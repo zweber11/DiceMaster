@@ -81,14 +81,18 @@ public class DashTileFragment extends Fragment {
                     return;
                 }
                 else
-                    while (res2.moveToNext()) //Loop and fill the List.
-                        sGS.add(res2.getString(1));
+                    while (res2.moveToNext()) { //Loop and fill the List.
+                        //Conditional code to change the data returned (Flag/remove in use options)
+                        if (db.valDGOptions(res2.getInt(0))) {
+                            sGS.add(res2.getString(1));
+                        } else {  } //Skip over it, since it's in use.
+
+                    }
 
                 //Init adapter
                 ArrayAdapter<String> ad = new ArrayAdapter<>(getContext(), R.layout.spinner_item, sGS);
                 ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinGridSetting.setAdapter(ad);
-                spinGridSetting.setSelection(dg.DSID - 1);
 
                 //Finish up, and set the View.
                 abGS.setView(v);
@@ -98,18 +102,11 @@ public class DashTileFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String sGSN = (String) spinGridSetting.getSelectedItem();
-
-                        //Convert the sGSN into the ID.
                         int sGSID = db.getDSID(sGSN);
-                        String s = sItemID + "";
 
-                        if (db.validDG(sItemID, sGSID)) {
-                            db.updateDG(sItemID, sGSID, "16777215");
-                            Toast.makeText(getContext(), "Dashboard Setting updated successfully.", Toast.LENGTH_SHORT).show();
-                            setGrid();
-                        } else {
-                            Toast.makeText(getContext(), "Dashboard Setting already in use. Please try again.", Toast.LENGTH_LONG).show();
-                        }
+                        db.updateDG(sItemID, sGSID, "16777215");
+                        Toast.makeText(getContext(), "Dashboard Setting updated successfully.", Toast.LENGTH_SHORT).show();
+                        setGrid();
                     }
                 });
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="5dp"
-    android:background="@drawable/background2"
+    android:background="@drawable/background3"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +15,7 @@
         android:paddingLeft="2dp"
         android:text="Field 1 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/color5"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -28,7 +28,7 @@
         android:paddingLeft="2dp"
         android:text="Field 2 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/color5"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
         android:paddingLeft="2dp"
         android:text="Field 3 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/color5"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         android:textStyle="bold" />
 </LinearLayout>

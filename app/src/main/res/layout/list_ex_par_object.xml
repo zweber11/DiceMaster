@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background3"
+    android:background="@drawable/background2"
     android:orientation="vertical">
 
     <TextView
@@ -15,7 +15,7 @@
         android:paddingEnd="0dp"
         android:text="Field 1 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/color6"
         android:textStyle="bold" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:paddingEnd="0dp"
         android:text="Field 2 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/color5"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -42,7 +42,7 @@
         android:paddingEnd="0dp"
         android:text="Field 3 Here"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/color4"
         android:textSize="18sp"
         android:textStyle="bold" />
 </LinearLayout>
