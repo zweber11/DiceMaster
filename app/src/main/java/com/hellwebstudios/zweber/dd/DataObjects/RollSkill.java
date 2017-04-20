@@ -11,9 +11,7 @@ public class RollSkill {
     public int ChapID;
     public int Roll;
 
-    //Empty
-    public RollSkill() {
-    }
+    public RollSkill() { }
 
     //Loaded
     public RollSkill(int ID, int skillID, int chapID, int roll) {
@@ -27,32 +25,13 @@ public class RollSkill {
     public int getID() {
         return ID;
     }
-
     public void setID(int ID) {
         this.ID = ID;
     }
-
     public int getSkillID() {
         return SkillID;
     }
-
-    public void setSkillID(int skillID) {
-        SkillID = skillID;
-    }
-
-    public int getChapID() {
-        return ChapID;
-    }
-
-    public void setChapID(int chapID) {
-        ChapID = chapID;
-    }
-
     public int getRoll() {
         return Roll;
-    }
-
-    public void setRoll(int roll) {
-        Roll = roll;
     }
 }

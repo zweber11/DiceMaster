@@ -10,10 +10,7 @@ public class Skill {
     public String LastUsed;
     public int Favorite;
 
-    //Empty constructor
-    public Skill() {
-
-    }
+    public Skill() { }
 
     //Loaded constructor
     public Skill(int skillID, String skillName, String lastUsed, int favorite) {
@@ -24,35 +21,7 @@ public class Skill {
     }
 
     //Getter-setters
-    public int getSkillID() {
-        return SkillID;
-    }
-
-    public void setSkillID(int skillID) {
-        SkillID = skillID;
-    }
-
-    public String getSkillName() {
-        return SkillName;
-    }
-
-    public void setSkillName(String skillName) {
-        SkillName = skillName;
-    }
-
-    public String getLastUsed() {
-        return LastUsed;
-    }
-
-    public void setLastUsed(String lastUsed) {
-        LastUsed = lastUsed;
-    }
-
-    public int getFavorite() {
-        return Favorite;
-    }
-
-    public void setFavorite(int favorite) {
-        Favorite = favorite;
-    }
+    public int getSkillID() { return SkillID; }
+    public String getSkillName() { return SkillName; }
+    public String getLastUsed() { return LastUsed; }
 }
