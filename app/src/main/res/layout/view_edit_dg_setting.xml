@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:theme="@style/Platform.AppCompat.Light">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/tvDashGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="serif-monospace"
+            android:text="Dashboard Grid Setting"
+            android:textColor="@color/color5"
+            android:textStyle="bold" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinGridSetting"
+            android:background="@drawable/background"
+            android:layout_margin="5dp" />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Dashboard Tile Color"-->
+                <!--android:id="@+id/tvDashGridColor"-->
+                <!--android:textColor="@color/color5"-->
+                <!--android:layout_marginStart="5dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginEnd="5dp" />-->
+            <!--<Button-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Reset Color"-->
+                <!--android:id="@+id/btnReset"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginEnd="5dp" />-->
+        <!--</LinearLayout>-->
+        <!--<com.larswerkman.holocolorpicker.ColorPicker-->
+            <!--android:id="@+id/picker"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center_horizontal" />-->
+
+        <!--<com.larswerkman.holocolorpicker.ValueBar-->
+            <!--android:id="@+id/valuebar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="10dp" />-->
+    </LinearLayout>
+</ScrollView>

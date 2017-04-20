@@ -298,8 +298,8 @@ public class DataHelper extends SQLiteOpenHelper {
 
         //Adv/Char flipped for testing purposes.
         db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH_GRID + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Position TEXT, DSID INTEGER REFERENCES DashboardSettings(ID), TileColor TEXT, TileTextColor TEXT)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 2, 3556946, 5685952)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 1, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 1, 3556946, 5685952)");
+        db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 2, 3556946, 5685952)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (3, 'Middle Left Tile', 3, 3556946, 5685952)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (4, 'Middle Right Tile', 4, 3556946, 5685952)");
         db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (5, 'Lower Left Tile', 5, 3556946, 5685952)");
@@ -337,8 +337,8 @@ public class DataHelper extends SQLiteOpenHelper {
 
             //Adv/Char flipped for testing purposes.
             db.execSQL("CREATE TABLE IF NOT EXISTS " + T_DASH_GRID + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Position TEXT, DSID INTEGER REFERENCES DashboardSettings(ID), TileColor TEXT, TileTextColor TEXT)");
-            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 2, 3556946, 5685952)");
-            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 1, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (1, 'Upper Left Tile', 1, 3556946, 5685952)");
+            db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (2, 'Upper Right Tile', 2, 3556946, 5685952)");
             db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (3, 'Middle Left Tile', 3, 3556946, 5685952)");
             db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (4, 'Middle Right Tile', 4, 3556946, 5685952)");
             db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (5, 'Lower Left Tile', 5, 3556946, 5685952)");
