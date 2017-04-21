@@ -20,7 +20,6 @@ import com.hellwebstudios.zweber.dd.Fragments.Characters.CharClassesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharRacesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharactersFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharFrag;
-import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharRaceFrag;
 import com.hellwebstudios.zweber.dd.Fragments.DashTileFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DashboardFragment;
 import com.hellwebstudios.zweber.dd.Fragments.DiceSets.DiceSetsFragment;
