@@ -230,13 +230,13 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (1, 'Acrobatics', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (2, 'Arcana', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (3, 'Athletics', 'Sat Dec 31, 2016. 01:00 PM', 0)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (4, 'Charisma (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Charisma
-        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (5, 'Construction (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Constitution
+        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (4, 'Charisma (SR)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Charisma
+        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (5, 'Construction (SR)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Constitution
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (6, 'Deception', 'Sat Dec 31, 2016. 01:00 PM', 0)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (7, 'Dexterity (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Dexterity
+        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (7, 'Dexterity (SR)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Dexterity
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (8, 'History', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (9, 'Insight', 'Sat Dec 31, 2016. 01:00 PM', 0)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (10, 'Intelligence (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Intelligence
+        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (10, 'Intelligence (SR)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Intelligence
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (11, 'Intimidation', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (12, 'Investigation', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (13, 'Medicine', 'Sat Dec 31, 2016. 01:00 PM', 0)");
@@ -246,9 +246,9 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (17, 'Religion', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (18, 'Sleight Of Hand', 'Sat Dec 31, 2016. 01:00 PM', 0)");
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (19, 'Stealth', 'Sat Dec 31, 2016. 01:00 PM', 0)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (20, 'Strength (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Strength
+        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (20, 'Strength (SR)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Strength
         db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (21, 'Survival', 'Sat Dec 31, 2016. 01:00 PM', 0)");
-        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (22, 'Wisdom (Save Roll)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Wisdom
+        db.execSQL("INSERT OR IGNORE INTO " + T_SKI + "(SkillID, SkillName, LastUsed, Favorite) VALUES (22, 'Wisdom (SR)', 'Sat Dec 31, 2016. 01:00 PM', 0)"); //Wisdom
 
         ///Save rolls: Charisma, Constitution, Dexterity, Intelligence, Strength, Wisdom
 
@@ -345,6 +345,14 @@ public class DataHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT OR IGNORE INTO " + T_DASH_GRID + "(ID, Position, DSID, TileColor, TileTextColor) VALUES (6, 'Lower Right Tile', 6, 3556946, 5685952)");
 
             //endregion
+
+            //Update skills table Save Roll entries to shorten them for better data display.
+            db.execSQL("UPDATE " + T_SKI + " SET SkillName = 'Charisma (SR)' WHERE SkillID = 4");
+            db.execSQL("UPDATE " + T_SKI + " SET SkillName = 'Construction (SR)' WHERE SkillID = 5");
+            db.execSQL("UPDATE " + T_SKI + " SET SkillName = 'Dexterity (SR)' WHERE SkillID = 7");
+            db.execSQL("UPDATE " + T_SKI + " SET SkillName = 'Intelligence (SR)' WHERE SkillID = 10");
+            db.execSQL("UPDATE " + T_SKI + " SET SkillName = 'Strength (SR)' WHERE SkillID = 20");
+            db.execSQL("UPDATE " + T_SKI + " SET SkillName = 'Wisdom (SR)' WHERE SkillID = 22");
         }
 
         onCreate(db);

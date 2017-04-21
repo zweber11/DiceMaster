@@ -224,7 +224,7 @@ public class DiceSetsFragment extends Fragment {
                 View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_die, null));
 
                 //DS Spinner
-                spinDS = (Spinner) v.findViewById(R.id.spinDS);
+                spinDS = (Spinner) v.findViewById(R.id.spinDS2);
                 sDS = new ArrayList<>();
                 Cursor res2 = db.getAllDS();
 
@@ -239,6 +239,12 @@ public class DiceSetsFragment extends Fragment {
                 ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinDS.setAdapter(ad2);
 
+
+//                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sDie);
+//                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                spinDice.setAdapter(ad);
+//                spinDice.setSelection(dsdFromDB.DiceID - 1);
+//                abAddDie.setView(view2);
 
                 //Die Spinner
                 spinDice = (Spinner) v.findViewById(R.id.spinDie);
