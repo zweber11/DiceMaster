@@ -11,8 +11,6 @@ public class Skill {
     public int Favorite;
 
     public Skill() { }
-
-    //Loaded constructor
     public Skill(int skillID, String skillName, String lastUsed, int favorite) {
         SkillID = skillID;
         SkillName = skillName;

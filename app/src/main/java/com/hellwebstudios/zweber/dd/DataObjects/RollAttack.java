@@ -11,11 +11,7 @@ public class RollAttack {
     public int DID;
     public int Roll;
 
-    //Empty
-    public RollAttack() {
-    }
-
-    //Loaded
+    public RollAttack() { }
     public RollAttack(int ID, int RASID, int DID, int roll) {
         this.ID = ID;
         this.RASID = RASID;
@@ -24,35 +20,8 @@ public class RollAttack {
     }
 
     //Getter/setters
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public int getRASID() {
-        return RASID;
-    }
-
-    public void setRASID(int RASID) {
-        this.RASID = RASID;
-    }
-
-    public int getDID() {
-        return DID;
-    }
-
-    public void setDID(int DID) {
-        this.DID = DID;
-    }
-
-    public int getRoll() {
-        return Roll;
-    }
-
-    public void setRoll(int roll) {
-        Roll = roll;
-    }
+    public int getID() { return ID; }
+    public void setID(int ID) { this.ID = ID; }
+    public int getDID() { return DID; }
+    public int getRoll() { return Roll; }
 }

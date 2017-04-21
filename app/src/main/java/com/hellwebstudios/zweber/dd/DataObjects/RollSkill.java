@@ -12,8 +12,6 @@ public class RollSkill {
     public int Roll;
 
     public RollSkill() { }
-
-    //Loaded
     public RollSkill(int ID, int skillID, int chapID, int roll) {
         this.ID = ID;
         SkillID = skillID;
