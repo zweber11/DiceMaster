@@ -247,16 +247,6 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.commit();
             }
 
-            //NewCharRaceFrag
-            NewCharRaceFrag newCharRaceFrag = (NewCharRaceFrag) fmgr.findFragmentByTag("newCharRaceFrag");
-            if (newCharRaceFrag != null && newCharRaceFrag.isVisible()) {
-                //Take the user back to the Races menu fragment.
-                CharRacesFrag fragment = new CharRacesFrag();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "charRacesFrag");
-                fragmentTransaction.commit();
-            }
-
             //Skills Frag
             SkillsFragment skillsFragment = (SkillsFragment) fmgr.findFragmentByTag("skillsFragment");
             if (skillsFragment != null && skillsFragment.isVisible())

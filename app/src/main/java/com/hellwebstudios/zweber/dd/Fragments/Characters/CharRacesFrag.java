@@ -1,6 +1,8 @@
 package com.hellwebstudios.zweber.dd.Fragments.Characters;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,9 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hellwebstudios.zweber.dd.DataHelper;
+import com.hellwebstudios.zweber.dd.DataObjects.CharClass;
 import com.hellwebstudios.zweber.dd.DataObjects.CharRace;
 import com.hellwebstudios.zweber.dd.ListAdapters.CharRaceListAdapter;
 import com.hellwebstudios.zweber.dd.R;
@@ -54,7 +59,59 @@ public class CharRacesFrag extends Fragment {
         tvAddRace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NCCF();
+
+                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
+                abAddAdv.setTitle("Please enter a Race Name name below.");
+
+                View vi = (LayoutInflater.from(getActivity()).inflate(R.layout.view_one_field, null));
+
+                final TextView txtClassName = (TextView) vi.findViewById(R.id.tvProp1); txtClassName.setText("Race Name");
+                final TextView tvRName = (TextView) vi.findViewById(R.id.editProp1);
+                abAddAdv.setView(vi);
+
+                abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        CharRace newR = new CharRace();
+                        newR.RaceID = 0;
+                        newR.RaceName = tvRName.getText().toString();
+
+                        AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
+                        if (tvRName.length() == 0) {
+                            myAlert.setMessage("Please enter a Race Name.")
+                                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).create();
+                            myAlert.show();
+                        } else if (tvRName.length() > 30) {
+                            myAlert.setMessage("Please enter a Race Name under 30 characters.")
+                                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).create();
+                            myAlert.show();
+                        } else {
+                            if (db.addRace(newR)) {
+                                Toast.makeText(getActivity(), "Class created successfully.", Toast.LENGTH_SHORT).show();
+                                setRaces();
+                            }
+                            else
+                                Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                AlertDialog a = abAddAdv.create();
+                a.show();
+
             }
         });
 
@@ -64,26 +121,74 @@ public class CharRacesFrag extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //Grab the selectedIndex
-                Integer sRaceID = (Integer) view.getTag();
+                final Integer sRaceID = (Integer) view.getTag();
 
-                //Take the user to NewCharRaceFrag.
-                NewCharRaceFrag fragment = new NewCharRaceFrag();
+                //Check if the ID is =< 16.
+                if (sRaceID <= 16) {
+                    Toast.makeText(getContext(), "Default Race, can't edit.", Toast.LENGTH_SHORT).show();
+                } else {
+                    AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
+                    abAddAdv.setTitle("Please enter a Race Name below.");
 
-                //Create a bundle, and setArguments of the fragment.
-                Bundle bundle = new Bundle();
-                bundle.putInt("RaceID", sRaceID);
-                fragment.setArguments(bundle);
+                    View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_one_field, null));
 
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "newCharClassFrag");
-                fragmentTransaction.commit();
+                    final TextView txtRaceName = (TextView) v.findViewById(R.id.tvProp1); txtRaceName.setText("Race Name");
+                    final TextView tvRName = (TextView) v.findViewById(R.id.editProp1);
+                    CharRace rFromDB = db.getRace(sRaceID);
+                    tvRName.setText(rFromDB.RaceName);
+
+                    abAddAdv.setView(v);
+
+                    abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            //Save logic here, or validate logic...
+                            db = new DataHelper(getActivity());
+                            CharRace rToUp = new CharRace();
+                            rToUp.RaceID = sRaceID;
+                            rToUp.RaceName = tvRName.getText().toString();
+
+                            AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
+                            if (tvRName.length() == 0) {
+                                myAlert.setMessage("Please enter a Race Name.")
+                                        .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        }).create();
+                                myAlert.show();
+                            } else if (tvRName.length() > 30) {
+                                myAlert.setMessage("Please enter a Race Name under 30 characters.")
+                                        .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        }).create();
+                                myAlert.show();
+                            } else {
+                                if (db.updateRace(rToUp)) {
+                                    Toast.makeText(getActivity(), "Race updated successfully.", Toast.LENGTH_SHORT).show();
+                                    setRaces();
+                                }
+                                else
+                                    Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                    AlertDialog a = abAddAdv.create();
+                    a.show();
+                }
+
             }
         });
     }
 
     //setRaces() pops the ListView.
-    private void setRaces()
-    {
+    private void setRaces() {
         mRaceList = new ArrayList<>();
         Cursor res = db.getAllRaces();
 
@@ -97,14 +202,4 @@ public class CharRacesFrag extends Fragment {
 
         res.close();
     }
-
-    //NCCF
-    private void NCCF()
-    {
-        NewCharRaceFrag fragment = new NewCharRaceFrag();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment, "newCharClassFrag");
-        fragmentTransaction.commit();
-    }
-
 }
