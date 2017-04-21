@@ -64,11 +64,65 @@ public class CharClassesFrag extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Take the user to the NewCharacterFragment.
-                NewCharClassFrag fragment = new NewCharClassFrag();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "newCharClassFrag");
-                fragmentTransaction.commit();
+                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
+                abAddAdv.setTitle("Please enter a Class name below.");
+
+                View vi = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
+
+                final TextView txtClassName = (TextView) vi.findViewById(R.id.txtAdvName);
+                TextView tvClassName = (TextView) vi.findViewById(R.id.textView);
+                tvClassName.setText("Class Name");
+
+                //Disable unused fields from the borrowed .xml view.
+                TextView tvAdv = (TextView) vi.findViewById(R.id.textView3);     tvAdv.setVisibility(View.GONE);
+                TextView tvAdvDesc = (TextView) vi.findViewById(R.id.txtAdvDesc); tvAdvDesc.setVisibility(View.GONE);
+                TextView tvChar = (TextView) vi.findViewById(R.id.textView23);   tvChar.setVisibility(View.GONE);
+                Spinner spinChars = (Spinner) vi.findViewById(R.id.spinChar);    spinChars.setVisibility(View.GONE);
+
+                abAddAdv.setView(vi);
+
+                abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Save logic here, or validate logic...
+                        db = new DataHelper(getActivity());
+                        CharClass newC = new CharClass();
+                        newC.ClassID = 0;
+                        newC.ClassName = txtClassName.getText().toString();
+
+                        AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
+                        if (txtClassName.length() == 0) {
+                            myAlert.setMessage("Please enter a Class Name.")
+                                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).create();
+                            myAlert.show();
+                        } else if (txtClassName.length() > 30) {
+                            myAlert.setMessage("Please enter a Class Name under 30 characters.")
+                                    .setPositiveButton("Close", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    }).create();
+                            myAlert.show();
+                        } else {
+                            if (db.addClass(newC)) {
+                                Toast.makeText(getActivity(), "Class created successfully.", Toast.LENGTH_SHORT).show();
+                                setClasses();
+                            }
+                            else
+                                Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                AlertDialog a = abAddAdv.create();
+                a.show();
 
             }
         });
@@ -91,26 +145,17 @@ public class CharClassesFrag extends Fragment {
                     View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
 
                     final TextView txtClassName = (TextView) v.findViewById(R.id.txtAdvName);
-
                     TextView tvClassName = (TextView) v.findViewById(R.id.textView);
                     tvClassName.setText("Class Name");
 
-                    TextView tvAdv = (TextView) v.findViewById(R.id.textView3);
-                    tvAdv.setVisibility(View.GONE);
-
-                    TextView tvAdvDesc = (TextView) v.findViewById(R.id.txtAdvDesc); //Disable unneeded fields.
-                    tvAdvDesc.setVisibility(View.GONE);
-
-                    TextView tvChar = (TextView) v.findViewById(R.id.textView23);
-                    tvChar.setVisibility(View.GONE);
-
-                    //Spinner
-                    Spinner spinChars = (Spinner) v.findViewById(R.id.spinChar); //Disable unneeded fields.
-                    spinChars.setVisibility(View.GONE);
+                    //Disable unused fields from the borrowed .xml view.
+                    TextView tvAdv = (TextView) v.findViewById(R.id.textView3);     tvAdv.setVisibility(View.GONE);
+                    TextView tvAdvDesc = (TextView) v.findViewById(R.id.txtAdvDesc); tvAdvDesc.setVisibility(View.GONE);
+                    TextView tvChar = (TextView) v.findViewById(R.id.textView23);   tvChar.setVisibility(View.GONE);
+                    Spinner spinChars = (Spinner) v.findViewById(R.id.spinChar);    spinChars.setVisibility(View.GONE);
 
                     CharClass classFromDB = db.getClass(sClassID);
                     txtClassName.setText(classFromDB.ClassName);
-
                     abAddAdv.setView(v);
 
                     abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
