@@ -19,7 +19,6 @@ import com.hellwebstudios.zweber.dd.Fragments.Adventures.ChapMenuFragment;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharClassesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharRacesFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.CharactersFragment;
-import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharClassFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharFrag;
 import com.hellwebstudios.zweber.dd.Fragments.Characters.NewCharRaceFrag;
 import com.hellwebstudios.zweber.dd.Fragments.DashTileFragment;
@@ -235,16 +234,6 @@ public class MainActivity extends AppCompatActivity
                 CharactersFragment fragment = new CharactersFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, fragment, "charactersFragment");
-                fragmentTransaction.commit();
-            }
-
-            //NewCharClassFrag
-            NewCharClassFrag newCharClassFrag = (NewCharClassFrag) fmgr.findFragmentByTag("newCharClassFrag");
-            if (newCharClassFrag != null && newCharClassFrag.isVisible()) {
-                //Take the user back to the CharClasses menu fragment.
-                CharClassesFrag fragment = new CharClassesFrag();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fmgr.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment, "charClassesFragment");
                 fragmentTransaction.commit();
             }
 
