@@ -96,14 +96,7 @@ public class ChapMenuFragment extends Fragment {
         }
 
         //Grab the Chapter, and display the ChapterName.
-        Cursor res = db.getChap(chapID);
-        c = new Chapter();
-
-        while (res.moveToNext()) {
-            c.ChapID = res.getInt(0);
-            c.AdvID = res.getInt(1);
-            c.Name = res.getString(2);
-        }
+        c = db.getChap(chapID);
 
         //Initialize TextViews
         txtChapTitle = (TextView) getView().findViewById(R.id.txtChapTitle);

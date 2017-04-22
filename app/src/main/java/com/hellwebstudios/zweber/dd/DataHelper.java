@@ -761,10 +761,34 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getChap(int chapID)
-    public Cursor getChap(int chapID) {
+    public Chapter getChap(int chapID) {
+        Chapter chap = new Chapter();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAP + " WHERE ChapID = " + chapID, null);
-        return res;
+
+        while (res.moveToNext()) {
+            chap.ChapID = res.getInt(0);
+            chap.AdvID = res.getInt(1);
+            chap.Name = res.getString(2);
+        }
+
+        return chap;
     }
+
+//    public Adventure getAdv(int advID) {
+//        Adventure adv = new Adventure();
+//        Cursor res = db.rawQuery("SELECT * FROM " + T_ADV + " WHERE AdvID = " + advID, null);
+//
+//        while (res.moveToNext()) {
+//            adv.AdvID = res.getInt(0);
+//            adv.Name = res.getString(1);
+//            adv.Desc = res.getString(2);
+//            adv.CharID = res.getInt(3);
+//            adv.NumChapters = res.getInt(4);
+//        }
+//
+//        return adv;
+//    }
+
 
     //updateChap(chap)
     public void updateChap(Chapter c) {

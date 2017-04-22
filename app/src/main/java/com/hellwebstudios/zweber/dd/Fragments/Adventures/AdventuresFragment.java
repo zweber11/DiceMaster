@@ -107,7 +107,8 @@ public class AdventuresFragment extends Fragment {
                 if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
                     int c = (int) view.getTag();
 
-//                    Toast.makeText(getContext(), "Child: " + c, Toast.LENGTH_SHORT).show();
+                    //EditChapter
+                    chapAlert(c);
 
                     return true;
                 } else if (itemType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
@@ -144,130 +145,11 @@ public class AdventuresFragment extends Fragment {
         tvAddChap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
-                abAddChap.setTitle("Please enter Chapter Details.");
 
-                View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
-
-                spinAdvChaps = (Spinner) v.findViewById(R.id.spinAdvChap);
-
-                sAdvChaps = new ArrayList<>();
-
-                Cursor res = db.getAllAdv();
-
-                if (res.getCount() == 0)
-                    return;
-                else
-                    //Loop and fill the List.
-                    while (res.moveToNext())
-                        sAdvChaps.add(res.getString(1));
-
-                //Init adapter
-                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sAdvChaps);
-                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinAdvChaps.setAdapter(ad);
-                abAddChap.setView(view);
-
-                res.close();
-
-                tvChapName = (TextView) v.findViewById(R.id.txtChapName);
-                abAddChap.setView(v);
-
-                //Save action button.
-                abAddChap.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        //Save logic here, or validate logic...
-                        db = new DataHelper(getActivity());
-                        Chapter c = new Chapter();
-                        c.ChapID = 0;
-
-                        int AdvID = (int) spinAdvChaps.getSelectedItemId() + 1;
-                        c.AdvID = AdvID;
-                        c.Name = tvChapName.getText().toString();
-
-                        valChapFields(c);
-                    }
-                });
-
-                AlertDialog a = abAddChap.create();
-                a.show();
+                //NewChapter.
+                chapAlert(0);
             }
         });
-
-        //endregion
-
-        //region **Old advList onItemLongClickListener **
-
-//        lvAdv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                db = new DataHelper(getActivity());
-//
-//                //Bring up the AlertDialog & populate with selected Adventure information. Grab the selectedIndex.
-//                final Integer sAdvID = (Integer) view.getTag();
-//
-//                Adventure adv = db.getAdv(sAdvID);
-//
-//                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
-//                abAddAdv.setTitle("Please enter the info below.");
-//
-//                View view2 = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
-//
-//                tvAdvName = (TextView) view2.findViewById(R.id.txtAdvName);
-//                tvAddDesc = (TextView) view2.findViewById(R.id.txtAdvDesc);
-//                tvAdvName.setText(adv.getName());
-//                tvAddDesc.setText(adv.getDesc());
-//
-//                //Spinner Chars
-//                spinChars = (Spinner) view2.findViewById(R.id.spinChar);
-//                sChars = new ArrayList<>();
-//                Cursor res = db.getAllCharacters();
-//
-//                if (res.getCount() == 0)
-//                    Toast.makeText(getActivity(), "An error occurred. Please try again", Toast.LENGTH_SHORT).show();
-//                else
-//                    //Loop and fill the List.
-//                    while (res.moveToNext())
-//                        sChars.add(res.getString(1));
-//
-//                //Init adapter
-//                ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
-//                ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinChars.setAdapter(ad2);
-//                spinChars.setSelection(adv.CharID - 1);
-//                abAddAdv.setView(view2);
-//
-//                res.close();
-//
-//                abAddAdv.setPositiveButton("Update", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                        //Save logic here, or validate logic...
-//                        db = new DataHelper(getActivity());
-//                        Adventure a = new Adventure();
-//                        a.AdvID = sAdvID;
-//                        a.Name = tvAdvName.getText().toString();
-//                        a.Desc = tvAddDesc.getText().toString();
-//
-//                        int CharID = (int) spinChars.getSelectedItemId() + 1;
-//                        a.CharID = CharID;
-//
-//                        a.NumChapters = 0;
-//
-//                        valFields(a);
-//                    }
-//                });
-//
-//                AlertDialog a = abAddAdv.create();
-//                a.show();
-//
-//                return true;
-//            }
-//        });
 
         //endregion
 
@@ -296,9 +178,7 @@ public class AdventuresFragment extends Fragment {
                 newAdv.NumChapters = dbCall.getInt(4);
 
                 adventures.add(newAdv);
-
                 List<Chapter> chap = new ArrayList<>();
-
                 Cursor res2 = db.getChapsByAdv(dbCall.getInt(0));
 
                 while (res2.moveToNext())
@@ -327,8 +207,7 @@ public class AdventuresFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .create();
+                    }).create();
             myAlert.show();
         } else if (tvAdvName.length() > 30 || tvAddDesc.length() > 30) {
             myAlert.setMessage("Please enter a Name & Description under 30 characters.")
@@ -337,8 +216,7 @@ public class AdventuresFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .create();
+                    }).create();
             myAlert.show();
         } else {
             if (a.AdvID == 0) { //New Adventure
@@ -366,8 +244,7 @@ public class AdventuresFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .create();
+                    }).create();
             myAlert.show();
         } else if (tvChapName.length() > 30) {
             myAlert.setMessage("Please enter a Chapter Name under 30 characters.")
@@ -376,8 +253,7 @@ public class AdventuresFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .create();
+                    }).create();
             myAlert.show();
         } else {
             if (c.ChapID == 0) { //New Chapter
@@ -418,9 +294,8 @@ public class AdventuresFragment extends Fragment {
                 sChars.add(res.getString(1));
 
         //Check the advID (Add vs. Edit)
-        if (advID == 0) {
-
-        } else {
+        if (advID == 0) { }
+        else {
             Adventure a = db.getAdv(advID);
             tvAdvName.setText(a.Name);
             tvAddDesc.setText(a.Desc);
@@ -465,12 +340,64 @@ public class AdventuresFragment extends Fragment {
     }
 
     //advChapter()
-    private void advChapter(int chapID) {
-        if (chapID == 0) {
+    private void chapAlert(final int chapID) {
 
-        } else {
+        AlertDialog.Builder abAddChap = new AlertDialog.Builder(getActivity());
+        abAddChap.setTitle("Please enter Chapter Details.");
 
+        View v = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_chapter, null));
+
+        //initialize spinner, w/ data.
+        spinAdvChaps = (Spinner) v.findViewById(R.id.spinAdvChap);
+        sAdvChaps = new ArrayList<>();
+        Cursor res = db.getAllAdv();
+        if (res.getCount() == 0)
+            return;
+        else
+            while (res.moveToNext()) //Loop and fill the List.
+                sAdvChaps.add(res.getString(1));
+
+        tvChapName = (TextView) v.findViewById(R.id.txtChapName); //chapName textbox.
+
+        //Check to see if we're dealing with an add/update
+        if (chapID == 0) { }
+        else { //Create a Chapter object
+            Chapter c = db.getChap(chapID);
+            spinAdvChaps.setSelection(c.AdvID - 1);
+            tvChapName.setText(c.Name);
         }
-    }
 
+        //Init adapter
+        ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sAdvChaps);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinAdvChaps.setAdapter(ad);
+        abAddChap.setView(v);
+        res.close();
+        abAddChap.setView(v);
+
+        //Save action button.
+        abAddChap.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                db = new DataHelper(getActivity());
+                Chapter c = new Chapter();
+
+                //Check the chapID.
+                if (chapID == 0)
+                    c.ChapID = 0;
+                else
+                    c.ChapID = chapID;
+
+                int AdvID = (int) spinAdvChaps.getSelectedItemId() + 1;
+                c.AdvID = AdvID;
+                c.Name = tvChapName.getText().toString();
+
+                valChapFields(c);
+            }
+        });
+
+        AlertDialog a = abAddChap.create();
+        a.show();
+    }
 }
