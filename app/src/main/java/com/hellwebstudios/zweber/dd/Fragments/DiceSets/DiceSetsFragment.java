@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -78,6 +79,9 @@ public class DiceSetsFragment extends Fragment {
         
         //ExListView code.
         exListView = (ExpandableListView) getView().findViewById(R.id.exDiceSetsListView);
+
+        //region **Child onClick**
+
         exListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
@@ -149,10 +153,35 @@ public class DiceSetsFragment extends Fragment {
                 AlertDialog a = abAddDie.create();
                 a.show();
 
-
                 return false;
             }
         });
+
+        //endregion
+
+        //region **Parent onLongClick**
+
+        exListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                int itemType = ExpandableListView.getPackedPositionType(id);
+
+                if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+                  return true;
+                } else if (itemType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+                    int ds = diceSets.get(ExpandableListView.getPackedPositionGroup(id)).ID;
+
+                    //EditDS.
+                    dsAlert(ds);
+
+                    return true;
+                } else { //null item, we don't consume the click.
+                    return false;
+                }
+            }
+        });
+
+        //endregion
 
         //region ***New DS/DSD buttons***
 
@@ -161,54 +190,7 @@ public class DiceSetsFragment extends Fragment {
         tvAddDS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder abAddDS = new AlertDialog.Builder(getActivity());
-                abAddDS.setTitle("Please enter the info below.");
-
-                View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_dice_set, null));
-                tvDSN = (TextView) view.findViewById(R.id.txtDSN);
-
-                //Spinner
-                spinDSChars = (Spinner) view.findViewById(R.id.spinDSChar);
-                sChars = new ArrayList<>();
-
-                db = new DataHelper(getActivity());
-                Cursor res = db.getAllCharacters();
-
-                if (res.getCount() == 0)
-                    return;
-                else //Loop and fill the List.
-                    while (res.moveToNext())
-                        sChars.add(res.getString(1));
-
-                //Init adapter
-                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
-                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinDSChars.setAdapter(ad);
-                abAddDS.setView(view);
-
-                res.close();
-
-                abAddDS.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        //Save logic here, or validate logic...
-                        db = new DataHelper(getActivity());
-                        DiceSet ds = new DiceSet();
-                        ds.ID = 0;
-                        ds.Name = tvDSN.getText().toString();
-
-                        int CharID = (int) spinDSChars.getSelectedItemId() + 1;
-                        ds.CharID = CharID;
-
-                        valFields(ds);
-                    }
-                });
-
-                AlertDialog a = abAddDS.create();
-                a.show();
-
+                dsAlert(0);
             }
         });
 
@@ -238,13 +220,6 @@ public class DiceSetsFragment extends Fragment {
                 ArrayAdapter<String> ad2 = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sDS);
                 ad2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinDS.setAdapter(ad2);
-
-
-//                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sDie);
-//                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                spinDice.setAdapter(ad);
-//                spinDice.setSelection(dsdFromDB.DiceID - 1);
-//                abAddDie.setView(view2);
 
                 //Die Spinner
                 spinDice = (Spinner) v.findViewById(R.id.spinDie);
@@ -316,9 +291,7 @@ public class DiceSetsFragment extends Fragment {
                 newDS.CharID = res.getInt(2);
 
                 diceSets.add(newDS);
-
                 List<DiceSetDie> diceSetDice = new ArrayList<>();
-
                 Cursor res2 = db.getDSDByDSID(newDS.ID);
 
                 while (res2.moveToNext())
@@ -346,8 +319,7 @@ public class DiceSetsFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .create();
+                    }).create();
             myAlert.show();
         } else if (tvDSN.length() > 30) { //Limits the DSN to 30 chars.
             myAlert.setMessage("Please enter a Name under 30 characters.")
@@ -356,19 +328,84 @@ public class DiceSetsFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
                         }
-                    })
-                    .create();
+                    }).create();
             myAlert.show();
         } else if (db.valDS(ds.Name) != 0) {
             Toast.makeText(getActivity(), "A Dice Set named " + ds.Name + " already exists.", Toast.LENGTH_SHORT).show();
         } else {
-            if (db.addDS(ds)) {
-                Toast.makeText(getActivity(), "Dice Set added successfully.", Toast.LENGTH_SHORT).show();
-                res = db.getAllDS();
-                fillData(res);
+            if (ds.ID == 0) { //NewDS.
+                db.addDS(ds);
+                Toast.makeText(getContext(), ds.Name + " added.", Toast.LENGTH_SHORT).show();
+            } else { //Existing DS.
+                db.updateDS(ds);
+                Toast.makeText(getContext(), ds.Name + " updated.", Toast.LENGTH_SHORT).show();
             }
-            else
-                Toast.makeText(getActivity(), "An error occurred. Please try again.", Toast.LENGTH_SHORT).show();
+
+            res = db.getAllDS();
+            fillData(res);
         }
+    }
+
+    //dsAlert(int dsID)
+    private void dsAlert(final int dsID){
+        AlertDialog.Builder abAddDS = new AlertDialog.Builder(getActivity());
+        abAddDS.setTitle("Please enter the info below.");
+
+        View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_dice_set, null));
+        tvDSN = (TextView) view.findViewById(R.id.txtDSN);
+
+        //Spinner
+        spinDSChars = (Spinner) view.findViewById(R.id.spinDSChar);
+        sChars = new ArrayList<>();
+
+        db = new DataHelper(getActivity());
+        Cursor res = db.getAllCharacters();
+
+        if (res.getCount() == 0)
+            return;
+        else //Loop and fill the List.
+            while (res.moveToNext())
+                sChars.add(res.getString(1));
+
+        //Check the dsID (Add vs. Edit)
+        if (dsID == 0) { }
+        else {
+            DiceSet ds = db.getDSByID(dsID);
+            tvDSN.setText(ds.Name);
+            spinDSChars.setSelection(ds.CharID);
+        }
+
+        //Init adapter
+        ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinDSChars.setAdapter(ad);
+        abAddDS.setView(view);
+
+        res.close();
+
+        abAddDS.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                db = new DataHelper(getActivity());
+                DiceSet ds = new DiceSet();
+
+                //Check the dsID (Add vs. Edit)
+                if (dsID == 0) {
+                    ds.ID = 0;
+                } else {
+                    ds.ID = dsID;
+                }
+
+                ds.Name = tvDSN.getText().toString();
+                int CharID = (int) spinDSChars.getSelectedItemId() + 1;
+                ds.CharID = CharID;
+
+                valFields(ds);
+            }
+        });
+
+        AlertDialog a = abAddDS.create();
+        a.show();
     }
 }

@@ -367,8 +367,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //addCharacter
-    public void addCharacter(DDCharacter newChar)
-    {
+    public void addCharacter(DDCharacter newChar) {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(C_1, newChar.CharacterName);
@@ -379,8 +378,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //updateCharacter(CHAR)
-    public void updateCharacter(DDCharacter charToUpdate)
-    {
+    public void updateCharacter(DDCharacter charToUpdate) {
         ContentValues cv = new ContentValues();
 
         cv.put(C_1, charToUpdate.CharacterName);
@@ -393,8 +391,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getChar(charID)
-    public DDCharacter getChar(int charID)
-    {
+    public DDCharacter getChar(int charID) {
         DDCharacter charFromDB = new DDCharacter();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CHAR + " WHERE CharacterID = " + charID, null);
 
@@ -409,8 +406,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getCharName(charID)
-    public String getCharName(int charID)
-    {
+    public String getCharName(int charID) {
         Cursor res = db.rawQuery("SELECT CharacterName FROM " + T_CHAR + " WHERE CharacterID = " + charID, null);
 
         String cn = "";
@@ -432,10 +428,8 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //addClass
-    public boolean addClass(CharClass newClass)
-    {
+    public boolean addClass(CharClass newClass) {
         ContentValues contentValues = new ContentValues();
-
         contentValues.put(CC_1, newClass.ClassName);
 
         long result = db.insert(T_CLASS, null, contentValues);
@@ -446,11 +440,9 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //updateClass
-    public boolean updateClass(CharClass cToUpdate)
-    {
+    public boolean updateClass(CharClass cToUpdate) {
         ContentValues cv = new ContentValues();
         cv.put(CC_1, cToUpdate.ClassName);
-
         String strFilter = "ClassID=" + cToUpdate.ClassID;
 
         long result = db.update(T_CLASS, cv, strFilter, null);
@@ -461,8 +453,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getClass
-    public CharClass getClass(int classID)
-    {
+    public CharClass getClass(int classID) {
         CharClass cFromDB = new CharClass();
         Cursor res = db.rawQuery("SELECT * FROM " + T_CLASS + " WHERE ClassID = " + classID, null);
 
@@ -475,8 +466,7 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //getCN
-    public String getCN(int classID)
-    {
+    public String getCN(int classID) {
         Cursor res = db.rawQuery("SELECT ClassName FROM " + T_CLASS + " WHERE ClassID = " + classID, null);
 
         String cn = "";
@@ -869,17 +859,24 @@ public class DataHelper extends SQLiteOpenHelper {
     }
 
     //addDS
-    public boolean addDS(DiceSet newDS) {
+    public void addDS(DiceSet newDS) {
         ContentValues cv = new ContentValues();
 
         cv.put(DS_1, newDS.Name);
         cv.put(DS_2, newDS.CharID);
 
-        long result = db.insert(T_DS, null, cv);
-        if (result == -1)
-            return false;
-        else
-            return true;
+        db.insert(T_DS, null, cv);
+    }
+
+    //updateDS
+    public void updateDS(DiceSet ds) {
+        ContentValues cv = new ContentValues();
+
+        cv.put(DS_1, ds.Name);
+        cv.put(DS_2, ds.CharID);
+
+        String strFilter = "ID=" + ds.ID;
+        db.update(T_DS, cv, strFilter, null);
     }
 
     //getDSNameByID

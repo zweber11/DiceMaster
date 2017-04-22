@@ -118,8 +118,7 @@ public class AdventuresFragment extends Fragment {
                     advAlert(g);
 
                     return true;
-                } else {
-                    //null item, we don't consume the click.
+                } else { //null item, we don't consume the click.
                     return false;
                 }
             }
