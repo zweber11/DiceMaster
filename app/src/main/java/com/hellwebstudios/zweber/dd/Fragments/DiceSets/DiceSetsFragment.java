@@ -330,8 +330,6 @@ public class DiceSetsFragment extends Fragment {
                         }
                     }).create();
             myAlert.show();
-        } else if (db.valDS(ds.Name) != 0) {
-            Toast.makeText(getActivity(), "A Dice Set named " + ds.Name + " already exists.", Toast.LENGTH_SHORT).show();
         } else {
             if (ds.ID == 0) { //NewDS.
                 db.addDS(ds);
@@ -367,20 +365,21 @@ public class DiceSetsFragment extends Fragment {
             while (res.moveToNext())
                 sChars.add(res.getString(1));
 
-        //Check the dsID (Add vs. Edit)
-        if (dsID == 0) { }
-        else {
-            DiceSet ds = db.getDSByID(dsID);
-            tvDSN.setText(ds.Name);
-            spinDSChars.setSelection(ds.CharID);
-        }
-
         //Init adapter
         ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinDSChars.setAdapter(ad);
-        abAddDS.setView(view);
 
+        //Check the dsID (Add vs. Edit)
+        if (dsID == 0) {
+            spinDSChars.setAdapter(ad);
+        } else {
+            DiceSet ds = db.getDSByID(dsID);
+            tvDSN.setText(ds.Name);
+            spinDSChars.setAdapter(ad);
+            spinDSChars.setSelection(ds.CharID - 1);
+        }
+
+        abAddDS.setView(view);
         res.close();
 
         abAddDS.setPositiveButton("Save", new DialogInterface.OnClickListener() {

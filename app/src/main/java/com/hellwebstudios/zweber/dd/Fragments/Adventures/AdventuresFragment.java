@@ -292,21 +292,23 @@ public class AdventuresFragment extends Fragment {
             while (res.moveToNext())
                 sChars.add(res.getString(1));
 
+        //Init adapter
+        ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         //Check the advID (Add vs. Edit)
-        if (advID == 0) { }
+        if (advID == 0) {
+            spinChars.setAdapter(ad);
+        }
         else {
             Adventure a = db.getAdv(advID);
             tvAdvName.setText(a.Name);
             tvAddDesc.setText(a.Desc);
+            spinChars.setAdapter(ad);
             spinChars.setSelection(a.CharID - 1);
         }
 
-        //Init adapter
-        ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
-        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinChars.setAdapter(ad);
         abAddAdv.setView(view);
-
         res.close();
 
         abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -358,21 +360,23 @@ public class AdventuresFragment extends Fragment {
 
         tvChapName = (TextView) v.findViewById(R.id.txtChapName); //chapName textbox.
 
-        //Check to see if we're dealing with an add/update
-        if (chapID == 0) { }
-        else { //Create a Chapter object
-            Chapter c = db.getChap(chapID);
-            spinAdvChaps.setSelection(c.AdvID - 1);
-            tvChapName.setText(c.Name);
-        }
-
         //Init adapter
         ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sAdvChaps);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinAdvChaps.setAdapter(ad);
+
+        //Check to see if we're dealing with an add/update
+        if (chapID == 0) {
+            spinAdvChaps.setAdapter(ad);
+        }
+        else { //Create a Chapter object
+            Chapter c = db.getChap(chapID);
+            tvChapName.setText(c.Name);
+            spinAdvChaps.setAdapter(ad);
+            spinAdvChaps.setSelection(c.AdvID - 1);
+        }
+
         abAddChap.setView(v);
         res.close();
-        abAddChap.setView(v);
 
         //Save action button.
         abAddChap.setPositiveButton("Save", new DialogInterface.OnClickListener() {

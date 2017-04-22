@@ -901,17 +901,6 @@ public class DataHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    //valDS(string DSN)
-    public int valDS(String DSN) {
-        int c = 0;
-        Cursor res = db.rawQuery("SELECT Count(ID) FROM " + T_DS + " WHERE Name = '" + DSN + "'", null);
-
-        while (res.moveToNext())
-            c = res.getInt(0);
-
-        return c;
-    }
-
     //endregion
 
     //region ***DiceSetDie table calls.
