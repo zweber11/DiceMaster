@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -98,6 +99,31 @@ public class AdventuresFragment extends Fragment {
             }
         });
 
+        exListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                int itemType = ExpandableListView.getPackedPositionType(id);
+
+                if (itemType == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+                    int c = (int) view.getTag();
+
+//                    Toast.makeText(getContext(), "Child: " + c, Toast.LENGTH_SHORT).show();
+
+                    return true;
+                } else if (itemType == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
+                    int g = adventures.get(ExpandableListView.getPackedPositionGroup(id)).AdvID;
+
+                    //EditAdventure.
+                    advAlert(g);
+
+                    return true;
+                } else {
+                    //null item, we don't consume the click.
+                    return false;
+                }
+            }
+        });
+
         //region **AddAdventure**
 
         tvAddAdv = (TextView) getView().findViewById(R.id.txtNewAdventure);
@@ -105,56 +131,8 @@ public class AdventuresFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
-                abAddAdv.setTitle("Please enter the info below.");
-
-                View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
-
-                tvAdvName = (TextView) view.findViewById(R.id.txtAdvName);
-                tvAddDesc = (TextView) view.findViewById(R.id.txtAdvDesc);
-
-                //Spinner
-                spinChars = (Spinner) view.findViewById(R.id.spinChar);
-                sChars = new ArrayList<>();
-                Cursor res = db.getAllCharacters();
-
-                if (res.getCount() == 0)
-                    return;
-                else
-                    //Loop and fill the List.
-                    while (res.moveToNext())
-                        sChars.add(res.getString(1));
-
-                //Init adapter
-                ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
-                ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinChars.setAdapter(ad);
-                abAddAdv.setView(view);
-
-                res.close();
-
-                abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        //Save logic here, or validate logic...
-                        db = new DataHelper(getActivity());
-                        Adventure newAdv = new Adventure();
-                        newAdv.AdvID = 0;
-                        newAdv.Name = tvAdvName.getText().toString();
-                        newAdv.Desc = tvAddDesc.getText().toString();
-
-                        int CharID = (int) spinChars.getSelectedItemId() + 1;
-                        newAdv.CharID = CharID;
-
-                        newAdv.NumChapters = 0;
-
-                        valFields(newAdv);
-                    }
-                });
-
-                AlertDialog a = abAddAdv.create();
-                a.show();
+                //NewAdventure.
+                advAlert(0);
             }
         });
 
@@ -339,8 +317,7 @@ public class AdventuresFragment extends Fragment {
     }
 
     //valFields, will check fields for adding a new Adventure.
-    private void valFields(Adventure a)
-    {
+    private void valFields(Adventure a) {
         AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
 
         if (tvAdvName.length() == 0 || tvAddDesc.length() == 0) {
@@ -379,8 +356,7 @@ public class AdventuresFragment extends Fragment {
     }
 
     //valFields, will check fields for adding a new Adventure.
-    private void valChapFields(Chapter c)
-    {
+    private void valChapFields(Chapter c) {
         AlertDialog.Builder myAlert = new AlertDialog.Builder(getActivity());
 
         if (tvChapName.length() == 0) {
@@ -417,4 +393,84 @@ public class AdventuresFragment extends Fragment {
             fillData(res);
         }
     }
+
+    //advAlert()
+    private void advAlert(final int advID) {
+
+        AlertDialog.Builder abAddAdv = new AlertDialog.Builder(getActivity());
+        abAddAdv.setTitle("Please enter the info below.");
+
+        View view = (LayoutInflater.from(getActivity()).inflate(R.layout.view_add_adventure, null));
+
+        tvAdvName = (TextView) view.findViewById(R.id.txtAdvName);
+        tvAddDesc = (TextView) view.findViewById(R.id.txtAdvDesc);
+
+        //Spinner
+        spinChars = (Spinner) view.findViewById(R.id.spinChar);
+        sChars = new ArrayList<>();
+        Cursor res = db.getAllCharacters();
+
+        if (res.getCount() == 0)
+            return;
+        else
+            //Loop and fill the List.
+            while (res.moveToNext())
+                sChars.add(res.getString(1));
+
+        //Check the advID (Add vs. Edit)
+        if (advID == 0) {
+
+        } else {
+            Adventure a = db.getAdv(advID);
+            tvAdvName.setText(a.Name);
+            tvAddDesc.setText(a.Desc);
+            spinChars.setSelection(a.CharID - 1);
+        }
+
+        //Init adapter
+        ArrayAdapter<String> ad = new ArrayAdapter<>(getActivity(), R.layout.spinner_item, sChars);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinChars.setAdapter(ad);
+        abAddAdv.setView(view);
+
+        res.close();
+
+        abAddAdv.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                db = new DataHelper(getActivity());
+                Adventure adv = new Adventure();
+
+                //Check the advID (Add vs. Edit)
+                if (advID == 0) {
+                    adv.AdvID = 0;
+                } else {
+                    adv.AdvID = advID;
+                }
+
+                adv.Name = tvAdvName.getText().toString();
+                adv.Desc = tvAddDesc.getText().toString();
+
+                int CharID = (int) spinChars.getSelectedItemId() + 1;
+                adv.CharID = CharID;
+                adv.NumChapters = 0;
+
+                valFields(adv);
+            }
+        });
+
+        AlertDialog a = abAddAdv.create();
+        a.show();
+    }
+
+    //advChapter()
+    private void advChapter(int chapID) {
+        if (chapID == 0) {
+
+        } else {
+
+        }
+    }
+
 }
